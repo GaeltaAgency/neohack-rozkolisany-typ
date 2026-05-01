@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>NEOHACK — Energetický Kompas: Rozptýlený typ</title>
+<style>
+  :root{
+    --bg:#000;
+    --s1:#07070A;
+    --s2:#0D0D10;
+    --s3:#111115;
+    --b1:#18181C;
+    --b2:#222228;
+    --w:#FFF;
+    --w92:rgba(255,255,255,.92);
+    --w80:rgba(255,255,255,.80);
+    --w75:rgba(255,255,255,.75);
+    --w50:rgba(255,255,255,.50);
+    --acc:#A855F7;
+    --acc30:rgba(168,85,247,.30);
+    --acc12:rgba(168,85,247,.12);
+    --acc06:rgba(168,85,247,.06);
+    --ag:linear-gradient(to right,#A855F7 0%,#E9D5FF 52%,#808080 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background:var(--bg);color:var(--w80);line-height:1.85;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  .eb-nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:saturate(140%) blur(14px);
+    -webkit-backdrop-filter:saturate(140%) blur(14px);
+    border-bottom:1px solid var(--b1);
+  }
+  .eb-nav-inner{
+    max-width:740px;margin:0 auto;padding:14px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .eb-logo{font-weight:800;letter-spacing:-.02em;font-size:18px;color:var(--w)}
+  .eb-logo .dot{color:var(--acc)}
+  .eb-pdf{
+    border:1px solid var(--acc30);border-radius:100px;
+    padding:9px 16px;font-size:11px;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--acc);
+    background:transparent;cursor:pointer;transition:all .25s ease;
+  }
+  .eb-pdf:hover{background:var(--acc12);box-shadow:0 0 24px var(--acc30)}
+
+  /* SECTIONS */
+  section{padding:clamp(38px,5vw,52px) 0;border-bottom:1px solid var(--b1)}
+  .eb-wrap{max-width:740px;margin:0 auto;padding:0 28px}
+  .bg-s1{background:var(--s1)}
+  .bg-s2{background:var(--s2)}
+
+  .eb-label{
+    font-size:11px;font-weight:800;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--acc);margin-bottom:18px;
+  }
+
+  h1{
+    font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-.03em;
+    line-height:1.05;color:var(--w);margin:14px 0 18px;
+    background:var(--ag);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  h2{
+    font-size:clamp(23px,3.2vw,32px);font-weight:800;letter-spacing:-.03em;
+    line-height:1.15;color:var(--w);margin:0 0 18px;
+  }
+  h2 em{
+    font-style:normal;
+    background:var(--ag);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  h3{font-size:clamp(16px,2vw,19px);font-weight:700;color:var(--w);margin:32px 0 14px;letter-spacing:-.01em}
+  p{font-size:16px;color:var(--w75);line-height:1.85;margin:0 0 16px}
+  .lead{font-size:17px;color:var(--w80);line-height:1.85;margin:0 0 22px}
+  strong{color:var(--w92);font-weight:700}
+
+  /* COVER */
+  .eb-tag{
+    display:inline-block;padding:6px 12px;border-radius:100px;
+    border:1px solid var(--acc30);background:var(--acc12);
+    font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);
+  }
+  .eb-subtitle{font-size:18px;color:var(--w80);margin:6px 0 22px;font-weight:600}
+  .eb-meta{font-size:12px;color:var(--w50);letter-spacing:.08em;margin-top:18px}
+
+  /* TOC */
+  .eb-toc{
+    margin-top:32px;background:var(--s2);border:1px solid var(--b2);
+    border-radius:10px;padding:22px 24px;
+  }
+  .eb-toc-title{
+    font-size:11px;font-weight:800;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--acc);margin-bottom:14px;
+  }
+  .eb-toc a{
+    display:flex;align-items:center;gap:14px;
+    font-size:15px;color:var(--w75);padding:9px 0;
+    border-top:1px solid var(--b1);transition:color .2s ease;
+  }
+  .eb-toc a:first-of-type{border-top:0}
+  .eb-toc a:hover{color:var(--w)}
+  .eb-toc a::before{
+    content:"";width:20px;height:1px;background:var(--acc);flex-shrink:0;
+  }
+
+  /* ITEM CARDS */
+  .eb-item{
+    position:relative;background:var(--s2);border:1px solid var(--b2);
+    border-radius:10px;padding:22px 24px;margin:14px 0;overflow:hidden;
+    transition:border-color .25s ease;
+  }
+  .eb-item::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:var(--ag);transform:scaleY(.35);transform-origin:top;
+    transition:transform .35s ease;
+  }
+  .eb-item:hover{border-color:var(--acc30)}
+  .eb-item:hover::before{transform:scaleY(1)}
+  .eb-item h3{margin:0 0 8px;font-size:17px;color:var(--w);font-weight:800;letter-spacing:-.01em}
+  .eb-item .num{font-size:26px;font-weight:800;color:var(--acc);display:block;margin-bottom:6px;line-height:1}
+  .eb-item .sub{display:block;color:var(--acc);font-size:12px;font-weight:700;margin:6px 0 10px;letter-spacing:.04em}
+  .eb-item p{margin:0;color:var(--w75);font-size:15.5px}
+
+  /* QUOTE */
+  .eb-quote{
+    position:relative;background:var(--acc06);border:1px solid var(--acc30);
+    border-radius:10px;padding:24px 26px;margin:22px 0;
+    font-size:17px;font-weight:700;color:var(--w92);line-height:1.65;
+    overflow:hidden;
+  }
+  .eb-quote::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--ag);
+  }
+
+  /* CALLOUT */
+  .eb-callout{
+    background:var(--s2);border-left:3px solid var(--acc);
+    padding:18px 22px;margin:20px 0;border-radius:4px;
+    font-size:15px;color:var(--w80);line-height:1.7;
+  }
+  .eb-callout strong{color:var(--w);font-weight:800;letter-spacing:.02em}
+
+  /* DEFICIT / BLOOD GRID */
+  .eb-deficit,.eb-blood{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;
+  }
+  .eb-deficit > div,.eb-blood > div{
+    background:var(--s2);border:1px solid var(--b2);border-radius:10px;
+    padding:16px 18px;
+  }
+  .eb-deficit .lab,.eb-blood .lab{
+    display:block;font-size:11px;font-weight:800;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--acc);margin-bottom:8px;
+  }
+  .eb-deficit p,.eb-blood p{font-size:14.5px;color:var(--w75);margin:0;line-height:1.65}
+
+  /* STEP */
+  .eb-step{
+    position:relative;background:var(--s2);border:1px solid var(--b2);
+    border-radius:10px;padding:26px;margin:18px 0;overflow:hidden;
+  }
+  .eb-step::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--ag);
+  }
+  .eb-step .step-label{
+    display:flex;align-items:center;gap:14px;
+    font-size:11px;font-weight:800;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--acc);margin-bottom:14px;
+  }
+  .eb-step .step-label::after{
+    content:"";flex:1;height:1px;background:var(--b2);
+  }
+  .eb-step h3{margin:0 0 12px;font-size:18px;color:var(--w);font-weight:800;letter-spacing:-.01em}
+  .eb-step p{font-size:15.5px;color:var(--w75);margin:0 0 14px}
+  .eb-step ul{list-style:none;padding:0;margin:10px 0 0}
+  .eb-step ul li{
+    position:relative;padding-left:22px;margin:10px 0;
+    font-size:15px;color:var(--w80);line-height:1.7;
+  }
+  .eb-step ul li::before{
+    content:"→";position:absolute;left:0;top:0;color:var(--acc);font-weight:700;
+  }
+
+  /* PRODUCT */
+  .eb-product{
+    display:grid;grid-template-columns:160px 1fr;gap:20px;
+    background:var(--s2);border:1px solid var(--b2);border-radius:10px;
+    padding:20px;margin:16px 0;align-items:center;
+    transition:border-color .25s ease,box-shadow .25s ease;
+  }
+  .eb-product:hover{
+    border-color:var(--acc30);
+    box-shadow:0 0 32px -6px rgba(168,85,247,.25);
+  }
+  .eb-product .img{
+    width:160px;height:160px;border-radius:8px;overflow:hidden;
+    background:var(--s3);border:1px solid var(--b1);
+  }
+  .eb-product .img img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .4s ease;
+  }
+  .eb-product:hover .img img{transform:scale(1.04)}
+  .eb-product .ptag{
+    display:inline-block;font-size:10px;font-weight:800;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--acc);
+    border:1px solid var(--acc30);padding:4px 9px;border-radius:100px;background:var(--acc06);
+    margin-bottom:8px;
+  }
+  .eb-product h3{margin:4px 0 8px;color:var(--w);font-size:17px;font-weight:800;letter-spacing:-.01em}
+  .eb-product p{font-size:14.5px;color:var(--w75);margin:0 0 12px;line-height:1.65}
+  .eb-cta{
+    display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--acc);border-bottom:1px solid var(--acc30);
+    padding-bottom:2px;transition:color .2s ease,border-color .2s ease;
+  }
+  .eb-cta:hover{color:var(--w);border-color:var(--w)}
+  .eb-product.muted{opacity:.78}
+  .eb-product.muted .ptag{color:var(--w50);border-color:var(--b2);background:transparent}
+
+  /* FINAL */
+  .eb-final{
+    position:relative;background:var(--bg);text-align:center;
+    padding:clamp(56px,8vw,96px) 0;overflow:hidden;
+  }
+  .eb-final::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse at center,rgba(168,85,247,.18) 0%,transparent 60%);
+    pointer-events:none;
+  }
+  .eb-final-inner{position:relative;z-index:1}
+  .eb-final .quote{
+    font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.02em;
+    line-height:1.25;margin:0 0 28px;
+    background:var(--ag);-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .eb-final p{font-size:16px;color:var(--w80);margin:0 0 16px}
+  .eb-final-cta{
+    display:inline-block;margin-top:18px;
+    border:1px solid var(--acc);border-radius:100px;
+    padding:14px 28px;font-size:13px;font-weight:800;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--w);
+    transition:all .3s ease;
+  }
+  .eb-final-cta:hover{
+    background:var(--acc12);box-shadow:0 0 40px var(--acc30);
+  }
+
+  /* FOOTER */
+  footer{
+    background:var(--bg);text-align:center;padding:28px;
+    font-size:12px;color:var(--w50);border-top:1px solid var(--b1);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:600px){
+    .eb-wrap,.eb-nav-inner{padding-left:20px;padding-right:20px}
+    section{padding:34px 0}
+    .eb-product{grid-template-columns:1fr}
+    .eb-product .img{width:100%;height:220px}
+    .eb-deficit,.eb-blood{grid-template-columns:1fr}
+    .eb-step{padding:22px}
+  }
+
+  /* PRINT */
+  @media print{
+    @page{size:A4;margin:15mm}
+    html,body{background:#fff!important;color:#111!important}
+    .eb-nav,.eb-pdf,.eb-final-cta{display:none!important}
+    section,.bg-s1,.bg-s2,.eb-final{
+      background:#fff!important;border-color:#ddd!important;
+      box-shadow:none!important;page-break-inside:avoid;
+    }
+    .eb-final::before{display:none}
+    h1,h2,h3,p,.lead,.eb-item p,.eb-step p,.eb-product p,.eb-final p,strong{
+      color:#111!important;-webkit-text-fill-color:#111!important;background:none!important;
+    }
+    h2 em,h1,.eb-final .quote{
+      -webkit-text-fill-color:#7c3aed!important;color:#7c3aed!important;background:none!important;
+    }
+    .eb-tag,.eb-label,.eb-toc-title,.eb-item .num,.eb-item .sub,
+    .eb-deficit .lab,.eb-blood .lab,.eb-step .step-label,.eb-product .ptag,
+    .eb-cta,.eb-toc a::before,.eb-step ul li::before{
+      color:#7c3aed!important;border-color:#7c3aed!important;background:none!important;
+    }
+    .eb-quote{background:#f7f1ff!important;border:1px solid #e0c8ff!important;color:#111!important}
+    .eb-callout{background:#fafafa!important;border-left:3px solid #7c3aed!important;color:#111!important}
+    .eb-item,.eb-step,.eb-deficit > div,.eb-blood > div,.eb-product,.eb-toc{
+      background:#fff!important;border:1px solid #ddd!important;
+    }
+    .eb-product .img{display:none!important}
+    .eb-product{grid-template-columns:1fr!important}
+    a{color:#7c3aed!important}
+  }
+</style>
+</head>
+<body>
+
+<nav class="eb-nav">
+  <div class="eb-nav-inner">
+    <a class="eb-logo" href="#cover">NEOHACK<span class="dot">.SK</span></a>
+    <button class="eb-pdf" onclick="window.print()">Uložiť PDF</button>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="eb-wrap">
+    <span class="eb-tag">🟣 ENERGETICKÝ KOMPAS</span>
+    <h1>ROZPTÝLENÝ TYP</h1>
+    <div class="eb-subtitle">Dopamínová fragmentácia</div>
+    <p class="lead">Keď mozog skáče všade – no ty stojíš na mieste.</p>
+    <div class="eb-meta">NEOHACK.SK · Personalizovaný sprievodca · Typ: Rozptýlený</div>
+
+    <div class="eb-toc">
+      <div class="eb-toc-title">Obsah</div>
+      <a href="#s1">Tvoj prvý krok: Odomknutie systému</a>
+      <a href="#s2">Anatómia rozptýlenosti</a>
+      <a href="#s3">Symptómy roztrieštenosti</a>
+      <a href="#s4">Ako sa snažíš oklamať vlastný systém</a>
+      <a href="#s5">Tvoj skutočný deficit</a>
+      <a href="#s6">Resetovací protokol</a>
+      <a href="#s7">Tvoja nová architektúra dňa</a>
+      <a href="#s8">Vylúčenie fyzického deficitu</a>
+      <a href="#s9">NEOHACK Protokol</a>
+    </div>
+  </div>
+</section>
+
+<!-- 01 -->
+<section id="s1">
+  <div class="eb-wrap">
+    <div class="eb-label">01</div>
+    <h2><em>TVOJ PRVÝ KROK:</em> Odomknutie systému</h2>
+    <p class="lead">Práve si získal prístup k pochopeniu vlastného tela. Tento krok mení všetko.</p>
+    <p>Držíš v rukách manuál k tvojej biológii. Presne ti vysvetlí, čo sa práve teraz deje v tvojom mozgu, ako si sa do tohto stavu dostal, a – čo je najdôležitejšie – ukáže ti konkrétne kroky, ktoré budú mať na tvoju energiu ten najvyšší efekt.</p>
+    <div class="eb-quote">PROFIL: ROZPTÝLENÝ TYP (Motor na plný plyn. Zaradený neutrál.) To, s čím momentálne bojuješ, nie je vyhorenie ani chronický stres.</div>
+    <p>Volá sa to dopamínová fragmentácia.</p>
+    <p>Tvoj problém nie je nedostatok paliva. Ty máš energie na rozdávanie.</p>
+    <p>Tvoj mozog beží na 200 % a nápady prúdia. Lenže tvoje sústredenie je na nule, pretože tento výkon spaľuješ na desiatich rôznych miestach naraz.</p>
+    <p>Začneš 10 vecí. Nedokončíš ani jednu. Výsledok dobre poznáš. Večer je tvoje telo absolútne vyčerpané z celodenného prešľapovania na mieste, no tvoja myseľ stále beží na plné obrátky a hľadá ďalší stimul.</p>
+    <p>Zastavme to tu a teraz a pozrime sa na tvoju biológiu bez emócií a sebaobviňovania.</p>
+    <div class="eb-callout">Nie, nie si lenivý. Tvoja pevná vôľa nezlyhala. Nie je to ani chyba tvojho charakteru. Tvoja biológia sa len zasekla v slučke okamžitých odmien.</div>
+    <p>Dobrá správa? Je to len systémový vzorec. A ten sa dá krok za krokom opraviť.</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="s2" class="bg-s1">
+  <div class="eb-wrap">
+    <div class="eb-label">02</div>
+    <h2>Anatómia rozptýlenosti: <em>Prečo tvoja brzda prestala fungovať?</em></h2>
+    <p class="lead">ANATÓMIA ROZPTÝLENOSTI: Prečo tvoja brzda prestala fungovať?</p>
+    <p>Rozptýlenosť je len naučený vzorec.</p>
+    <p>V biológii tomuto stavu hovoríme dopamínová fragmentácia a oslabená top-down regulácia.</p>
+    <p>Preložené do reči tvojho tela:</p>
+    <p>Tvoja prefrontálna kôra – racionálne centrum, ktoré riadi sústredenie a robí plány – stratila výkon. Riadenie prevzal limbický systém. Tvoje centrum okamžitých impulzov.</p>
+    <div class="eb-quote">Racionálna brzda zoslabla. Emócie vyhrali.</div>
+    <div class="eb-callout"><strong>TVOJE TELO NEZLYHALO. IBA SA DOKONALE PRISPÔSOBILO.</strong></div>
+    <p>Ako k tomu došlo?</p>
+    <p>Prostredie neustálych notifikácií, preskakovania pozornosti a digitálneho šumu potichu prekalibrovalo tvoje nervové dráhy.</p>
+    <p>Tvoj dopamínový systém sa naučil fungovať na rýchlych, nízkonákladových odmenách. Tvoj mozog prestal budovať pevnú štruktúru, pretože si zvykol na skratky.</p>
+    <p>A presne preto máš dnes pocit, že nevieš zaradiť rýchlosť.</p>
+    <p>Akonáhle od seba vyžaduješ prácu, ktorá je pomalá, sústredená a vyžaduje námahu, tvoja myseľ odmietne spolupracovať. Nechce ísť ťažšou cestou. Namiesto toho automaticky hľadá najbližší, okamžitý dopamínový únik.</p>
+    <p>Tvoje telo nepotrebuje umelo bičovať. Nepotrebuješ viac motivácie ani viac energie.</p>
+    <p>Potrebuješ len vrátiť svojej energii smer. Znovu vybudovať stratenú kapacitu pre hlboké sústredenie. A nastaviť tichú dopamínovú disciplínu.</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="s3">
+  <div class="eb-wrap">
+    <div class="eb-label">03</div>
+    <h2>Symptómy: <em>Ako vyzerá tvoja roztrieštenosť v praxi?</em></h2>
+    <p class="lead">SYMPTÓMY: Ako vyzerá tvoja roztrieštenosť v praxi?</p>
+
+    <div class="eb-item"><span class="num">01</span><h3>SYNDRÓM ZAMRZNUTÉHO ŠTARTU</h3><p>Začneš niekoľko vecí naraz s obrovskou úvodnou energiou. Nedokončíš žiadnu. Nový projekt je totiž dopamínový hit. Dokončovanie je len drina.</p></div>
+    <div class="eb-item"><span class="num">02</span><h3>KREATIVITA BEZ REALIZÁCIE A VÝSLEDKOV</h3><p>Tvoja myseľ generuje skvelé nápady. Zasekávaš sa však v realizácii. Máš plný stôl plánov, no nulové výstupy.</p></div>
+    <div class="eb-item"><span class="num">03</span><h3>OCHRANNÁ PARALÝZA (bezcieľne scrollovanie)</h3><p>Vezmeš do ruky telefón, hoci si to vôbec nechcel. Prezeráš sociálne siete v stave miernej letargie. Tvoj systém takto kompenzuje neschopnosť udržať pozornosť na ťažších úlohách.</p></div>
+    <div class="eb-item"><span class="num">04</span><h3>ALERGIA NA NUDU</h3><p>Akonáhle dostaneš zadanie, ktoré nemá okamžitú odmenu (je nudné, dlhé, analytické), tvoj mozog doslova odmieta spolupracovať. Aj keď vieš, že je to pre teba životne dôležité.</p></div>
+    <div class="eb-item"><span class="num">05</span><h3>NOČNÁ HYPERAKTIVITA</h3><p>Cez deň si mal problém sústrediť sa, ale večer, keď má ísť telo spať, tvoj mozog paradoxne nabehne na plné obrátky. Unavený nervový systém stále zúfalo hľadá posledné stimuly pred vypnutím.</p></div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="s4" class="bg-s2">
+  <div class="eb-wrap">
+    <div class="eb-label">04</div>
+    <h2>Ako sa snažíš <em>oklamať vlastný systém</em>: Tvoje kompenzácie</h2>
+    <p class="lead">AKO SA SNAŽÍŠ OKLAMAŤ VLASTNÝ SYSTÉM: Tvoje kompenzácie</p>
+    <p>Cítiš, že strácaš pôdu pod nohami. A tak hľadáš skratky. Tvoj mozog si vytvoril tri rýchle kompenzačné mechanizmy, ktorými sa snaží zakryť stratu sústredenia.</p>
+
+    <div class="eb-item"><span class="num">01</span><h3>KOFEÍNOVÝ ÚVER</h3><p>Leješ do seba kávu s nádejou, že ťa konečne donúti sústrediť sa. Ale kofeín ti nedá ani miligram skutočného sústredenia. On iba hrubo zablokuje senzory únavy. Berie si od tvojho tela biologický úver, ktorého drastický úrok vždy splatíš neskorším pádom.</p></div>
+    <div class="eb-item"><span class="num">02</span><h3>DIGITÁLNA ANESTÉZIA</h3><p>Mobil a sociálne siete. Používaš ich ako okamžitú dopamínovú infúziu presne v momente, keď tvoj mozog odmieta čeliť ťažkej úlohe. Nie je to hľadanie informácií. Je to len rýchly únik pred námahou.</p></div>
+    <div class="eb-item"><span class="num">03</span><h3>ILÚZIA PRODUKTIVITY</h3><p>Neustále otváraš nové a nové projekty. Novosť je totiž pre tvoj systém dokonalý dopamínový hit. Začínať niečo nové je vždy ľahké a bezbolestné. Dokončovať veci v tichosti je drina, ktorej sa tvoj mozog vyhýba.</p></div>
+
+    <p><strong>Kde je chyba?</strong></p>
+    <p>Každé jedno z týchto rýchlych riešení ťa ťahá hlbšie ku dnu. Neriešia príčinu a drasticky znižujú tvoj prah dopamínovej citlivosti. Tvoje telo zrazu potrebuje čoraz viac stimulov len na to, aby vôbec niečo cítilo a dosiahlo rovnaký efekt.</p>
+    <p>Výsledok je neúprosný. Skutočná práca – hlboká, pomalá, hodnotná – sa pre teba stáva zo dňa na deň nedosiahnuteľnejšia.</p>
+  </div>
+</section>
+
+<!-- 05 -->
+<section id="s5" class="bg-s1">
+  <div class="eb-wrap">
+    <div class="eb-label">05</div>
+    <h2>Tvoj skutočný deficit: <em>Čo tvojmu telu chýba?</em></h2>
+    <p class="lead">TVOJ SKUTOČNÝ DEFICIT: Čo tvojmu telu chýba?</p>
+    <p>Vymeňme si na chvíľu optiku. Dopamín nie je odmena za to, že si niečo dokázal. Je to biologický kompas. Je to motivačný signál smerom k odmene.</p>
+    <p>Ak je tvoj dopamínový systém fragmentovaný, nemáš šancu udržať motiváciu k dlhodobým cieľom. Aj keď ich racionálne veľmi chceš dosiahnuť. Tvoj mozog zakaždým bezpečne uskočí k najbližšej, najrýchlejšej odmene. To, čo si stratil, nie je energia. Stratil si tri kľúčové parametre:</p>
+
+    <div class="eb-deficit">
+      <div><span class="lab">Smer</span><p>Bez jasného cieľa je tvoj dopamínový systém slepý. Automaticky preto začne vyhľadávať náhradné, lacné odmeny v okolí.</p></div>
+      <div><span class="lab">Sústredenie</span><p>Tvoja nervová kapacita pre dlhšie, neprerušované sústredenie doslova atrofovala. Zmenšila sa ako sval, ktorý prestaneš používať.</p></div>
+      <div><span class="lab">Dopamínová disciplína</span><p>Stratil si kľúčovú schopnosť – odložiť okamžitú, bezcennú odmenu v prospech tej väčšej, významnejšej, ale vzdialenejšej.</p></div>
+    </div>
+
+    <p>Ako z toho von?</p>
+    <p>Tvoja racionálna brzda je momentálne oslabená. Impulzy nad tebou vyhrávajú každý jeden deň.</p>
+    <p>Existuje len jediné riešenie. Tréning čistej, neprerušovanej, sústredenej práce.</p>
+    <p>Pretože práve ten je fyzickým tréningom tvojho brzdného systému.</p>
+
+    <h3>Ako si sa sem dostal? Chyby v kóde tvojho dňa.</h3>
+    <p>Tvoj mozog sa nepokazil zo dňa na deň. Bola to postupná, potichu prebiehajúca adaptácia na prostredie. Tu sú štyri presné momenty, kedy tvoja biológia začala prehrávať:</p>
+
+    <div class="eb-item"><span class="num">01</span><h3>DIGITÁLNA OVERSTIMULÁCIA</h3><span class="sub">Čo sa stalo: Mozog sa natrénoval na mikro-odmeny</span><p>Sociálne siete, krátke videá, nekonečný prúd notifikácií. Tvoj dopamínový systém bol každý deň vystavovaný extrémnym dávkam lacných podnetov. Výsledok? Naučil sa reagovať len na zlomky sekúnd. Pomalá realita ho prestala zaujímať.</p></div>
+    <div class="eb-item"><span class="num">02</span><h3>ILÚZIA ROBENIA VIACERÝCH VECÍ NARAZ (MULTITASKING)</h3><span class="sub">Čo sa stalo: Zabudol si zostať pri jednej veci</span><p>Neustále si preskakoval medzi otvorenými oknami, úlohami a konverzáciami. Nikdy si nedokončil jednu myšlienku do konca. Tvoj mozog sa doslova odnaučil, ako vyzerá dlhodobá, hlboká práca.</p></div>
+    <div class="eb-item"><span class="num">03</span><h3>ZÁVISLOSŤ NA KRÁTKYCH ODMENÁCH</h3><span class="sub">Čo sa stalo: Prerušenie sa stalo odmenou</span><p>Lajky, views, okamžité odpovede na správy. Náš mozog miluje rýchlu spätnú väzbu. Každé jedno pípnutie telefónu sa stalo mikro-odmenou, ktorú tvoje telo začalo uprednostňovať pred skutočnými, veľkými víťazstvami.</p></div>
+    <div class="eb-item"><span class="num">04</span><h3>CHÝBAJÚCA VÍZIA</h3><span class="sub">Čo sa stalo: Systém začal hľadať náhrady</span><p>Bez silnej vízie je tvoj dopamínový systém stratený. Nemá jasný smer. A tak začne zúfalo hľadať náhradné ciele – neustále začínanie nových projektov, konzumácia nekonečného obsahu a umelá stimulácia.</p></div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section id="s6">
+  <div class="eb-wrap">
+    <div class="eb-label">06</div>
+    <h2>Resetovací protokol: <em>3 kroky, ktoré ti pomôžu vrátiť sústredenie</em></h2>
+    <p class="lead">Tvoja biológia nepotrebuje zložité inovácie. Potrebuje konzistenciu. Tieto taktiky možno budú znieť pre teba obyčajne, ale pre tvoj systém predstavujú práve tieto tri zmeny najvyššiu návratnosť investovanej energie.</p>
+
+    <div class="eb-step">
+      <div class="step-label">Krok 01</div>
+      <h3>01. TRÉNING HĹBKY (60 MINÚT DENNE)</h3>
+      <p>Toto je ten najdôležitejší tréning pre tvoj nervový systém. Každá dokončená hodina hlbokej práce priamo posilňuje tvoju oslabenú „top-down“ reguláciu.</p>
+      <ul>
+        <li>1 úloha. 60 minút. Nulové prerušenia. Každý deň rovnaký čas.</li>
+        <li>Žiadny telefón. Žiadne notifikácie. „len si niečo rýchlo skontrolujem“.</li>
+        <li>Ak je hodina na začiatok priveľa, začni na 25 minútach (Pomodoro technika) a kapacitu postupne zvyšuj. Tvoj mozog dostane jasný signál, kedy má začať sústredenie.</li>
+        <li>Bude to nepríjemné. Tvoja myseľ bude hľadať únikový východ. To je úplne normálne. A je to presne ten dôvod, prečo to musíš robiť.</li>
+      </ul>
+    </div>
+
+    <div class="eb-step">
+      <div class="step-label">Krok 02</div>
+      <h3>02. ELIMINÁCIA KOGNITÍVNEJ DANE (MOBIL MIMO DOHĽAD)</h3>
+      <p>Aj keď je smartfón otočený displejom nadol a úplne ticho, jeho samotná prítomnosť znižuje tvoju kognitívnu kapacitu o 10 až 20 %. Pre tvoj typ to nie je metafora. Je to reálna daň za pozornosť.</p>
+      <ul>
+        <li>Počas práce ide telefón do inej miestnosti alebo do šuplíka.</li>
+        <li>Prvú hodinu po prebudení nepozeraj do obrazovky. Je to absolútne kľúčový čas pre rannú kalibráciu dopamínu.</li>
+        <li>Vypni všetky upozornenia a notifikácie okrem hovorov od blízkych. Ty kontroluješ technológie, nie ony teba.</li>
+      </ul>
+    </div>
+
+    <div class="eb-step">
+      <div class="step-label">Krok 03</div>
+      <h3>03. JASNÁ HIERARCHIA (1 PRIORITA NA DEŇ)</h3>
+      <p>Rozptýlený mozog nedokáže rozlíšiť dôležitosť. Všetko sa mu zdá rovnako naliehavé a dôležité. Preto potrebuješ externý systém.</p>
+      <ul>
+        <li>Každé ráno (alebo večer predtým) urči presne 1 vec, ktorá urobí tvoj deň úspešným.</li>
+        <li>Táto 1 vec je zákon. Všetko ostatné v ten deň je len bonus.</li>
+        <li>Večer skontroluj iba túto jednu vec. Nerieš 10 iných.</li>
+        <li>Týmto postupom potichu rekalibruješ svoj systém na dlhodobejšie odmeny. Každý deň znovu zažiješ ten pocit, aké to je reálne niečo dokončiť a pripísať si skutočnú výhru.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="s7" class="bg-s2">
+  <div class="eb-wrap">
+    <div class="eb-label">07</div>
+    <h2>Tvoja nová <em>architektúra dňa</em></h2>
+    <p class="lead">Nestačí len trénovať sústredenie. Musíš okamžite zastaviť krvácanie svojej pozornosti. Pomôžu ti tieto 3 úpravy tvojej každodennej operatívy.</p>
+
+    <div class="eb-step">
+      <div class="step-label">Krok 01</div>
+      <h3>01. INFORMAČNÁ DIÉTA (Menej notifikácií)</h3>
+      <p>Každé jedno pípnutie je priame prerušenie tvojho flow. A každý návrat k plnej koncentrácii ťa stojí v priemere 23 minút. Pre Rozptýlený typ je táto notifikačná záťaž doslova zatiahnutou ručnou brzdou.</p>
+      <ul>
+        <li>Vypni všetky push notifikácie okrem hovorov od blízkych.</li>
+        <li>E-mail a pracovné aplikácie (ako Slack, Asana) kontroluj aktívne len 2 až 3-krát za deň. Nepracuj reaktívne podľa toho, kto a kedy ti napíše.</li>
+        <li>Na sociálne siete si v nastaveniach telefónu nastav tvrdý časový limit.</li>
+      </ul>
+    </div>
+
+    <div class="eb-step">
+      <div class="step-label">Krok 02</div>
+      <h3>02. KOGNITÍVNA PROTÉZA (Jasná priorita dňa)</h3>
+      <p>Bez jasnej priority tvoj mozog vždy vyberie tú najpríjemnejšiu dostupnú aktivitu. Nikdy tú najdôležitejšiu. Systém jednej priority slúži pre tvoj typ ako vonkajšia barla.</p>
+      <ul>
+        <li>1. Deň si pripravuj už večer predtým. Tvoje emócie sú po celom dni stabilnejšie.</li>
+        <li>2. Neplánuj si dôležité veci hneď ráno. Ranné rozhodnutia v stave čerstvo naštartovaného systému (s nízkym kortizolom) sú objektívne horšie.</li>
+        <li>3. Pravidlo znie: 1 hlavná priorita. Maximálne 3 podporné úlohy. Nič viac.</li>
+      </ul>
+    </div>
+
+    <div class="eb-step">
+      <div class="step-label">Krok 03</div>
+      <h3>03. OCHRANA PRED INSTANTNÝMI STIMULMI</h3>
+      <p>Aplikácie, nekonečné feedy, sociálne siete a online nakupovanie neurobili chybu. Sú navrhnuté tak, aby obišli tvoju racionálnu brzdu a udreli priamo na dopamín. Odstrihni ich.</p>
+      <ul>
+        <li>Bezcieľne prezeranie sociálnych sietí vymeň za fyzickú aktivitu alebo čítanie.</li>
+        <li>Prestaň pasívne konzumovať videá. Pozeraj ich výhradne so zámerom a cieľom.</li>
+        <li>Zaveď pravidelný reset: Jeden deň v týždni úplne bez sociálnych sietí a streamovania. Tvoja dopamínová rovnováha potrebuje čas na obnovu.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section id="s8" class="bg-s1">
+  <div class="eb-wrap">
+    <div class="eb-label">08</div>
+    <h2>Vylúčenie fyzického deficitu: <em>Čo si nechať skontrolovať</em></h2>
+    <p class="lead">Tvoj primárny problém so sústredením je naučený behaviorálny vzorec.</p>
+    <p>Žiadny laboratórny test u lekára ti zázračne nevráti stratené sústredenie. Ten si budeš musieť pretrénovať vlastným úsilím.</p>
+    <p>Napriek tomu sa v tvojom tele môže skrývať aj fyzický deficit.</p>
+    <p>Tieto krvné hodnoty slúžia výlučne na to, aby sme vylúčili organické príčiny tvojej únavy. Pre úplný pokoj v duši a istotu, že pri tvrdom tréningu disciplíny nebudeš bežať so zatiahnutou ručnou brzdou.</p>
+    <p>Ak sa budeš cítiť vyčerpaný aj po poctivom zavedení protokolu, daj si u lekára preventívne skontrolovať tieto 4 hodnoty:</p>
+
+    <div class="eb-blood">
+      <div><span class="lab">B12</span><p>B12: Jeho nízke hladiny priamo spôsobujú neurologické spomalenie. Bez neho sa len veľmi ťažko zbavíš takzvanej „mentálnej hmly“.</p></div>
+      <div><span class="lab">Vitamín D</span><p>VITAMÍN D: Nízke hodnoty tohto hormónu matematicky korelujú s citeľne horším kognitívnym výkonom a celkovou kapacitou mozgu.</p></div>
+      <div><span class="lab">Železo &amp; Feritín</span><p>ŽELEZO A FERITÍN: Ak je tento parameter v deficite, tvoj mozog nemá fyzicky dostatok kyslíka na to, aby udržal hlbokú a dlhodobú koncentráciu.</p></div>
+      <div><span class="lab">Glukóza</span><p>GLUKÓZA: Základ tvojej energie. Akákoľvek glukózová nestabilita (prudké výkyvy cukru v krvi) okamžite a radikálne zhoršuje tvoju schopnosť sústrediť sa. Mozog vyžaduje plynulý prísun paliva.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section id="s9">
+  <div class="eb-wrap">
+    <div class="eb-label">09</div>
+    <h2>NEOHACK Protokol — <em>Prvých 6–8 týždňov</em></h2>
+    <p class="lead">TVOJE PALIVO: NEOHACK PROTOKOL (Prvých 6 – 8 týždňov) Doteraz si svoj systém bičoval kofeínom a novými projektmi. Výsledok poznáš.</p>
+    <p>Je čas prejsť od stimulácie k systematickému budovaniu. Urobme si jasno. Doplnky za teba tvoju rozbitú pozornosť neopravia. To, čo máš pred sebou, nie je instantná energia na dlh. Je to cielená, biologická podpora presne pre tvoj typ rozptýlenosti.</p>
+    <p>Čisté stavebné látky, ktoré tvoj mozog môže potrebovať na to, aby si dokázal znovu vytvoriť stabilné sústredenie a udržal si sa na ceste. My ti dodáme funkčné nástroje. Motor však musíš naštartovať ty. METAFOCUS (Kalibrácia tvojho sústredenia)</p>
+
+    <div class="eb-product">
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/dopafocus-product.jpg" alt="DopaFocus" loading="lazy" /></div>
+      <div>
+        <span class="ptag">Hlavný protokol</span>
+        <h3>Nootropický komplex — DopаFocus</h3>
+        <p>Nootropický komplex navrhnutý pre okamžitú dopamínovú reguláciu. Pre tvoj typ je to priama podpora oslabenej racionálnej brzdy (top-down regulácie). Výrazne znižuje mentálny hluk a fyzicky ti pomáha udržať pozornosť na jednej jedinej veci. Ranná dávka nastaví tvoj mozog na neprerušovanú prácu skôr, ako príde prvá notifikácia.</p>
+        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
+      </div>
+    </div>
+
+    <div class="eb-product">
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/aminofuel-product.jpg" alt="AminoFuel" loading="lazy" /></div>
+      <div>
+        <span class="ptag">AminoFuel</span>
+        <h3>Stabilizácia motivácie</h3>
+        <p>Tvoje telo nevyrába dopamín zo vzduchu. Vyrába ho z aminokyselín (konkrétne z tyrozínu, ktorý pochádza z proteínu). Ak ich tvoja strava nemá dostatok, tvoj systém beží nasucho a dopamínová syntéza viazne. AminoFuel ti dodá esenciálne stavebné bloky pre stabilnú produkciu dopamínu počas celého dňa.</p>
+        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
+      </div>
+    </div>
+
+    <div class="eb-product">
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/methylfuel-product.jpg" alt="MethylFuel B-Complex" loading="lazy" /></div>
+      <div>
+        <span class="ptag">MethylFuel B-Complex</span>
+        <h3>Aktivácia nervových dráh</h3>
+        <p>Bez aktívnych, metylovaných B-vitamínov (B6, B12 a folát) nedokáže tvoje telo správne premeniť prijaté aminokyseliny na dopamín. Sú to nevyhnutné kofaktory. Bez nich ti ani ten najlepší proteín nezaručí funkčnú chémiu v mozgu. Pre tvoj typ je to absolútny základ neurotransmiterovej podpory.</p>
+        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
+      </div>
+    </div>
+
+    <h3>SYSTÉMOVÁ NADSTAVBA: Počúvaj svoje telo</h3>
+    <p>Každá biológia je iná. Tvoj Rozptýlený typ sa môže prelínať s inými deficitmi. Počúvaj svoje telo a ak popri tréningu tvojho sústredenia narážaš na tieto špecifické prekážky, zaraď doplnkové poistky:</p>
+
+    <div class="eb-product muted">
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/hydrofuel-product.jpg" alt="HydroFuel" loading="lazy" /></div>
+      <div>
+        <span class="ptag">Bonus — HydroFuel</span>
+        <h3>Hlboká hydratácia</h3>
+        <p>Zaraď ho v prípade, ak počas dňa pozoruješ prudké, nepredvídateľné výpadky energie (je možné, že sa tvoj profil prelína s Rozkolísaným typom). Únava totiž často nie je nedostatok spánku, ale chronická strata bunkovej vody a minerálov.</p>
+        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
+      </div>
+    </div>
+
+    <div class="eb-product muted">
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/omega3fuel-product.jpg" alt="Omega3Fuel" loading="lazy" /></div>
+      <div>
+        <span class="ptag">Bonus — Omega3Fuel</span>
+        <h3>Ochrana neurónov</h3>
+        <p>Tvoja voľba, ak ťa trápi permanentná mentálna hmla a nedokážeš udržať čistú myseľ ani po ôsmich hodinách hlbokého spánku. Tvoj mozog nedokáže budovať rýchle nervové spojenia, ak mu chýbajú kvalitné tuky na stavbu bunkových membrán.</p>
+        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
+      </div>
+    </div>
+
+    <div class="eb-product muted">
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/mineralfuel-product.jpg" alt="MineralFuel" loading="lazy" /></div>
+      <div>
+        <span class="ptag">Bonus — MineralFuel</span>
+        <h3>Nervová stabilita</h3>
+        <p>Kľúčový doplnok, ak tvoju rozptýlenosť sprevádza aj celková fyzická a psychická rozkolísanosť. Horčík je primárny inhibítor stresu. Ak ho máš málo, tvoj systém nedokáže fyzicky vypnúť napätie, čo priamo znemožňuje hlboké sústredenie.</p>
+        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="eb-final">
+  <div class="eb-wrap eb-final-inner">
+    <div class="quote">„Fokus nie je talent. Je to sval. Trénovateľný.“</div>
+    <p>Hlboké sústredenie nie je vrodený talent. Je to sval tvojho nervového systému. Ako každý iný sval, aj tento sa dá vytrénovať a adaptovať na akúkoľvek záťaž.</p>
+    <p>Tvoja rozptýlenosť nie je defekt tvojho charakteru. Je to len brzda, ktorú tvoje telo zatiahlo pred ďalším vyhorením. Biológia nepozná sviatky ani pondelky. Prevezmi nad sebou kontrolu už zajtra ráno. Spomaľ. Odlož ten telefón. A nastav svoj systém späť do rovnováhy.</p>
+    <a class="eb-final-cta" href="https://neohack.sk" target="_blank" rel="noopener">Začni na neohack.sk</a>
+  </div>
+</section>
+
+<footer>© 2025 NEOHACK.SK — Energetický Kompas: Rozptýlený typ. Všetky práva vyhradené.</footer>
+
+</body>
+</html>
