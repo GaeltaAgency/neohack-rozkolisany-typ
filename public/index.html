@@ -305,6 +305,114 @@
     .eb-product{grid-template-columns:1fr!important}
     a{color:#7c3aed!important}
   }
+
+  /* ============ A4 PREVIEW MODE ============ */
+  body.a4-preview{background:#3a3a40}
+  body.a4-preview .eb-nav{position:sticky}
+  body.a4-preview main{
+    max-width:none;padding:30px 0;
+    display:flex;flex-direction:column;align-items:center;gap:24px;
+  }
+  body.a4-preview section{
+    width:210mm;min-height:297mm;
+    background:#fff!important;color:#111!important;
+    border:0;border-radius:2px;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);
+    padding:18mm 18mm!important;margin:0;
+    page-break-after:always;position:relative;
+    overflow:hidden;
+  }
+  body.a4-preview section::after{
+    content:"A4 — " attr(data-title);
+    position:absolute;bottom:6mm;right:10mm;
+    font-size:10px;color:#999;letter-spacing:.1em;text-transform:uppercase;
+  }
+  body.a4-preview .eb-wrap{max-width:none;padding:0}
+  body.a4-preview h1,body.a4-preview h2,body.a4-preview h3,
+  body.a4-preview p,body.a4-preview .lead,body.a4-preview strong,
+  body.a4-preview .eb-item p,body.a4-preview .eb-step p,
+  body.a4-preview .eb-product p,body.a4-preview .eb-final p,
+  body.a4-preview .eb-toc a,body.a4-preview .eb-deficit p,
+  body.a4-preview .eb-blood p{
+    color:#111!important;-webkit-text-fill-color:#111!important;background:none!important;
+  }
+  body.a4-preview h1,body.a4-preview h2 em,body.a4-preview .eb-final .quote{
+    color:#7c3aed!important;-webkit-text-fill-color:#7c3aed!important;background:none!important;
+  }
+  body.a4-preview .eb-tag,body.a4-preview .eb-label,
+  body.a4-preview .eb-toc-title,body.a4-preview .eb-item .num,
+  body.a4-preview .eb-item .sub,body.a4-preview .eb-deficit .lab,
+  body.a4-preview .eb-blood .lab,body.a4-preview .eb-step .step-label,
+  body.a4-preview .eb-product .ptag,body.a4-preview .eb-cta{
+    color:#7c3aed!important;border-color:#7c3aed!important;background:none!important;
+  }
+  body.a4-preview .eb-quote{background:#f7f1ff!important;border:1px solid #e0c8ff!important;color:#111!important}
+  body.a4-preview .eb-callout{background:#fafafa!important;border-left:3px solid #7c3aed!important;color:#111!important}
+  body.a4-preview .eb-item,body.a4-preview .eb-step,
+  body.a4-preview .eb-deficit > div,body.a4-preview .eb-blood > div,
+  body.a4-preview .eb-product,body.a4-preview .eb-toc{
+    background:#fff!important;border:1px solid #e2e2e2!important;
+  }
+  body.a4-preview .eb-product .img{
+    border:1px solid #eee!important;background:#fafafa!important;
+  }
+  body.a4-preview .eb-final::before{display:none}
+  body.a4-preview footer{
+    width:210mm;background:#fff;color:#666;border-top:1px solid #eee;
+    box-shadow:0 8px 30px rgba(0,0,0,.5);
+  }
+
+  /* ============ DIAGNOSTIC PANEL ============ */
+  .eb-diag-toggle{
+    position:fixed;bottom:20px;right:20px;z-index:60;
+    width:48px;height:48px;border-radius:50%;
+    background:var(--acc);color:#fff;border:0;cursor:pointer;
+    font-size:20px;font-weight:800;
+    box-shadow:0 6px 20px rgba(168,85,247,.5);
+    transition:transform .2s ease;
+  }
+  .eb-diag-toggle:hover{transform:scale(1.08)}
+  .eb-diag{
+    position:fixed;bottom:80px;right:20px;z-index:60;
+    width:340px;max-height:70vh;overflow-y:auto;
+    background:#0d0d10;border:1px solid var(--acc30);border-radius:12px;
+    padding:18px;color:var(--w80);font-size:13px;line-height:1.5;
+    box-shadow:0 12px 40px rgba(0,0,0,.6);
+    display:none;
+  }
+  .eb-diag.open{display:block}
+  .eb-diag h4{
+    color:var(--acc);font-size:11px;font-weight:800;letter-spacing:.18em;
+    text-transform:uppercase;margin:0 0 10px;
+  }
+  .eb-diag h4:not(:first-child){margin-top:18px}
+  .eb-diag .row{
+    display:flex;justify-content:space-between;gap:10px;
+    padding:5px 0;border-bottom:1px solid #1a1a20;font-size:12px;
+  }
+  .eb-diag .ok{color:#4ade80}
+  .eb-diag .bad{color:#f87171}
+  .eb-diag .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+  .eb-diag .actions button{
+    flex:1;background:transparent;border:1px solid var(--acc30);
+    color:var(--acc);padding:7px 10px;border-radius:6px;
+    font-size:11px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;cursor:pointer;transition:background .2s;
+  }
+  .eb-diag .actions button:hover{background:var(--acc12)}
+  .eb-diag .diac-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:8px;
+  }
+  .eb-diag .diac-grid span{
+    text-align:center;padding:4px 2px;border-radius:4px;
+    background:#16161a;font-size:11px;
+  }
+  .eb-diag .diac-grid .has{color:#4ade80;background:rgba(74,222,128,.08)}
+  .eb-diag .diac-grid .miss{color:#f87171;background:rgba(248,113,113,.1)}
+
+  @media print{
+    .eb-diag,.eb-diag-toggle,#dlPdf,#a4Toggle{display:none!important}
+  }
 </style>
 </head>
 <body>
@@ -312,9 +420,15 @@
 <nav class="eb-nav">
   <div class="eb-nav-inner">
     <a class="eb-logo" href="#cover">NEOHACK<span class="dot">.SK</span></a>
-    <button class="eb-pdf" onclick="window.print()">Uložiť PDF</button>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button class="eb-pdf" id="a4Toggle" type="button">A4 náhľad</button>
+      <button class="eb-pdf" id="dlPdf" type="button">Stiahnuť PDF</button>
+      <button class="eb-pdf" onclick="window.print()" type="button">Tlačiť</button>
+    </div>
   </div>
 </nav>
+
+<main>
 
 <!-- COVER -->
 <section id="cover">
