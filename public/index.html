@@ -22,7 +22,7 @@
     --acc30:rgba(168,85,247,.30);
     --acc12:rgba(168,85,247,.12);
     --acc06:rgba(168,85,247,.06);
-    --ag:linear-gradient(to right,#A855F7 0%,#E9D5FF 52%,#808080 100%);
+    --ag:linear-gradient(to right,#A855F7 0%,#C9A3FA 50%,#E9D5FF 100%);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -68,16 +68,16 @@
 
   h1{
     font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-.03em;
-    line-height:1.05;color:var(--w);margin:14px 0 18px;
+    line-height:1.15;color:var(--w);margin:14px 0 18px;padding-top:.08em;
     background:var(--ag);-webkit-background-clip:text;background-clip:text;
     -webkit-text-fill-color:transparent;
   }
   h2{
     font-size:clamp(23px,3.2vw,32px);font-weight:800;letter-spacing:-.03em;
-    line-height:1.15;color:var(--w);margin:0 0 18px;
+    line-height:1.25;color:var(--w);margin:0 0 18px;padding-top:.06em;
   }
   h2 em{
-    font-style:normal;
+    font-style:normal;display:inline;
     background:var(--ag);-webkit-background-clip:text;background-clip:text;
     -webkit-text-fill-color:transparent;
   }
@@ -207,12 +207,31 @@
   .eb-product .img{
     width:160px;height:160px;border-radius:8px;overflow:hidden;
     background:var(--s3);border:1px solid var(--b1);
+    position:relative;flex-shrink:0;
   }
   .eb-product .img img{
     width:100%;height:100%;object-fit:cover;display:block;
     transition:transform .4s ease;
   }
   .eb-product:hover .img img{transform:scale(1.04)}
+  .eb-product .img.fallback{
+    background:
+      radial-gradient(circle at 30% 20%, var(--acc12) 0%, transparent 60%),
+      linear-gradient(135deg,#15151a 0%,#0a0a0d 100%);
+    border-color:var(--acc30);
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:14px;
+  }
+  .eb-product .img.fallback::before{
+    content:attr(data-label);
+    font-size:13px;font-weight:800;color:var(--w92);
+    letter-spacing:.02em;line-height:1.3;
+  }
+  .eb-product .img.fallback::after{
+    content:"";position:absolute;top:10px;right:10px;
+    width:8px;height:8px;border-radius:50%;background:var(--acc);
+    box-shadow:0 0 12px var(--acc);
+  }
   .eb-product .ptag{
     display:inline-block;font-size:10px;font-weight:800;letter-spacing:.2em;
     text-transform:uppercase;color:var(--acc);
@@ -273,6 +292,9 @@
     .eb-product .img{width:100%;height:220px}
     .eb-deficit,.eb-blood{grid-template-columns:1fr}
     .eb-step{padding:22px}
+    .eb-pdf{padding:7px 11px;font-size:10px;letter-spacing:.12em}
+    .eb-nav-inner{flex-wrap:nowrap}
+    .eb-nav-inner > div{gap:6px!important}
   }
 
   /* PRINT */
@@ -673,7 +695,7 @@
     <p>Čisté stavebné látky, ktoré tvoj mozog môže potrebovať na to, aby si dokázal znovu vytvoriť stabilné sústredenie a udržal si sa na ceste. My ti dodáme funkčné nástroje. Motor však musíš naštartovať ty. METAFOCUS (Kalibrácia tvojho sústredenia)</p>
 
     <div class="eb-product">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/dopafocus-product.jpg" alt="DopaFocus" loading="lazy" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/dopafocus-product.jpg" alt="DopaFocus" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">Hlavný protokol</span>
         <h3>Nootropický komplex — DopаFocus</h3>
@@ -683,7 +705,7 @@
     </div>
 
     <div class="eb-product">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/aminofuel-product.jpg" alt="AminoFuel" loading="lazy" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/aminofuel-product.jpg" alt="AminoFuel" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">AminoFuel</span>
         <h3>Stabilizácia motivácie</h3>
@@ -693,7 +715,7 @@
     </div>
 
     <div class="eb-product">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/methylfuel-product.jpg" alt="MethylFuel B-Complex" loading="lazy" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/methylfuel-product.jpg" alt="MethylFuel B-Complex" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">MethylFuel B-Complex</span>
         <h3>Aktivácia nervových dráh</h3>
@@ -706,7 +728,7 @@
     <p>Každá biológia je iná. Tvoj Rozptýlený typ sa môže prelínať s inými deficitmi. Počúvaj svoje telo a ak popri tréningu tvojho sústredenia narážaš na tieto špecifické prekážky, zaraď doplnkové poistky:</p>
 
     <div class="eb-product muted">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/hydrofuel-product.jpg" alt="HydroFuel" loading="lazy" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/hydrofuel-product.jpg" alt="HydroFuel" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">Bonus — HydroFuel</span>
         <h3>Hlboká hydratácia</h3>
@@ -716,7 +738,7 @@
     </div>
 
     <div class="eb-product muted">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/omega3fuel-product.jpg" alt="Omega3Fuel" loading="lazy" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/omega3fuel-product.jpg" alt="Omega3Fuel" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">Bonus — Omega3Fuel</span>
         <h3>Ochrana neurónov</h3>
@@ -726,7 +748,7 @@
     </div>
 
     <div class="eb-product muted">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/mineralfuel-product.jpg" alt="MineralFuel" loading="lazy" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/mineralfuel-product.jpg" alt="MineralFuel" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">Bonus — MineralFuel</span>
         <h3>Nervová stabilita</h3>
@@ -740,7 +762,7 @@
 <!-- FINAL -->
 <section class="eb-final" data-title="Záver">
   <div class="eb-wrap eb-final-inner">
-    <div class="quote">„Fokus nie je talent. Je to sval. Trénovateľný.“</div>
+    <div class="quote">„Fokus nie je talent.<br/>Je to sval, ktorý sa dá trénovať."</div>
     <p>Hlboké sústredenie nie je vrodený talent. Je to sval tvojho nervového systému. Ako každý iný sval, aj tento sa dá vytrénovať a adaptovať na akúkoľvek záťaž.</p>
     <p>Tvoja rozptýlenosť nie je defekt tvojho charakteru. Je to len brzda, ktorú tvoje telo zatiahlo pred ďalším vyhorením. Biológia nepozná sviatky ani pondelky. Prevezmi nad sebou kontrolu už zajtra ráno. Spomaľ. Odlož ten telefón. A nastav svoj systém späť do rovnováhy.</p>
     <a class="eb-final-cta" href="https://neohack.sk" target="_blank" rel="noopener">Začni na neohack.sk</a>
