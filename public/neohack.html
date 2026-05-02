@@ -298,16 +298,63 @@
   .eb-final-cta svg{width:16px;height:16px;flex-shrink:0}
   .eb-final-cta:disabled{opacity:.6;cursor:wait}
 
-  /* PDF EXPORT MODE — keep dark theme */
-  body.pdf-export{background:#0a0a0a!important}
+  /* PDF EXPORT MODE — keep dark theme, force solid colors so html2canvas can rasterize text */
+  body.pdf-export{background:#0a0a0a!important;color:#fff!important}
   body.pdf-export .eb-nav,
   body.pdf-export .eb-diag,
   body.pdf-export .eb-diag-toggle{display:none!important}
   body.pdf-export::before{display:none!important}
   body.pdf-export html,
   body.pdf-export main,
-  body.pdf-export section,
   body.pdf-export footer{background:#0a0a0a!important}
+  body.pdf-export section{background:#0a0a0a!important;border-color:#1a1a20!important}
+  body.pdf-export section.bg-s1{background:#0d0d12!important}
+  body.pdf-export section.bg-s2{background:#101015!important}
+  /* Replace all transparent/gradient text with solid colors */
+  body.pdf-export h1,
+  body.pdf-export h2 em,
+  body.pdf-export .eb-final .quote{
+    background:none!important;-webkit-text-fill-color:#c9a3fa!important;color:#c9a3fa!important;
+  }
+  body.pdf-export h2,
+  body.pdf-export h3,
+  body.pdf-export strong,
+  body.pdf-export .eb-callout strong,
+  body.pdf-export .eb-product h3,
+  body.pdf-export .eb-step h3,
+  body.pdf-export .eb-item h3{color:#ffffff!important}
+  body.pdf-export p,
+  body.pdf-export .lead,
+  body.pdf-export .eb-item p,
+  body.pdf-export .eb-step p,
+  body.pdf-export .eb-step ul li,
+  body.pdf-export .eb-product p,
+  body.pdf-export .eb-deficit p,
+  body.pdf-export .eb-blood p,
+  body.pdf-export .eb-callout,
+  body.pdf-export .eb-quote,
+  body.pdf-export .eb-disclaimer,
+  body.pdf-export .eb-toc a,
+  body.pdf-export footer{color:#e6e6ea!important}
+  body.pdf-export .eb-tag,
+  body.pdf-export .eb-label,
+  body.pdf-export .eb-toc-title,
+  body.pdf-export .eb-item .num,
+  body.pdf-export .eb-item .sub,
+  body.pdf-export .eb-deficit .lab,
+  body.pdf-export .eb-blood .lab,
+  body.pdf-export .eb-step .step-label,
+  body.pdf-export .eb-product .ptag,
+  body.pdf-export .eb-cta{color:#c9a3fa!important}
+  body.pdf-export .eb-item,
+  body.pdf-export .eb-step,
+  body.pdf-export .eb-product,
+  body.pdf-export .eb-deficit > div,
+  body.pdf-export .eb-blood > div,
+  body.pdf-export .eb-toc{background:#15151a!important;border-color:#26262e!important}
+  body.pdf-export .eb-quote{background:rgb(28,18,40)!important;border-color:#5b3b8a!important}
+  body.pdf-export .eb-callout{background:#15151a!important;border-left-color:#a855f7!important}
+  body.pdf-export .eb-disclaimer{background:rgb(40,32,8)!important;border-color:#a37a08!important;border-left-color:#eab308!important}
   body.pdf-export .eb-item,
   body.pdf-export .eb-step,
   body.pdf-export .eb-product,
@@ -315,8 +362,15 @@
   body.pdf-export .eb-blood > div,
   body.pdf-export .eb-quote,
   body.pdf-export .eb-callout,
+  body.pdf-export .eb-disclaimer,
   body.pdf-export .eb-toc{
     page-break-inside:avoid;break-inside:avoid;
+  }
+
+  /* Subtle ambient glow */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background:radial-gradient(60% 50% at 50% 0%, rgba(168,85,247,.18), transparent 70%);
   }
 
   /* Subtle ambient glow */
