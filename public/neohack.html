@@ -1062,9 +1062,16 @@
       var pageCount = pdf.internal.getNumberOfPages();
       var pageWidth = pdf.internal.pageSize.getWidth();
       var pageHeight = pdf.internal.pageSize.getHeight();
+      // Prepend a full-page dark background to every page's content stream
+      // (drawn BEFORE content so it sits behind everything, incl. last-page tail).
+      var bgCmd = 'q\n0.039 0.039 0.039 rg\n0 0 '+pageWidth.toFixed(3)+' '+pageHeight.toFixed(3)+' re\nf\nQ\n';
       for(var i = 1; i <= pageCount; i++){
-        if(pdf.internal.pages[i] && pdf.internal.pages[i].unshift){
-          pdf.internal.pages[i].unshift('0.039 0.039 0.039 rg\n0 0 '+pageWidth+' '+pageHeight+' re\nf\n');
+        var pg = pdf.internal.pages[i];
+        if(pg == null) continue;
+        if(typeof pg === 'string'){
+          pdf.internal.pages[i] = bgCmd + pg;
+        } else if(Array.isArray(pg) && pg.unshift){
+          pg.unshift(bgCmd);
         }
       }
       pdf.save(opt.filename);
