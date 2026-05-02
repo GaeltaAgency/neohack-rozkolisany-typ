@@ -156,9 +156,23 @@
   .eb-callout strong{color:var(--w);font-weight:800;letter-spacing:.02em}
 
   /* DEFICIT / BLOOD GRID */
-  .eb-deficit,.eb-blood{
+  .eb-deficit{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0;
+  }
+  .eb-blood{
     display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;
   }
+  @media (max-width:760px){ .eb-deficit{grid-template-columns:1fr} }
+
+  /* DISCLAIMER */
+  .eb-disclaimer{
+    background:rgba(234,179,8,.06);
+    border:1px solid rgba(234,179,8,.35);
+    border-left:3px solid #eab308;
+    border-radius:10px;padding:18px 22px;margin:22px 0;
+    font-size:14.5px;color:var(--w80);line-height:1.7;
+  }
+  .eb-disclaimer strong{color:#facc15}
   .eb-deficit > div,.eb-blood > div{
     background:var(--s2);border:1px solid var(--b2);border-radius:10px;
     padding:16px 18px;
@@ -284,16 +298,63 @@
   .eb-final-cta svg{width:16px;height:16px;flex-shrink:0}
   .eb-final-cta:disabled{opacity:.6;cursor:wait}
 
-  /* PDF EXPORT MODE — keep dark theme */
-  body.pdf-export{background:#0a0a0a!important}
+  /* PDF EXPORT MODE — keep dark theme, force solid colors so html2canvas can rasterize text */
+  body.pdf-export{background:#0a0a0a!important;color:#fff!important}
   body.pdf-export .eb-nav,
   body.pdf-export .eb-diag,
   body.pdf-export .eb-diag-toggle{display:none!important}
   body.pdf-export::before{display:none!important}
   body.pdf-export html,
   body.pdf-export main,
-  body.pdf-export section,
   body.pdf-export footer{background:#0a0a0a!important}
+  body.pdf-export section{background:#0a0a0a!important;border-color:#1a1a20!important}
+  body.pdf-export section.bg-s1{background:#0d0d12!important}
+  body.pdf-export section.bg-s2{background:#101015!important}
+  /* Replace all transparent/gradient text with solid colors */
+  body.pdf-export h1,
+  body.pdf-export h2 em,
+  body.pdf-export .eb-final .quote{
+    background:none!important;-webkit-text-fill-color:#c9a3fa!important;color:#c9a3fa!important;
+  }
+  body.pdf-export h2,
+  body.pdf-export h3,
+  body.pdf-export strong,
+  body.pdf-export .eb-callout strong,
+  body.pdf-export .eb-product h3,
+  body.pdf-export .eb-step h3,
+  body.pdf-export .eb-item h3{color:#ffffff!important}
+  body.pdf-export p,
+  body.pdf-export .lead,
+  body.pdf-export .eb-item p,
+  body.pdf-export .eb-step p,
+  body.pdf-export .eb-step ul li,
+  body.pdf-export .eb-product p,
+  body.pdf-export .eb-deficit p,
+  body.pdf-export .eb-blood p,
+  body.pdf-export .eb-callout,
+  body.pdf-export .eb-quote,
+  body.pdf-export .eb-disclaimer,
+  body.pdf-export .eb-toc a,
+  body.pdf-export footer{color:#e6e6ea!important}
+  body.pdf-export .eb-tag,
+  body.pdf-export .eb-label,
+  body.pdf-export .eb-toc-title,
+  body.pdf-export .eb-item .num,
+  body.pdf-export .eb-item .sub,
+  body.pdf-export .eb-deficit .lab,
+  body.pdf-export .eb-blood .lab,
+  body.pdf-export .eb-step .step-label,
+  body.pdf-export .eb-product .ptag,
+  body.pdf-export .eb-cta{color:#c9a3fa!important}
+  body.pdf-export .eb-item,
+  body.pdf-export .eb-step,
+  body.pdf-export .eb-product,
+  body.pdf-export .eb-deficit > div,
+  body.pdf-export .eb-blood > div,
+  body.pdf-export .eb-toc{background:#15151a!important;border-color:#26262e!important}
+  body.pdf-export .eb-quote{background:rgb(28,18,40)!important;border-color:#5b3b8a!important}
+  body.pdf-export .eb-callout{background:#15151a!important;border-left-color:#a855f7!important}
+  body.pdf-export .eb-disclaimer{background:rgb(40,32,8)!important;border-color:#a37a08!important;border-left-color:#eab308!important}
   body.pdf-export .eb-item,
   body.pdf-export .eb-step,
   body.pdf-export .eb-product,
@@ -301,8 +362,15 @@
   body.pdf-export .eb-blood > div,
   body.pdf-export .eb-quote,
   body.pdf-export .eb-callout,
+  body.pdf-export .eb-disclaimer,
   body.pdf-export .eb-toc{
     page-break-inside:avoid;break-inside:avoid;
+  }
+
+  /* Subtle ambient glow */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background:radial-gradient(60% 50% at 50% 0%, rgba(168,85,247,.18), transparent 70%);
   }
 
   /* Subtle ambient glow */
@@ -519,14 +587,19 @@
     <h2><em>TVOJ PRVÝ KROK:</em> Odomknutie systému</h2>
     <p class="lead">Práve si získal prístup k pochopeniu vlastného tela. Tento krok mení všetko.</p>
     <p>Držíš v rukách manuál k tvojej biológii. Presne ti vysvetlí, čo sa práve teraz deje v tvojom mozgu, ako si sa do tohto stavu dostal, a – čo je najdôležitejšie – ukáže ti konkrétne kroky, ktoré budú mať na tvoju energiu ten najvyšší efekt.</p>
-    <div class="eb-quote">PROFIL: ROZPTÝLENÝ TYP (Motor na plný plyn. Zaradený neutrál.) To, s čím momentálne bojuješ, nie je vyhorenie ani chronický stres.</div>
-    <p>Volá sa to dopamínová fragmentácia.</p>
+
+    <div class="eb-disclaimer"><strong>⚠️ Upozornenie:</strong> Tento manuál nie je náhradou lekárskych odporúčaní. Tvoje zdravie je tvoja zodpovednosť. Akékoľvek pretrvávajúce zdravotné problémy rieš primárne so svojím lekárom.</div>
+
+    <h3>PROFIL: ROZPTÝLENÝ TYP</h3>
+    <p class="lead"><strong>Motor na plný plyn. Zaradený neutrál.</strong></p>
+    <p>To, s čím momentálne bojuješ, nie je vyhorenie ani chronický stres.</p>
+    <div class="eb-quote">Volá sa to <span style="color:var(--acc)">dopamínová fragmentácia.</span></div>
     <p>Tvoj problém nie je nedostatok paliva. Ty máš energie na rozdávanie.</p>
     <p>Tvoj mozog beží na 200 % a nápady prúdia. Lenže tvoje sústredenie je na nule, pretože tento výkon spaľuješ na desiatich rôznych miestach naraz.</p>
     <p>Začneš 10 vecí. Nedokončíš ani jednu. Výsledok dobre poznáš. Večer je tvoje telo absolútne vyčerpané z celodenného prešľapovania na mieste, no tvoja myseľ stále beží na plné obrátky a hľadá ďalší stimul.</p>
-    <p>Zastavme to tu a teraz a pozrime sa na tvoju biológiu bez emócií a sebaobviňovania.</p>
-    <div class="eb-callout">Nie, nie si lenivý. Tvoja pevná vôľa nezlyhala. Nie je to ani chyba tvojho charakteru. Tvoja biológia sa len zasekla v slučke okamžitých odmien.</div>
-    <p>Dobrá správa? Je to len systémový vzorec. A ten sa dá krok za krokom opraviť.</p>
+    <div class="eb-callout">Zastavme to tu a teraz a pozrime sa na tvoju biológiu bez emócií a sebaobviňovania.</div>
+    <p>Nie, nie si lenivý. Tvoja pevná vôľa nezlyhala. Nie je to ani chyba tvojho charakteru. Tvoja biológia sa len zasekla v slučke okamžitých odmien.</p>
+    <div class="eb-quote"><span style="color:var(--acc)">Dobrá správa?</span> Je to len systémový vzorec. A ten sa dá krok za krokom opraviť.</div>
   </div>
 </section>
 
@@ -535,7 +608,7 @@
   <div class="eb-wrap">
     <div class="eb-label">02</div>
     <h2>Anatómia rozptýlenosti: <em>Prečo tvoja brzda prestala fungovať?</em></h2>
-    <p class="lead">ANATÓMIA ROZPTÝLENOSTI: Prečo tvoja brzda prestala fungovať?</p>
+    
     <p>Rozptýlenosť je len naučený vzorec.</p>
     <p>V biológii tomuto stavu hovoríme dopamínová fragmentácia a oslabená top-down regulácia.</p>
     <p>Preložené do reči tvojho tela:</p>
@@ -557,7 +630,7 @@
   <div class="eb-wrap">
     <div class="eb-label">03</div>
     <h2>Symptómy: <em>Ako vyzerá tvoja roztrieštenosť v praxi?</em></h2>
-    <p class="lead">SYMPTÓMY: Ako vyzerá tvoja roztrieštenosť v praxi?</p>
+    <p class="lead">Cítiš to každý deň. Tu je päť tvárí dopamínovej fragmentácie.</p>
 
     <div class="eb-item"><span class="num">01</span><h3>SYNDRÓM ZAMRZNUTÉHO ŠTARTU</h3><p>Začneš niekoľko vecí naraz s obrovskou úvodnou energiou. Nedokončíš žiadnu. Nový projekt je totiž dopamínový hit. Dokončovanie je len drina.</p></div>
     <div class="eb-item"><span class="num">02</span><h3>KREATIVITA BEZ REALIZÁCIE A VÝSLEDKOV</h3><p>Tvoja myseľ generuje skvelé nápady. Zasekávaš sa však v realizácii. Máš plný stôl plánov, no nulové výstupy.</p></div>
@@ -572,7 +645,7 @@
   <div class="eb-wrap">
     <div class="eb-label">04</div>
     <h2>Ako sa snažíš <em>oklamať vlastný systém</em>: Tvoje kompenzácie</h2>
-    <p class="lead">AKO SA SNAŽÍŠ OKLAMAŤ VLASTNÝ SYSTÉM: Tvoje kompenzácie</p>
+    
     <p>Cítiš, že strácaš pôdu pod nohami. A tak hľadáš skratky. Tvoj mozog si vytvoril tri rýchle kompenzačné mechanizmy, ktorými sa snaží zakryť stratu sústredenia.</p>
 
     <div class="eb-item"><span class="num">01</span><h3>KOFEÍNOVÝ ÚVER</h3><p>Leješ do seba kávu s nádejou, že ťa konečne donúti sústrediť sa. Ale kofeín ti nedá ani miligram skutočného sústredenia. On iba hrubo zablokuje senzory únavy. Berie si od tvojho tela biologický úver, ktorého drastický úrok vždy splatíš neskorším pádom.</p></div>
@@ -590,7 +663,7 @@
   <div class="eb-wrap">
     <div class="eb-label">05</div>
     <h2>Tvoj skutočný deficit: <em>Čo tvojmu telu chýba?</em></h2>
-    <p class="lead">TVOJ SKUTOČNÝ DEFICIT: Čo tvojmu telu chýba?</p>
+    
     <p>Vymeňme si na chvíľu optiku. Dopamín nie je odmena za to, že si niečo dokázal. Je to biologický kompas. Je to motivačný signál smerom k odmene.</p>
     <p>Ak je tvoj dopamínový systém fragmentovaný, nemáš šancu udržať motiváciu k dlhodobým cieľom. Aj keď ich racionálne veľmi chceš dosiahnuť. Tvoj mozog zakaždým bezpečne uskočí k najbližšej, najrýchlejšej odmene. To, čo si stratil, nie je energia. Stratil si tri kľúčové parametre:</p>
 
@@ -669,7 +742,7 @@
     <div class="eb-step">
       <div class="step-label">Krok 01</div>
       <h3>01. INFORMAČNÁ DIÉTA (Menej notifikácií)</h3>
-      <p>Každé jedno pípnutie je priame prerušenie tvojho flow. A každý návrat k plnej koncentrácii ťa stojí v priemere 23 minút. Pre Rozptýlený typ je táto notifikačná záťaž doslova zatiahnutou ručnou brzdou.</p>
+      <p>Každé jedno pípnutie je priame prerušenie tvojho sústredenia. A každý návrat k plnej koncentrácii ťa stojí v priemere 23 minút. Pre Rozptýlený typ je táto notifikačná záťaž doslova zatiahnutou ručnou brzdou.</p>
       <ul>
         <li>Vypni všetky push notifikácie okrem hovorov od blízkych.</li>
         <li>E-mail a pracovné aplikácie (ako Slack, Asana) kontroluj aktívne len 2 až 3-krát za deň. Nepracuj reaktívne podľa toho, kto a kedy ti napíše.</li>
@@ -726,15 +799,17 @@
   <div class="eb-wrap">
     <div class="eb-label">09</div>
     <h2>NEOHACK Protokol — <em>Prvých 6–8 týždňov</em></h2>
-    <p class="lead">TVOJE PALIVO: NEOHACK PROTOKOL (Prvých 6 – 8 týždňov) Doteraz si svoj systém bičoval kofeínom a novými projektmi. Výsledok poznáš.</p>
-    <p>Je čas prejsť od stimulácie k systematickému budovaniu. Urobme si jasno. Doplnky za teba tvoju rozbitú pozornosť neopravia. To, čo máš pred sebou, nie je instantná energia na dlh. Je to cielená, biologická podpora presne pre tvoj typ rozptýlenosti.</p>
-    <p>Čisté stavebné látky, ktoré tvoj mozog môže potrebovať na to, aby si dokázal znovu vytvoriť stabilné sústredenie a udržal si sa na ceste. My ti dodáme funkčné nástroje. Motor však musíš naštartovať ty. METAFOCUS (Kalibrácia tvojho sústredenia)</p>
+    <p class="lead"><strong>TVOJE PALIVO: NEOHACK PROTOKOL</strong></p>
+    <p><strong>✅ ZÁKLADNÁ KOTVA</strong> (Prvých 6 až 8 týždňov)</p>
+    <p>Doteraz si svoj systém bičoval kofeínom a novými projektmi. Výsledok poznáš. Je čas prejsť od stimulácie k systematickému budovaniu.</p>
+    <p>Urobme si jasno. Doplnky za teba tvoju rozbitú pozornosť neopravia. To, čo máš pred sebou, nie je instantná energia na dlh. Je to cielená, biologická podpora presne pre tvoj typ rozptýlenosti.</p>
+    <p>Čisté stavebné látky, ktoré tvoj mozog môže potrebovať na to, aby si dokázal znovu vytvoriť stabilné sústredenie a udržal si sa na ceste. My ti dodáme funkčné nástroje. Motor však musíš naštartovať ty.</p>
 
     <div class="eb-product">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/MetaFocusPP_07050d96-e098-4756-8de1-2f30984fc5bf.png" alt="DopaFocus" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/MetaFocusPP_07050d96-e098-4756-8de1-2f30984fc5bf.png" alt="MetaFocus" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
-        <span class="ptag">Hlavný protokol</span>
-        <h3>Nootropický komplex — DopаFocus</h3>
+        <span class="ptag">MetaFocus</span>
+        <h3>Kalibrácia tvojho sústredenia</h3>
         <p>Nootropický komplex navrhnutý pre okamžitú dopamínovú reguláciu. Pre tvoj typ je to priama podpora oslabenej racionálnej brzdy (top-down regulácie). Výrazne znižuje mentálny hluk a fyzicky ti pomáha udržať pozornosť na jednej jedinej veci. Ranná dávka nastaví tvoj mozog na neprerušovanú prácu skôr, ako príde prvá notifikácia.</p>
         <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
       </div>
