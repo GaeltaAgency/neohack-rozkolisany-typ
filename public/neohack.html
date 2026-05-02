@@ -1051,12 +1051,7 @@
     document.body.classList.add('pdf-export');
     var target = document.querySelector('main');
     var tail = document.querySelector('.eb-pdf-tail');
-    if(tail){
-      tail.style.height = '0px';
-      var pageHeightPx = 794 * (297 / 210);
-      var remainder = target.scrollHeight % pageHeightPx;
-      tail.style.height = (remainder ? Math.ceil(pageHeightPx - remainder) : 0) + 'px';
-    }
+    if(tail) tail.style.height = '0px';
     var opt = {
       margin: 0,
       filename: 'NEOHACK-Rozptyleny-typ.pdf',
@@ -1065,7 +1060,16 @@
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all','css','legacy'], avoid: ['.eb-item','.eb-step','.eb-product','.eb-quote','.eb-callout','.eb-disclaimer','.eb-toc','.eb-deficit > div','.eb-blood > div','h2','h3'] }
     };
-    html2pdf().set(opt).from(target).save().then(function(){
+    html2pdf().set(opt).from(target).toPdf().get('pdf').then(function(pdf){
+      var pageCount = pdf.internal.getNumberOfPages();
+      var pageWidth = pdf.internal.pageSize.getWidth();
+      var pageHeight = pdf.internal.pageSize.getHeight();
+      pdf.setPage(pageCount);
+      pdf.setFillColor(10, 10, 10);
+      pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+      return html2pdf().set(opt).from(target).toPdf().get('pdf');
+    }).then(function(pdf){
+      pdf.save(opt.filename);
       if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
       btn.innerHTML = origHTML;
