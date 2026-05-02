@@ -1049,6 +1049,13 @@
     window.scrollTo(0, 0);
     document.body.classList.add('pdf-export');
     var target = document.querySelector('main');
+    var tail = document.querySelector('.eb-pdf-tail');
+    if(tail){
+      tail.style.height = '0px';
+      var pageHeightPx = 794 * (297 / 210);
+      var remainder = target.scrollHeight % pageHeightPx;
+      tail.style.height = (remainder ? Math.ceil(pageHeightPx - remainder) : 0) + 'px';
+    }
     var opt = {
       margin: 0,
       filename: 'NEOHACK-Rozptyleny-typ.pdf',
@@ -1058,11 +1065,13 @@
       pagebreak: { mode: ['avoid-all','css','legacy'], avoid: ['.eb-item','.eb-step','.eb-product','.eb-quote','.eb-callout','.eb-disclaimer','.eb-toc','.eb-deficit > div','.eb-blood > div','h2','h3'] }
     };
     html2pdf().set(opt).from(target).save().then(function(){
+      if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
       btn.innerHTML = origHTML;
       btn.disabled = false;
     }).catch(function(err){
       console.error(err);
+      if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
       btn.innerHTML = 'Chyba — skús znova';
       btn.disabled = false;
