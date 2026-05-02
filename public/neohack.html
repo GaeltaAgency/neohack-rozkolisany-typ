@@ -452,7 +452,9 @@
     page-break-inside:avoid;break-inside:avoid;
   }
   body.pdf-export section{page-break-before:always;break-before:page;padding:18px 0!important}
-  body.pdf-export #cover{page-break-before:auto;break-before:auto;page-break-after:always;padding:14px 0 18px!important}
+  body.pdf-export #cover{page-break-before:auto;break-before:auto;page-break-after:auto;break-after:auto;padding:14px 0 18px!important}
+  body.pdf-export main > section:last-of-type{page-break-after:avoid!important;break-after:avoid!important}
+  body.pdf-export main{padding:0!important;margin:0!important}
   body.pdf-export h2,body.pdf-export h3{page-break-after:avoid;break-after:avoid}
   body.pdf-export h2 + p,body.pdf-export h3 + p{page-break-before:avoid;break-before:avoid}
 
