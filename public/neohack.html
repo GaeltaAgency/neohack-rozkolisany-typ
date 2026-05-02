@@ -1038,7 +1038,7 @@
       image: { type: 'jpeg', quality: 0.95 },
       html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['css','legacy'], before: 'section' }
+      pagebreak: { mode: ['css','legacy'], before: 'section:not(#cover)', avoid: ['.eb-item','.eb-step','.eb-product','.eb-quote','.eb-callout','.eb-disclaimer','.eb-toc','.eb-deficit > div','.eb-blood > div'] }
     };
     html2pdf().set(opt).from(target).save().then(function(){
       document.body.classList.remove('pdf-export');
