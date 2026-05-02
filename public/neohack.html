@@ -115,31 +115,33 @@
     box-shadow:0 0 14px rgba(168,85,247,.7);
   }
   .eb-hero-title{
-    font-size:clamp(56px,11vw,148px);font-weight:800;letter-spacing:-.045em;
-    line-height:.95;color:var(--w);margin:0 0 28px;
+    font-size:clamp(44px,8vw,88px);font-weight:800;letter-spacing:-.035em;
+    line-height:1.05;color:var(--w);margin:0 0 28px;
     -webkit-text-fill-color:var(--w);background:none;
+    padding-bottom:.15em;
   }
   .eb-hero-title .accent{
     display:block;
     background:linear-gradient(180deg,#c084fc 0%,#a855f7 60%,#7e22ce 100%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    padding-bottom:.18em;margin-bottom:-.18em;
   }
   .eb-hero-lead{
-    font-size:clamp(20px,2.4vw,28px);font-weight:700;color:var(--w);
-    line-height:1.35;margin:0 0 26px;max-width:820px;letter-spacing:-.01em;
+    font-size:clamp(18px,2vw,22px);font-weight:700;color:var(--w);
+    line-height:1.4;margin:0 0 22px;max-width:760px;letter-spacing:-.005em;
   }
   .eb-hero-desc{
-    font-size:clamp(16px,1.4vw,18px);color:var(--w75);line-height:1.8;
-    margin:0 0 40px;max-width:780px;
+    font-size:clamp(15px,1.2vw,17px);color:var(--w75);line-height:1.7;
+    margin:0 0 36px;max-width:720px;
   }
   .eb-meta{font-size:12px;color:var(--w50);letter-spacing:.08em;margin-top:18px}
   .eb-chips{
-    display:flex;flex-wrap:wrap;gap:32px 36px;margin-top:48px;
-    padding-top:28px;border-top:1px solid var(--b1);
+    display:flex;flex-wrap:wrap;gap:18px 32px;margin-top:40px;
+    padding-top:24px;border-top:1px solid var(--b1);
   }
   .eb-chips a{
     display:inline-flex;align-items:center;gap:10px;
-    font-size:14px;color:var(--w50);transition:color .2s ease;
+    font-size:13px;color:var(--w50);transition:color .2s ease;
   }
   .eb-chips a::before{
     content:"";width:6px;height:6px;border-radius:50%;background:var(--acc);
@@ -147,8 +149,8 @@
   }
   .eb-chips a:hover{color:var(--w)}
   @media (max-width:640px){
-    .eb-hero-title{font-size:clamp(48px,15vw,72px)}
-    .eb-chips{gap:14px 22px}
+    .eb-hero-title{font-size:clamp(40px,12vw,56px)}
+    .eb-chips{gap:12px 20px}
   }
 
   /* TOC */
