@@ -1064,9 +1064,11 @@
       var pageCount = pdf.internal.getNumberOfPages();
       var pageWidth = pdf.internal.pageSize.getWidth();
       var pageHeight = pdf.internal.pageSize.getHeight();
-      pdf.setPage(pageCount);
-      pdf.setFillColor(10, 10, 10);
-      pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+      for(var i = 1; i <= pageCount; i++){
+        if(pdf.internal.pages[i] && pdf.internal.pages[i].unshift){
+          pdf.internal.pages[i].unshift('0.039 0.039 0.039 rg\n0 0 '+pageWidth+' '+pageHeight+' re\nf\n');
+        }
+      }
       pdf.save(opt.filename);
       if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
