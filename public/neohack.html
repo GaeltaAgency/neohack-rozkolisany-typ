@@ -28,7 +28,7 @@
   html{scroll-behavior:smooth}
   body{
     font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-    background:var(--bg);color:var(--w80);line-height:1.85;
+    background:var(--bg);color:var(--w80);line-height:1.7;
     -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   }
   a{color:inherit;text-decoration:none}
@@ -59,7 +59,8 @@
   .eb-pdf svg{width:14px;height:14px;flex-shrink:0}
 
   /* SECTIONS */
-  section{padding:clamp(38px,5vw,52px) 0;border-bottom:1px solid var(--b1)}
+  section{padding:clamp(48px,6vw,72px) 0;border-bottom:1px solid var(--b1)}
+  #cover{padding:clamp(60px,8vw,100px) 0 clamp(40px,5vw,64px)}
   .eb-wrap{max-width:740px;margin:0 auto;padding:0 28px}
   .bg-s1{background:var(--s1)}
   .bg-s2{background:var(--s2)}
@@ -90,7 +91,7 @@
   strong{color:var(--w92);font-weight:700}
 
   /* COVER */
-  #cover{padding:clamp(70px,10vw,140px) 0 clamp(50px,6vw,80px);border-bottom:1px solid var(--b1);position:relative;overflow:hidden}
+  #cover{position:relative;overflow:hidden}
   #cover .eb-wrap{max-width:1100px}
   .eb-eyebrow{
     display:flex;align-items:center;gap:18px;margin-bottom:26px;
@@ -155,22 +156,32 @@
 
   /* TOC */
   .eb-toc{
-    margin-top:32px;background:var(--s2);border:1px solid var(--b2);
-    border-radius:10px;padding:22px 24px;
+    margin-top:48px;background:var(--s2);border:1px solid var(--b2);
+    border-radius:14px;padding:32px 36px;
   }
   .eb-toc-title{
-    font-size:11px;font-weight:800;letter-spacing:.22em;
-    text-transform:uppercase;color:var(--acc);margin-bottom:14px;
+    font-size:11px;font-weight:800;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--acc);margin-bottom:22px;
   }
   .eb-toc a{
-    display:flex;align-items:center;gap:14px;
-    font-size:15px;color:var(--w75);padding:9px 0;
-    border-top:1px solid var(--b1);transition:color .2s ease;
+    display:flex;align-items:center;gap:18px;
+    font-size:16px;color:var(--w80);padding:11px 0;
+    transition:color .2s ease;
   }
-  .eb-toc a:first-of-type{border-top:0}
   .eb-toc a:hover{color:var(--w)}
+  .eb-toc a:hover::before{background:var(--acc);width:28px}
   .eb-toc a::before{
-    content:"";width:20px;height:1px;background:var(--acc);flex-shrink:0;
+    content:"";width:22px;height:1.5px;background:rgba(168,85,247,.45);
+    flex-shrink:0;transition:all .25s ease;
+  }
+  .eb-toc a .num{
+    font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--acc);
+    min-width:22px;
+  }
+  .eb-toc a .t{flex:1}
+  @media (max-width:600px){
+    .eb-toc{padding:24px 22px}
+    .eb-toc a{font-size:15px;gap:14px}
   }
 
   /* ITEM CARDS */
@@ -421,6 +432,10 @@
   body.pdf-export .eb-toc{
     page-break-inside:avoid;break-inside:avoid;
   }
+  body.pdf-export section{page-break-before:always;break-before:page}
+  body.pdf-export #cover{page-break-before:auto;break-before:auto}
+  body.pdf-export h2,body.pdf-export h3{page-break-after:avoid;break-after:avoid}
+  body.pdf-export h2 + p,body.pdf-export h3 + p{page-break-before:avoid;break-before:avoid}
 
   /* Subtle ambient glow */
   body::before{
@@ -619,12 +634,21 @@
     <h1 class="eb-hero-title">Rozptýlený<span class="accent">typ.</span></h1>
     <p class="eb-hero-lead">Keď mozog skáče všade — no ty stojíš na mieste.</p>
     <p class="eb-hero-desc">Držíš v rukách manuál k tvojej biológii. Presne ti vysvetlí, čo sa práve teraz deje v tvojom mozgu, ako si sa do tohto stavu dostal, a — čo je najdôležitejšie — ukáže ti konkrétne kroky, ktoré budú mať na tvoju energiu ten najvyšší efekt.</p>
-    <div class="eb-chips">
-      <a href="#s6">Resetovací protokol</a>
-      <a href="#s7">Architektúra dňa</a>
-      <a href="#s9">NEOHACK protokol</a>
-      <a href="https://neohack.sk" target="_blank" rel="noopener">neohack.sk</a>
+
+    <div class="eb-toc">
+      <div class="eb-toc-title">Obsah</div>
+      <a href="#s1"><span class="num">01</span><span class="t">Profil: Rozptýlený typ</span></a>
+      <a href="#s2"><span class="num">02</span><span class="t">Anatómia rozptýlenosti</span></a>
+      <a href="#s3"><span class="num">03</span><span class="t">Symptómy v praxi</span></a>
+      <a href="#s4"><span class="num">04</span><span class="t">Ako oklameš vlastný systém</span></a>
+      <a href="#s5"><span class="num">05</span><span class="t">Tvoj skutočný deficit</span></a>
+      <a href="#s6"><span class="num">06</span><span class="t">Resetovací protokol</span></a>
+      <a href="#s7"><span class="num">07</span><span class="t">Nová architektúra dňa</span></a>
+      <a href="#s8"><span class="num">08</span><span class="t">Vylúčenie fyzického deficitu</span></a>
+      <a href="#s9"><span class="num">09</span><span class="t">Tvoje palivo: NEOHACK protokol</span></a>
     </div>
+
+    <div class="eb-meta">NEOHACK.SK · Personalizovaný sprievodca · Typ: Rozptýlený</div>
   </div>
 </section>
 
