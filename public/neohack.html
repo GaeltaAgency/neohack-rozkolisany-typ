@@ -45,15 +45,18 @@
     max-width:740px;margin:0 auto;padding:14px 28px;
     display:flex;align-items:center;justify-content:space-between;gap:16px;
   }
-  .eb-logo{font-weight:800;letter-spacing:-.02em;font-size:18px;color:var(--w)}
-  .eb-logo .dot{color:var(--acc)}
+  .eb-logo{display:inline-flex;align-items:center}
+  .eb-logo img{height:28px;width:auto;display:block}
   .eb-pdf{
+    display:inline-flex;align-items:center;gap:8px;
     border:1px solid var(--acc30);border-radius:100px;
     padding:9px 16px;font-size:11px;font-weight:700;
     letter-spacing:.18em;text-transform:uppercase;color:var(--acc);
     background:transparent;cursor:pointer;transition:all .25s ease;
+    font-family:inherit;
   }
   .eb-pdf:hover{background:var(--acc12);box-shadow:0 0 24px var(--acc30)}
+  .eb-pdf svg{width:14px;height:14px;flex-shrink:0}
 
   /* SECTIONS */
   section{padding:clamp(38px,5vw,52px) 0;border-bottom:1px solid var(--b1)}
@@ -268,14 +271,44 @@
   }
   .eb-final p{font-size:16px;color:var(--w80);margin:0 0 16px}
   .eb-final-cta{
-    display:inline-block;margin-top:18px;
+    display:inline-flex;align-items:center;gap:10px;margin-top:18px;
     border:1px solid var(--acc);border-radius:100px;
     padding:14px 28px;font-size:13px;font-weight:800;letter-spacing:.18em;
     text-transform:uppercase;color:var(--w);
+    background:transparent;cursor:pointer;font-family:inherit;
     transition:all .3s ease;
   }
   .eb-final-cta:hover{
     background:var(--acc12);box-shadow:0 0 40px var(--acc30);
+  }
+  .eb-final-cta svg{width:16px;height:16px;flex-shrink:0}
+  .eb-final-cta:disabled{opacity:.6;cursor:wait}
+
+  /* PDF EXPORT MODE — keep dark theme */
+  body.pdf-export{background:#0a0a0a!important}
+  body.pdf-export .eb-nav,
+  body.pdf-export .eb-diag,
+  body.pdf-export .eb-diag-toggle{display:none!important}
+  body.pdf-export::before{display:none!important}
+  body.pdf-export html,
+  body.pdf-export main,
+  body.pdf-export section,
+  body.pdf-export footer{background:#0a0a0a!important}
+  body.pdf-export .eb-item,
+  body.pdf-export .eb-step,
+  body.pdf-export .eb-product,
+  body.pdf-export .eb-deficit > div,
+  body.pdf-export .eb-blood > div,
+  body.pdf-export .eb-quote,
+  body.pdf-export .eb-callout,
+  body.pdf-export .eb-toc{
+    page-break-inside:avoid;break-inside:avoid;
+  }
+
+  /* Subtle ambient glow */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background:radial-gradient(60% 50% at 50% 0%, rgba(168,85,247,.18), transparent 70%);
   }
 
   /* FOOTER */
@@ -433,7 +466,7 @@
   .eb-diag .diac-grid .miss{color:#f87171;background:rgba(248,113,113,.1)}
 
   @media print{
-    .eb-diag,.eb-diag-toggle,#dlPdf,#a4Toggle{display:none!important}
+    .eb-diag,.eb-diag-toggle,#dlPdf{display:none!important}
   }
 </style>
 </head>
@@ -441,11 +474,14 @@
 
 <nav class="eb-nav">
   <div class="eb-nav-inner">
-    <a class="eb-logo" href="#cover">NEOHACK<span class="dot">.SK</span></a>
+    <a class="eb-logo" href="#cover" aria-label="NEOHACK">
+      <img src="https://neohack.sk/cdn/shop/files/NEOHACK-C-SemiNeg-RGB.png" alt="NEOHACK" crossorigin="anonymous" />
+    </a>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <button class="eb-pdf" id="a4Toggle" type="button">A4 náhľad</button>
-      <button class="eb-pdf" id="dlPdf" type="button">Stiahnuť PDF</button>
-      <button class="eb-pdf" onclick="window.print()" type="button">Tlačiť</button>
+      <button class="eb-pdf" id="dlPdf" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Stiahnuť PDF
+      </button>
     </div>
   </div>
 </nav>
@@ -695,7 +731,7 @@
     <p>Čisté stavebné látky, ktoré tvoj mozog môže potrebovať na to, aby si dokázal znovu vytvoriť stabilné sústredenie a udržal si sa na ceste. My ti dodáme funkčné nástroje. Motor však musíš naštartovať ty. METAFOCUS (Kalibrácia tvojho sústredenia)</p>
 
     <div class="eb-product">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/MetaFocusPP_07050d96-e098-4756-8de1-2f30984fc5bf.png" alt="DopaFocus" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/MetaFocusPP_07050d96-e098-4756-8de1-2f30984fc5bf.png" alt="DopaFocus" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">Hlavný protokol</span>
         <h3>Nootropický komplex — DopаFocus</h3>
@@ -705,7 +741,7 @@
     </div>
 
     <div class="eb-product">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/AminoFuelgradient.jpg" alt="AminoFuel" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/AminoFuelgradient.jpg" alt="AminoFuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">AminoFuel</span>
         <h3>Stabilizácia motivácie</h3>
@@ -715,7 +751,7 @@
     </div>
 
     <div class="eb-product">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/ChatGPTImage26.2.2026_12_47_33.png" alt="MethylFuel B-Complex" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/ChatGPTImage26.2.2026_12_47_33.png" alt="MethylFuel B-Complex" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">MethylFuel B-Complex</span>
         <h3>Aktivácia nervových dráh</h3>
@@ -728,7 +764,7 @@
     <p>Každá biológia je iná. Tvoj Rozptýlený typ sa môže prelínať s inými deficitmi. Počúvaj svoje telo a ak popri tréningu tvojho sústredenia narážaš na tieto špecifické prekážky, zaraď doplnkové poistky:</p>
 
     <div class="eb-product muted">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/HydroFuel_with_background.jpg" alt="HydroFuel" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/HydroFuel_with_background.jpg" alt="HydroFuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">Bonus — HydroFuel</span>
         <h3>Hlboká hydratácia</h3>
@@ -738,7 +774,7 @@
     </div>
 
     <div class="eb-product muted">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/Omega3Fueltable.jpg" alt="Omega3Fuel" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/Omega3Fueltable.jpg" alt="Omega3Fuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">Bonus — Omega3Fuel</span>
         <h3>Ochrana neurónov</h3>
@@ -748,7 +784,7 @@
     </div>
 
     <div class="eb-product muted">
-      <div class="img"><img src="https://neohack.sk/cdn/shop/files/mineralfuel_gradient_BG.png" alt="MineralFuel" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
+      <div class="img"><img src="https://neohack.sk/cdn/shop/files/mineralfuel_gradient_BG.png" alt="MineralFuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></div>
       <div>
         <span class="ptag">Bonus — MineralFuel</span>
         <h3>Nervová stabilita</h3>
@@ -765,7 +801,10 @@
     <div class="quote">„Fokus nie je talent.<br/>Je to sval, ktorý sa dá trénovať."</div>
     <p>Hlboké sústredenie nie je vrodený talent. Je to sval tvojho nervového systému. Ako každý iný sval, aj tento sa dá vytrénovať a adaptovať na akúkoľvek záťaž.</p>
     <p>Tvoja rozptýlenosť nie je defekt tvojho charakteru. Je to len brzda, ktorú tvoje telo zatiahlo pred ďalším vyhorením. Biológia nepozná sviatky ani pondelky. Prevezmi nad sebou kontrolu už zajtra ráno. Spomaľ. Odlož ten telefón. A nastav svoj systém späť do rovnováhy.</p>
-    <a class="eb-final-cta" href="https://neohack.sk" target="_blank" rel="noopener">Začni na neohack.sk</a>
+    <button class="eb-final-cta" id="dlPdfFinal" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Stiahnuť PDF
+    </button>
   </div>
 </section>
 
@@ -794,45 +833,38 @@
   var DIACRITICS = ['á','é','í','ó','ú','ý','ä','ô','ľ','ĺ','ŕ','š','č','ž','ť','ď','ň',
                     'Á','É','Í','Ó','Ú','Ý','Ä','Ô','Ľ','Ĺ','Ŕ','Š','Č','Ž','Ť','Ď','Ň'];
 
-  // ========= A4 PREVIEW TOGGLE =========
-  var a4Btn = document.getElementById('a4Toggle');
-  a4Btn.addEventListener('click', function(){
-    document.body.classList.toggle('a4-preview');
-    a4Btn.textContent = document.body.classList.contains('a4-preview')
-      ? 'Zatvoriť A4 náhľad' : 'A4 náhľad';
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-
-  // ========= DIRECT PDF DOWNLOAD =========
-  var dlBtn = document.getElementById('dlPdf');
-  dlBtn.addEventListener('click', function(){
-    var orig = dlBtn.textContent;
-    dlBtn.textContent = 'Generujem...';
-    dlBtn.disabled = true;
-    // Force light styling for PDF rendering
-    var wasA4 = document.body.classList.contains('a4-preview');
-    if(!wasA4) document.body.classList.add('a4-preview');
+  // ========= DIRECT PDF DOWNLOAD (dark theme) =========
+  function downloadPdf(btn){
+    var label = btn.querySelector('svg') ? btn.lastChild : null;
+    var origHTML = btn.innerHTML;
+    btn.innerHTML = 'Generujem…';
+    btn.disabled = true;
+    document.body.classList.add('pdf-export');
     var target = document.querySelector('main');
     var opt = {
       margin: 0,
       filename: 'NEOHACK-Rozptyleny-typ.pdf',
       image: { type: 'jpeg', quality: 0.95 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', letterRendering: true },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['css','legacy'], before: 'section' }
     };
     html2pdf().set(opt).from(target).save().then(function(){
-      if(!wasA4) document.body.classList.remove('a4-preview');
-      dlBtn.textContent = orig;
-      dlBtn.disabled = false;
+      document.body.classList.remove('pdf-export');
+      btn.innerHTML = origHTML;
+      btn.disabled = false;
     }).catch(function(err){
       console.error(err);
-      if(!wasA4) document.body.classList.remove('a4-preview');
-      dlBtn.textContent = 'Chyba — skús znova';
-      dlBtn.disabled = false;
-      setTimeout(function(){ dlBtn.textContent = orig; }, 2500);
+      document.body.classList.remove('pdf-export');
+      btn.innerHTML = 'Chyba — skús znova';
+      btn.disabled = false;
+      setTimeout(function(){ btn.innerHTML = origHTML; }, 2500);
     });
-  });
+  }
+  var dlBtn = document.getElementById('dlPdf');
+  dlBtn.addEventListener('click', function(){ downloadPdf(dlBtn); });
+  var dlBtnFinal = document.getElementById('dlPdfFinal');
+  if(dlBtnFinal) dlBtnFinal.addEventListener('click', function(){ downloadPdf(dlBtnFinal); });
 
   // ========= DIAGNOSTICS =========
   var diagBtn = document.getElementById('diagToggle');
