@@ -1067,8 +1067,6 @@
       pdf.setPage(pageCount);
       pdf.setFillColor(10, 10, 10);
       pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-      return html2pdf().set(opt).from(target).toPdf().get('pdf');
-    }).then(function(pdf){
       pdf.save(opt.filename);
       if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
