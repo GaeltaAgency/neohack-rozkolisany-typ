@@ -393,7 +393,7 @@
   .eb-final-cta:disabled{opacity:.6;cursor:wait}
 
   /* PDF EXPORT MODE — keep dark theme, force solid colors so html2canvas can rasterize text */
-  body.pdf-export{background:#0a0a0a!important;color:#fff!important}
+  body.pdf-export{background:#0a0a0a!important;color:#fff!important;overflow:visible!important}
   body.pdf-export .eb-nav,
   body.pdf-export .eb-diag,
   body.pdf-export .eb-diag-toggle{display:none!important}
@@ -460,10 +460,11 @@
   body.pdf-export .eb-toc{
     page-break-inside:avoid;break-inside:avoid;
   }
-  body.pdf-export section{page-break-before:always;break-before:page;padding:18px 0!important}
-  body.pdf-export #cover{page-break-before:auto;break-before:auto;page-break-after:auto;break-after:auto;padding:14px 0 18px!important}
+  body.pdf-export main{width:794px!important;max-width:794px!important;margin:0 auto!important;padding:0!important;background:#0a0a0a!important}
+  body.pdf-export section{page-break-before:auto!important;break-before:auto!important;page-break-after:auto!important;break-after:auto!important;padding:18px 0!important}
+  body.pdf-export #cover{padding:0 0 18px!important}
   body.pdf-export main > section:last-of-type{page-break-after:avoid!important;break-after:avoid!important}
-  body.pdf-export main{padding:0!important;margin:0!important}
+  body.pdf-export footer{background:#0a0a0a!important;padding:18px 24px!important;border-color:#1a1a20!important}
   body.pdf-export h2,body.pdf-export h3{page-break-after:avoid;break-after:avoid}
   body.pdf-export h2 + p,body.pdf-export h3 + p{page-break-before:avoid;break-before:avoid}
 
