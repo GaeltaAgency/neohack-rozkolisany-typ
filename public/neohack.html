@@ -436,10 +436,23 @@
   body.pdf-export .eb-toc{
     page-break-inside:avoid;break-inside:avoid;
   }
-  body.pdf-export section{page-break-before:always;break-before:page}
-  body.pdf-export #cover{page-break-before:auto;break-before:auto}
+  body.pdf-export section{page-break-before:always;break-before:page;padding:18px 0!important}
+  body.pdf-export #cover{page-break-before:auto;break-before:auto;page-break-after:always;padding:14px 0 18px!important}
   body.pdf-export h2,body.pdf-export h3{page-break-after:avoid;break-after:avoid}
   body.pdf-export h2 + p,body.pdf-export h3 + p{page-break-before:avoid;break-before:avoid}
+
+  /* Cover fit-on-one-A4 in PDF */
+  body.pdf-export #cover .eb-hero-title{font-size:42px!important;line-height:1.05!important;margin:0 0 12px!important}
+  body.pdf-export #cover .eb-hero-lead{font-size:14.5px!important;margin:0 0 10px!important}
+  body.pdf-export #cover .eb-hero-desc{font-size:13px!important;line-height:1.5!important;margin:0 0 14px!important}
+  body.pdf-export #cover .eb-tag{margin-bottom:14px!important;padding:5px 12px!important;font-size:10px!important}
+  body.pdf-export #cover .eb-eyebrow{margin-bottom:12px!important}
+  body.pdf-export #cover .eb-chips{display:none!important}
+  body.pdf-export #cover .eb-toc{margin-top:14px!important;padding:14px 18px!important}
+  body.pdf-export #cover .eb-toc a{font-size:12.5px!important;padding:4px 0!important;gap:12px!important}
+  body.pdf-export #cover .eb-toc-title{margin-bottom:10px!important;font-size:10px!important}
+
+  @page{size:A4;margin:14mm 14mm 16mm}
 
   /* Subtle ambient glow */
   body::before{
