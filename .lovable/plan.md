@@ -1,74 +1,69 @@
-# NEOHACK ebook — UI & PDF export refresh
+# Editorial Compact Polish — neohack.html
 
-Edits are scoped to a single file: `public/neohack.html`. No app/business logic changes.
+Goal: tighter, more book-like rhythm with strong readability. Cover (hero + Obsah) fits on a single A4 page. Same compact rules apply globally.
 
-## 1. Replace text logo with NEOHACK image
+## Typography scale (new)
 
-In the top nav (line 444), replace the `NEOHACK.SK` text mark with an `<img>` using:
-`https://neohack.sk/cdn/shop/files/NEOHACK-C-SemiNeg-RGB.png`
+- Body: `15px / 1.6`, letter-spacing `0`
+- H1 (chapter): `clamp(24px, 3vw, 32px)`, line-height `1.25`, weight 700
+- H2: `clamp(19px, 2.2vw, 23px)`, line-height `1.3`
+- H3: `16px`, line-height `1.35`, weight 600, uppercase tracking `.04em`
+- Hero title (cover): `clamp(36px, 6.5vw, 64px)`, line-height `1.05`
+- Small / meta / chips: `12.5px`, line-height `1.4`
+- Keep `padding-bottom: .15em` trick on gradient text to prevent descender clipping
 
-- Wrap in the existing `<a href="#cover" class="eb-logo">` so it stays clickable.
-- Set `height: ~28px`, `width: auto`, `display: block`, `alt="NEOHACK"`.
-- Add `crossorigin="anonymous"` so html2canvas can include it in the PDF.
-- Remove the `.dot` span styling usage (logo is now an image). Keep the `.eb-logo` class for layout but drop the text-specific font rules.
+## Spacing rhythm (new)
 
-## 2. Simplify the toolbar (remove "Tlačiť" and "A4 náhľad")
+- Section vertical padding: `48px` desktop / `32px` mobile (was ~80/56)
+- Wrap max-width unified: `720px`
+- Block stack gap (paragraphs, items): `14px`
+- Card/item internal padding: `18px 20px` (was ~24/28)
+- Heading margin-bottom: `10px`; margin-top: `28px`
+- Quote padding: `16px 20px`
+- TOC row height: `32px`, gap `4px`
 
-In the nav (lines 446–448), keep only the **Stiahnuť PDF** button:
+## Cover page — fit on one A4
 
-- Delete the `#a4Toggle` button.
-- Delete the `onclick="window.print()"` button.
-- Add a small download icon inside `#dlPdf` (inline SVG, currentColor, 14×14, sits left of the label via the existing flex gap).
-- In the JS (lines 797–804) remove the entire A4 toggle handler block.
-- In the PDF handler (lines 813, 825) remove the `wasA4` toggling — instead always render against the current dark theme (see step 3).
-- Update the `@media print` rule on line 436: drop `#a4Toggle` selector (button no longer exists).
+Reduce so hero + full Obsah render inside one 210×297mm page in PDF:
 
-## 3. Make the downloaded PDF look like the dark site
+- Cover top padding: `28mm` print / `48px` screen
+- Hero title scale capped at `52px` in print
+- Subtitle: `15px`, single line where possible
+- Hero description: max `2 short lines`, `14px / 1.5`
+- Drop hero CTA chips on print (keep on screen) OR shrink to `11px`
+- Obsah: 9 rows × `28px` = ~252px; numerals `13px`, title `14px`, dotted leader thinner (`1px`)
+- Remove decorative spacer between hero and Obsah on print
+- Add `body.pdf-export #cover { padding: 18mm 16mm; }` and `page-break-after: always`
 
-Currently the export forces the `a4-preview` class (which converts everything to a light/white print layout) and uses `backgroundColor: '#ffffff'`. Change to dark output:
+## Print rules (A4)
 
-- Remove the `a4-preview` class manipulation in the download handler.
-- In `html2canvas` options change `backgroundColor: '#ffffff'` → `'#0a0a0a'` (matches `--bg`).
-- Add a temporary body class `pdf-export` while generating, removed in `finally`. Use it to:
-  - Hide nav, diagnostics button/panel, and the floating download button during capture (`.pdf-export .eb-nav, .pdf-export .eb-diag, .pdf-export .eb-diag-toggle { display:none !important }`).
-  - Force `background: #0a0a0a` on `html, body, main, section` so each rasterised page is dark edge-to-edge.
-  - Add `break-inside: avoid` to cards (`.eb-item, .eb-step, .eb-product, .eb-deficit > div, .eb-blood > div, .eb-quote, .eb-callout`) so they don't get split mid-card across A4 pages.
-- Keep `pagebreak: { mode: ['css','legacy'], before: 'section' }` so each section starts on a new page.
-- Ensure all referenced product images already use `crossorigin="anonymous"` (add where missing) — required for `useCORS:true` to embed them in the dark PDF.
-
-## 4. Replace final CTA with "Stiahnuť PDF"
-
-On line 768, replace:
+```css
+@page { size: A4; margin: 14mm 14mm 16mm; }
+body.pdf-export { font-size: 14px; line-height: 1.55; }
+body.pdf-export section { padding: 10mm 0 !important; page-break-before: always; }
+body.pdf-export #cover { page-break-before: avoid; }
+body.pdf-export .eb-item,
+body.pdf-export .eb-quote,
+body.pdf-export .eb-product,
+body.pdf-export .eb-toc { break-inside: avoid; }
+body.pdf-export .eb-back { display: none; }
 ```
-<a class="eb-final-cta" href="https://neohack.sk" target="_blank">Začni na neohack.sk</a>
-```
-with a button that triggers the same PDF download as the nav button:
-```
-<button class="eb-final-cta" type="button" id="dlPdfFinal">[icon] Stiahnuť PDF</button>
-```
-- Reuse the same download-icon SVG.
-- In the JS, attach the same handler used for `#dlPdf` to `#dlPdfFinal` (extract handler into a named function `downloadPdf` and bind it to both buttons).
-- Keep `.eb-final-cta` styling; add minor button-reset rules (border:none cursor:pointer) so the existing anchor styles render correctly on a `<button>`.
 
-## 5. Light visual polish (inspired by the uploaded v4/FINAL files)
+## Visual consistency pass
 
-Only safe, additive tweaks — no structural change to sections or copy:
+- Unify all border colors to a single token (`rgba(168,85,247,.18)`) and width `1px`
+- Unify all card radii to `10px`
+- Unify accent gradient stops in one CSS variable, reuse everywhere
+- Replace inconsistent margin values (24/28/32/40) with a 4-step scale: `8 / 14 / 24 / 40`
+- Chips: same height `26px`, padding `0 10px`, font `12px`
 
-- Add a subtle radial accent glow behind the cover hero: `body::before` with `radial-gradient(60% 50% at 50% 0%, rgba(168,85,247,.18), transparent 70%)`, fixed, `z-index:-1`, `pointer-events:none`. Hidden during `pdf-export` to keep page bg solid.
-- Slightly stronger top accent line on `.eb-item`, `.eb-product`, `.eb-step` (use `--ag` gradient at full opacity; current is fine but bump height to `2px`).
-- Add a soft inner border-glow on hover for `.eb-product` (`box-shadow: 0 0 0 1px var(--acc30), 0 12px 40px -12px var(--acc30)`).
+## Validation
 
-These are CSS-only, do not affect any data, copy, or product images.
+1. Open `/neohack.html` in preview, check screen rendering at desktop + 390px
+2. Trigger PDF export, count pages, verify cover is single page
+3. Convert PDF to images with `pdftoppm -r 150` and inspect each page for clipping, orphaned headings, broken cards
+4. Iterate on any page that breaks awkwardly
 
-## Out of scope
+## Files touched
 
-- Product image URLs (already correct from previous turn).
-- Section copy and structure.
-- Any React/route changes — file remains `public/neohack.html`, served via the existing `Index.tsx` redirect.
-
-## Verification
-
-After changes I will:
-1. Read back the modified `public/neohack.html` regions to confirm edits.
-2. Visit `/neohack.html` in the preview to confirm logo loads, only one toolbar button is present, final CTA reads "Stiahnuť PDF".
-3. Note that PDF download cannot be triggered headlessly from the agent; the user should test the download once and confirm it is dark-themed.
+- `public/neohack.html` only (CSS + minor markup tweaks for cover)
