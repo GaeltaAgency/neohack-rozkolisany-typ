@@ -432,6 +432,10 @@
   body.pdf-export .eb-toc{
     page-break-inside:avoid;break-inside:avoid;
   }
+  body.pdf-export section{page-break-before:always;break-before:page}
+  body.pdf-export #cover{page-break-before:auto;break-before:auto}
+  body.pdf-export h2,body.pdf-export h3{page-break-after:avoid;break-after:avoid}
+  body.pdf-export h2 + p,body.pdf-export h3 + p{page-break-before:avoid;break-before:avoid}
 
   /* Subtle ambient glow */
   body::before{
