@@ -482,8 +482,9 @@
   body.pdf-export .eb-toc{
     page-break-inside:avoid;break-inside:avoid;
   }
-  /* A4 @ 96dpi = 794px wide, minus 14mm (53px) each side margin = ~688px content. */
-  body.pdf-export main{width:688px!important;max-width:688px!important;margin:0 auto!important;padding:0!important;background:#0a0a0a!important}
+  /* A4 @ 96dpi = 794px wide. Render full A4 width and use inner padding for "margin". */
+  body.pdf-export html,body.pdf-export body{width:794px!important;max-width:794px!important;margin:0!important;padding:0!important}
+  body.pdf-export main{width:794px!important;max-width:794px!important;margin:0!important;padding:0 53px!important;background:#0a0a0a!important;box-sizing:border-box!important}
   body.pdf-export .eb-wrap,body.pdf-export .eb-wrap-wide{max-width:100%!important;width:100%!important;padding:0!important;margin:0!important}
   body.pdf-export .eb-product{grid-template-columns:200px 1fr!important;gap:14px!important}
   body.pdf-export .eb-final{min-height:240mm!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
@@ -708,6 +709,10 @@
       <a href="#s9">Protokol</a>
     </div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button class="eb-pdf" id="previewPdf" type="button" style="background:transparent;border:1px solid var(--b2);color:var(--w80)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        Náhľad PDF
+      </button>
       <button class="eb-pdf" id="dlPdf" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Stiahnuť PDF
@@ -1054,6 +1059,17 @@
 <button class="eb-diag-toggle" id="diagToggle" type="button" aria-label="Diagnostika">⚙</button>
 <aside class="eb-diag" id="diagPanel" aria-live="polite"></aside>
 
+<div id="pdfPreviewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;padding:20px;flex-direction:column;gap:12px" role="dialog" aria-modal="true" aria-label="Náhľad PDF">
+  <div style="display:flex;justify-content:space-between;align-items:center;color:#fff;gap:12px;flex-wrap:wrap">
+    <strong style="font-size:14px;letter-spacing:.04em">Náhľad PDF — A4</strong>
+    <div style="display:flex;gap:8px">
+      <button type="button" id="pdfPreviewDownload" class="eb-pdf">Stiahnuť</button>
+      <button type="button" id="pdfPreviewClose" class="eb-pdf" style="background:transparent;border:1px solid #444;color:#fff">Zavrieť</button>
+    </div>
+  </div>
+  <iframe id="pdfPreviewFrame" style="flex:1;width:100%;height:100%;border:0;background:#222;border-radius:8px"></iframe>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
 (function(){
@@ -1072,31 +1088,28 @@
   var DIACRITICS = ['á','é','í','ó','ú','ý','ä','ô','ľ','ĺ','ŕ','š','č','ž','ť','ď','ň',
                     'Á','É','Í','Ó','Ú','Ý','Ä','Ô','Ľ','Ĺ','Ŕ','Š','Č','Ž','Ť','Ď','Ň'];
 
-  // ========= DIRECT PDF DOWNLOAD (dark theme) =========
-  function downloadPdf(btn){
-    var label = btn.querySelector('svg') ? btn.lastChild : null;
-    var origHTML = btn.innerHTML;
-    btn.innerHTML = 'Generujem…';
-    btn.disabled = true;
+  // ========= PDF GENERATION (dark theme) =========
+  var FILENAME = 'NEOHACK-Rozptyleny-typ.pdf';
+  var lastPdfBlob = null;
+
+  function generatePdf(){
     window.scrollTo(0, 0);
     document.body.classList.add('pdf-export');
     var target = document.querySelector('main');
     var tail = document.querySelector('.eb-pdf-tail');
     if(tail) tail.style.height = '0px';
     var opt = {
-      margin: [10, 10, 12, 10], // mm: top, left, bottom, right
-      filename: 'NEOHACK-Rozptyleny-typ.pdf',
+      margin: 0,
+      filename: FILENAME,
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: 688 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: 794, width: 794 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all','css','legacy'], avoid: ['.eb-item','.eb-step','.eb-product','.eb-quote','.eb-callout','.eb-disclaimer','.eb-toc','.eb-deficit > div','.eb-blood > div','h2','h3'] }
     };
-    html2pdf().set(opt).from(target).toPdf().get('pdf').then(function(pdf){
+    return html2pdf().set(opt).from(target).toPdf().get('pdf').then(function(pdf){
       var pageCount = pdf.internal.getNumberOfPages();
       var pageWidth = pdf.internal.pageSize.getWidth();
       var pageHeight = pdf.internal.pageSize.getHeight();
-      // Prepend a full-page dark background to every page's content stream
-      // (drawn BEFORE content so it sits behind everything, incl. last-page tail).
       var bgCmd = 'q\n0.039 0.039 0.039 rg\n0 0 '+pageWidth.toFixed(3)+' '+pageHeight.toFixed(3)+' re\nf\nQ\n';
       for(var i = 1; i <= pageCount; i++){
         var pg = pdf.internal.pages[i];
@@ -1107,24 +1120,68 @@
           pg.unshift(bgCmd);
         }
       }
-      pdf.save(opt.filename);
-      if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
-      btn.innerHTML = origHTML;
-      btn.disabled = false;
+      return pdf;
     }).catch(function(err){
-      console.error(err);
-      if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
-      btn.innerHTML = 'Chyba — skús znova';
-      btn.disabled = false;
-      setTimeout(function(){ btn.innerHTML = origHTML; }, 2500);
+      throw err;
     });
   }
+
+  function withButton(btn, label, fn){
+    var orig = btn.innerHTML;
+    btn.innerHTML = label;
+    btn.disabled = true;
+    return fn().then(function(r){
+      btn.innerHTML = orig; btn.disabled = false; return r;
+    }).catch(function(e){
+      console.error(e);
+      btn.innerHTML = 'Chyba — skús znova';
+      setTimeout(function(){ btn.innerHTML = orig; btn.disabled = false; }, 2500);
+    });
+  }
+
+  function downloadPdf(btn){
+    return withButton(btn, 'Generujem…', function(){
+      return generatePdf().then(function(pdf){ pdf.save(FILENAME); });
+    });
+  }
+
+  function previewPdf(btn){
+    return withButton(btn, 'Generujem…', function(){
+      return generatePdf().then(function(pdf){
+        var blob = pdf.output('blob');
+        lastPdfBlob = blob;
+        var url = URL.createObjectURL(blob);
+        var modal = document.getElementById('pdfPreviewModal');
+        var frame = document.getElementById('pdfPreviewFrame');
+        frame.src = url;
+        modal.style.display = 'flex';
+      });
+    });
+  }
+
   var dlBtn = document.getElementById('dlPdf');
   dlBtn.addEventListener('click', function(){ downloadPdf(dlBtn); });
   var dlBtnFinal = document.getElementById('dlPdfFinal');
   if(dlBtnFinal) dlBtnFinal.addEventListener('click', function(){ downloadPdf(dlBtnFinal); });
+  var pvBtn = document.getElementById('previewPdf');
+  if(pvBtn) pvBtn.addEventListener('click', function(){ previewPdf(pvBtn); });
+
+  var modal = document.getElementById('pdfPreviewModal');
+  document.getElementById('pdfPreviewClose').addEventListener('click', function(){
+    modal.style.display = 'none';
+    var frame = document.getElementById('pdfPreviewFrame');
+    if(frame.src) { URL.revokeObjectURL(frame.src); frame.src = 'about:blank'; }
+  });
+  document.getElementById('pdfPreviewDownload').addEventListener('click', function(){
+    if(!lastPdfBlob) return;
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(lastPdfBlob);
+    a.download = FILENAME;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  });
 
   // Back-to-TOC chips removed — header now provides anchor navigation.
 
