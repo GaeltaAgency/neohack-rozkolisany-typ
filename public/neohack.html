@@ -374,6 +374,9 @@
   .eb-cta:hover{color:var(--w);border-color:var(--w)}
   .eb-product.muted{opacity:.78}
   .eb-product.muted .ptag{color:var(--w50);border-color:var(--b2);background:transparent}
+  @media (min-width:601px) and (max-width:900px){
+    .eb-product{grid-template-columns:180px 1fr;gap:12px;padding:12px}
+  }
   @media (max-width:600px){
     .eb-product .img{height:180px}
   }
