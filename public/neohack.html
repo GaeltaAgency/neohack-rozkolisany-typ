@@ -482,9 +482,11 @@
   body.pdf-export .eb-toc{
     page-break-inside:avoid;break-inside:avoid;
   }
-  /* A4 @ 96dpi = 794px wide. Render full A4 width and use inner padding for "margin". */
-  body.pdf-export html,body.pdf-export body{width:794px!important;max-width:794px!important;margin:0!important;padding:0!important}
-  body.pdf-export main{width:794px!important;max-width:794px!important;margin:0!important;padding:0 53px!important;background:#0a0a0a!important;box-sizing:border-box!important}
+  /* A4 @ 96dpi = 794px wide. Render a real 1:1 A4 viewport and use inner padding for margins. */
+  html.pdf-export,
+  html.pdf-export body,
+  body.pdf-export{width:794px!important;max-width:794px!important;margin:0!important;padding:0!important;overflow-x:hidden!important}
+  body.pdf-export main{width:794px!important;max-width:794px!important;margin:0!important;padding:0 53px!important;background:#0a0a0a!important;box-sizing:border-box!important;overflow:hidden!important}
   body.pdf-export .eb-wrap,body.pdf-export .eb-wrap-wide{max-width:100%!important;width:100%!important;padding:0!important;margin:0!important}
   body.pdf-export .eb-product{grid-template-columns:200px 1fr!important;gap:14px!important}
   body.pdf-export .eb-final{min-height:240mm!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
@@ -1094,6 +1096,7 @@
 
   function generatePdf(){
     window.scrollTo(0, 0);
+    document.documentElement.classList.add('pdf-export');
     document.body.classList.add('pdf-export');
     var target = document.querySelector('main');
     var tail = document.querySelector('.eb-pdf-tail');
@@ -1102,7 +1105,7 @@
       margin: 0,
       filename: FILENAME,
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: 794, width: 794 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: 794, windowHeight: 1123, width: 794, x: 0, y: 0 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all','css','legacy'], avoid: ['.eb-item','.eb-step','.eb-product','.eb-quote','.eb-callout','.eb-disclaimer','.eb-toc','.eb-deficit > div','.eb-blood > div','h2','h3'] }
     };
@@ -1121,9 +1124,11 @@
         }
       }
       document.body.classList.remove('pdf-export');
+      document.documentElement.classList.remove('pdf-export');
       return pdf;
     }).catch(function(err){
       document.body.classList.remove('pdf-export');
+      document.documentElement.classList.remove('pdf-export');
       throw err;
     });
   }
