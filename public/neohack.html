@@ -1085,10 +1085,10 @@
     var tail = document.querySelector('.eb-pdf-tail');
     if(tail) tail.style.height = '0px';
     var opt = {
-      margin: [10, 10, 12, 10], // mm: top, left, bottom, right
+      margin: 0,
       filename: 'NEOHACK-Rozptyleny-typ.pdf',
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: 688 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: 794, width: 794 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all','css','legacy'], avoid: ['.eb-item','.eb-step','.eb-product','.eb-quote','.eb-callout','.eb-disclaimer','.eb-toc','.eb-deficit > div','.eb-blood > div','h2','h3'] }
     };
