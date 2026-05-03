@@ -1,69 +1,48 @@
-# Editorial Compact Polish — neohack.html
+## QA scan results
 
-Goal: tighter, more book-like rhythm with strong readability. Cover (hero + Obsah) fits on a single A4 page. Same compact rules apply globally.
+I scanned the e‑book at three viewports (1920×1080, 768×1024, 375×812) and the rest of the page is solid: typography rhythm reads cleanly, product cards now have matching image/text height on desktop, the cards stack nicely on mobile with the image flush on top, the TOC, deficit grid, and protocol blocks all reflow correctly, and the footer + final CTA hold up.
 
-## Typography scale (new)
+Three issues are worth fixing for a true "final" version. Everything else is intentional and can stay.
 
-- Body: `15px / 1.6`, letter-spacing `0`
-- H1 (chapter): `clamp(24px, 3vw, 32px)`, line-height `1.25`, weight 700
-- H2: `clamp(19px, 2.2vw, 23px)`, line-height `1.3`
-- H3: `16px`, line-height `1.35`, weight 600, uppercase tracking `.04em`
-- Hero title (cover): `clamp(36px, 6.5vw, 64px)`, line-height `1.05`
-- Small / meta / chips: `12.5px`, line-height `1.4`
-- Keep `padding-bottom: .15em` trick on gradient text to prevent descender clipping
+## What to fix
 
-## Spacing rhythm (new)
+### 1. Hero feels off‑center on wide desktops (highest impact)
+On 1440 px and 1920 px the entire content column is locked at `max-width:720px` and centered, but the hero typography ("Rozptýlený typ.") is so large it visually hugs the left edge of that column. The result is a big empty band on the right of the screen and the page reads as misaligned.
 
-- Section vertical padding: `48px` desktop / `32px` mobile (was ~80/56)
-- Wrap max-width unified: `720px`
-- Block stack gap (paragraphs, items): `14px`
-- Card/item internal padding: `18px 20px` (was ~24/28)
-- Heading margin-bottom: `10px`; margin-top: `28px`
-- Quote padding: `16px 20px`
-- TOC row height: `32px`, gap `4px`
+Fix: keep the 720 px reading column for body copy, but let the hero stretch a bit wider (≈ 880–940 px) and re‑center it so the H1 sits balanced under the navbar. Also widen the TOC card slightly so it doesn't look like a narrow ribbon on 1920 px.
 
-## Cover page — fit on one A4
+### 2. Mobile nav loses all section links with no replacement
+At ≤ 720 px the rule `.eb-nav-links{display:none}` hides Obsah / Profil / Deficit / Reset / Protokol entirely, leaving only the logo and the "Stiahnuť PDF" button. There is no hamburger or alternative way to jump between sections on a phone.
 
-Reduce so hero + full Obsah render inside one 210×297mm page in PDF:
+Fix: add a small compact anchor row (icon‑less, single line, horizontally scrollable if needed) that appears below the logo on mobile only — same five anchors, smaller font, subtle separator. No JS hamburger needed; this keeps it lightweight and matches the editorial style.
 
-- Cover top padding: `28mm` print / `48px` screen
-- Hero title scale capped at `52px` in print
-- Subtitle: `15px`, single line where possible
-- Hero description: max `2 short lines`, `14px / 1.5`
-- Drop hero CTA chips on print (keep on screen) OR shrink to `11px`
-- Obsah: 9 rows × `28px` = ~252px; numerals `13px`, title `14px`, dotted leader thinner (`1px`)
-- Remove decorative spacer between hero and Obsah on print
-- Add `body.pdf-export #cover { padding: 18mm 16mm; }` and `page-break-after: always`
+### 3. Product card image is slightly oversized on tablet (768 px)
+At tablet width the card is still in two‑column mode with a 240 px image, which leaves the right column cramped (≈ 380 px for heading + paragraph + CTA). The image dominates.
 
-## Print rules (A4)
+Fix: between 600 px and 900 px, drop the image column to 180 px so the text gets more breathing room. Keep desktop at 240 px and mobile stacked as today.
 
-```css
-@page { size: A4; margin: 14mm 14mm 16mm; }
-body.pdf-export { font-size: 14px; line-height: 1.55; }
-body.pdf-export section { padding: 10mm 0 !important; page-break-before: always; }
-body.pdf-export #cover { page-break-before: avoid; }
-body.pdf-export .eb-item,
-body.pdf-export .eb-quote,
-body.pdf-export .eb-product,
-body.pdf-export .eb-toc { break-inside: avoid; }
-body.pdf-export .eb-back { display: none; }
+## Out of scope (intentionally not changing)
+
+- PDF export layout — already verified clean over 14 A4 pages
+- Color system, typography, gradients, accent purple — final
+- TOC anchor smooth scroll — works on desktop; the in‑preview "scroll didn't move" I saw during QA is a sandbox iframe quirk, not a real bug (clicking the TOC link inside the page jumped correctly)
+- Footer, final CTA, deficit grid, blood panel — all reading well across breakpoints
+
+## Technical notes
+
+File touched: `public/neohack.html` only (single‑file project, no React components involved).
+
+CSS changes, roughly:
+
+```text
+.eb-wrap                 → keep max-width:720px (body copy)
+.eb-hero, .eb-toc-wrap   → new wider wrapper, max-width:920px, margin:0 auto
+.eb-nav-links-mobile     → new element, shown only @media (max-width:720px)
+.eb-product              → @media (min-width:601px) and (max-width:900px) {
+                              grid-template-columns: 180px 1fr;
+                            }
 ```
 
-## Visual consistency pass
+HTML changes: wrap the hero block + TOC in a wider container div; add a second `<div class="eb-nav-links-mobile">` inside the navbar with the same five anchors. No content edits, no copy changes.
 
-- Unify all border colors to a single token (`rgba(168,85,247,.18)`) and width `1px`
-- Unify all card radii to `10px`
-- Unify accent gradient stops in one CSS variable, reuse everywhere
-- Replace inconsistent margin values (24/28/32/40) with a 4-step scale: `8 / 14 / 24 / 40`
-- Chips: same height `26px`, padding `0 10px`, font `12px`
-
-## Validation
-
-1. Open `/neohack.html` in preview, check screen rendering at desktop + 390px
-2. Trigger PDF export, count pages, verify cover is single page
-3. Convert PDF to images with `pdftoppm -r 150` and inspect each page for clipping, orphaned headings, broken cards
-4. Iterate on any page that breaks awkwardly
-
-## Files touched
-
-- `public/neohack.html` only (CSS + minor markup tweaks for cover)
+After implementation I will re‑screenshot all three viewports to confirm.

@@ -62,6 +62,20 @@
   }
   .eb-nav-links a:hover::after{transform:scaleX(1)}
   @media (max-width:720px){ .eb-nav-links{display:none} }
+  /* Mobile nav anchor row — visible only on phones */
+  .eb-nav-links-mobile{display:none}
+  @media (max-width:720px){
+    .eb-nav-inner{flex-wrap:wrap;row-gap:6px}
+    .eb-nav-links-mobile{
+      display:flex;flex-basis:100%;width:100%;order:3;gap:18px;justify-content:center;
+      padding:6px 0 4px;border-top:1px solid var(--b1);margin-top:4px;
+      font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+      overflow-x:auto;scrollbar-width:none;
+    }
+    .eb-nav-links-mobile::-webkit-scrollbar{display:none}
+    .eb-nav-links-mobile a{color:var(--w50);transition:color .2s ease;white-space:nowrap}
+    .eb-nav-links-mobile a:hover,.eb-nav-links-mobile a:active{color:var(--acc)}
+  }
   .eb-pdf{
     display:inline-flex;align-items:center;gap:8px;
     border:1px solid var(--acc30);border-radius:100px;
@@ -77,6 +91,7 @@
   section{padding:clamp(32px,4.5vw,48px) 0;border-bottom:1px solid var(--b1)}
   #cover{padding:clamp(36px,5vw,56px) 0 clamp(28px,3.5vw,40px)}
   .eb-wrap{max-width:720px;margin:0 auto;padding:0 24px}
+  .eb-wrap-wide{max-width:920px;margin:0 auto;padding:0 24px}
   .bg-s1{background:var(--s1)}
   .bg-s2{background:var(--s2)}
 
@@ -359,6 +374,9 @@
   .eb-cta:hover{color:var(--w);border-color:var(--w)}
   .eb-product.muted{opacity:.78}
   .eb-product.muted .ptag{color:var(--w50);border-color:var(--b2);background:transparent}
+  @media (min-width:601px) and (max-width:900px){
+    .eb-product{grid-template-columns:180px 1fr;gap:12px;padding:12px}
+  }
   @media (max-width:600px){
     .eb-product .img{height:180px}
   }
@@ -513,14 +531,14 @@
 
   /* RESPONSIVE */
   @media (max-width:600px){
-    .eb-wrap,.eb-nav-inner{padding-left:20px;padding-right:20px}
+    .eb-wrap,.eb-wrap-wide,.eb-nav-inner{padding-left:20px;padding-right:20px}
     section{padding:34px 0}
     .eb-product{grid-template-columns:1fr}
     .eb-product .img{width:100%;height:220px}
     .eb-deficit,.eb-blood{grid-template-columns:1fr}
     .eb-step{padding:22px}
     .eb-pdf{padding:7px 11px;font-size:10px;letter-spacing:.12em}
-    .eb-nav-inner{flex-wrap:nowrap}
+    .eb-nav-inner{flex-wrap:wrap}
     .eb-nav-inner > div{gap:6px!important}
   }
 
@@ -576,7 +594,7 @@
     position:absolute;bottom:6mm;right:10mm;
     font-size:10px;color:#999;letter-spacing:.1em;text-transform:uppercase;
   }
-  body.a4-preview .eb-wrap{max-width:none;padding:0}
+  body.a4-preview .eb-wrap,body.a4-preview .eb-wrap-wide{max-width:none;padding:0}
   body.a4-preview h1,body.a4-preview h2,body.a4-preview h3,
   body.a4-preview p,body.a4-preview .lead,body.a4-preview strong,
   body.a4-preview .eb-item p,body.a4-preview .eb-step p,
@@ -678,6 +696,13 @@
       <a href="#s6">Reset</a>
       <a href="#s9">Protokol</a>
     </div>
+    <div class="eb-nav-links-mobile" aria-label="Rýchla navigácia (mobil)">
+      <a href="#cover">Obsah</a>
+      <a href="#s1">Profil</a>
+      <a href="#s5">Deficit</a>
+      <a href="#s6">Reset</a>
+      <a href="#s9">Protokol</a>
+    </div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <button class="eb-pdf" id="dlPdf" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -691,7 +716,7 @@
 
 <!-- COVER -->
 <section id="cover" data-title="Obálka">
-  <div class="eb-wrap">
+  <div class="eb-wrap-wide">
     <div class="eb-eyebrow"><span>Energetický kompas</span></div>
     <div class="eb-tag">Dopamínová fragmentácia</div>
     <h1 class="eb-hero-title">Rozptýlený<span class="accent">typ.</span></h1>
