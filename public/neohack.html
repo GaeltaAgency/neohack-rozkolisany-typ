@@ -494,7 +494,7 @@
   body.pdf-export #cover{page-break-before:auto!important;break-before:auto!important;padding:0 0 18px!important}
   body.pdf-export main > section:last-of-type{page-break-after:avoid!important;break-after:avoid!important}
   body.pdf-export footer{background:#0a0a0a!important;padding:18px 24px!important;border-color:#1a1a20!important}
-  body.pdf-export .eb-pdf-tail{display:block!important;background:#0a0a0a!important;border:0!important;padding:0!important;margin:0!important}
+  body.pdf-export .eb-pdf-tail{display:block!important;width:100%!important;background:#0a0a0a!important;border:0!important;padding:0!important;margin:0!important;min-height:1px!important}
   body.pdf-export h2,body.pdf-export h3{page-break-after:avoid;break-after:avoid}
   body.pdf-export h2 + p,body.pdf-export h3 + p{page-break-before:avoid;break-before:avoid}
 
@@ -1100,14 +1100,21 @@
     document.body.classList.add('pdf-export');
     var target = document.querySelector('main');
     var tail = document.querySelector('.eb-pdf-tail');
-    if(tail) tail.style.height = '0px';
+    if(tail){
+      tail.style.height = '0px';
+      var pagePx = 1123; // A4 height at 96dpi for the 794px export viewport
+      var height = Math.ceil(target.getBoundingClientRect().height);
+      var remainder = height % pagePx;
+      var fill = remainder === 0 ? 0 : pagePx - remainder;
+      tail.style.height = Math.max(fill, 2) + 'px';
+    }
     var opt = {
       margin: 0,
       filename: FILENAME,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: 794, windowHeight: 1123, width: 794, x: 0, y: 0 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['avoid-all','css','legacy'], avoid: ['.eb-item','.eb-step','.eb-product','.eb-quote','.eb-callout','.eb-disclaimer','.eb-toc','.eb-deficit > div','.eb-blood > div','h2','h3'] }
+      pagebreak: { mode: ['css','legacy'], avoid: ['.eb-item','.eb-step','.eb-product','.eb-quote','.eb-callout','.eb-disclaimer','.eb-toc','.eb-deficit > div','.eb-blood > div','h2','h3'] }
     };
     return html2pdf().set(opt).from(target).toPdf().get('pdf').then(function(pdf){
       var pageCount = pdf.internal.getNumberOfPages();
@@ -1123,10 +1130,12 @@
           pg.unshift(bgCmd);
         }
       }
+      if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
       document.documentElement.classList.remove('pdf-export');
       return pdf;
     }).catch(function(err){
+      if(tail) tail.style.height = '0px';
       document.body.classList.remove('pdf-export');
       document.documentElement.classList.remove('pdf-export');
       throw err;
