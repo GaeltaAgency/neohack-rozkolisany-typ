@@ -136,14 +136,14 @@
   }
   .eb-tag{
     display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;
-    border:1px solid var(--acc30);background:rgba(168,85,247,.08);
-    font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#e9d8ff;
+    border:1px solid var(--acc30);background:rgba(245,158,11,.08);
+    font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#FEF3C7;
     margin-bottom:22px;
   }
   .eb-tag::before{
     content:"";width:8px;height:8px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%,#d8b4fe,var(--acc) 70%);
-    box-shadow:0 0 12px rgba(168,85,247,.7);
+    background:radial-gradient(circle at 30% 30%,#FDE68A,var(--acc) 70%);
+    box-shadow:0 0 12px rgba(245,158,11,.7);
   }
   .eb-hero-title{
     font-size:clamp(36px,6.5vw,64px);font-weight:800;letter-spacing:-.03em;
@@ -153,7 +153,7 @@
   }
   .eb-hero-title .accent{
     display:block;
-    background:linear-gradient(180deg,#c084fc 0%,#a855f7 60%,#7e22ce 100%);
+    background:linear-gradient(180deg,#FCD34D 0%,#F59E0B 60%,#B45309 100%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     padding-bottom:.16em;margin-bottom:-.16em;
   }
@@ -185,7 +185,7 @@
   }
   .eb-chips a::before{
     content:"";width:5px;height:5px;border-radius:50%;background:var(--acc);
-    box-shadow:0 0 8px rgba(168,85,247,.6);
+    box-shadow:0 0 8px rgba(245,158,11,.6);
   }
   .eb-chips a:hover{color:var(--w)}
   @media (max-width:640px){
@@ -210,7 +210,7 @@
   .eb-toc a:hover{color:var(--w)}
   .eb-toc a:hover::before{background:var(--acc);width:24px}
   .eb-toc a::before{
-    content:"";width:18px;height:1px;background:rgba(168,85,247,.45);
+    content:"";width:18px;height:1px;background:rgba(245,158,11,.45);
     flex-shrink:0;transition:all .25s ease;
   }
   .eb-toc a .num{
@@ -327,7 +327,7 @@
    .eb-product > .body{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:4px 6px;}
    .eb-product:hover{
      border-color:var(--acc30);
-     box-shadow:0 0 32px -6px rgba(168,85,247,.25);
+     box-shadow:0 0 32px -6px rgba(245,158,11,.25);
    }
    .eb-product .img{
      display:block;width:100%;height:100%;overflow:hidden;
@@ -388,7 +388,7 @@
   }
   .eb-final::before{
     content:"";position:absolute;inset:0;
-    background:radial-gradient(ellipse at center,rgba(168,85,247,.18) 0%,transparent 60%);
+    background:radial-gradient(ellipse at center,rgba(245,158,11,.18) 0%,transparent 60%);
     pointer-events:none;
   }
   .eb-final-inner{position:relative;z-index:1}
@@ -430,7 +430,7 @@
   body.pdf-export h1,
   body.pdf-export h2 em,
   body.pdf-export .eb-final .quote{
-    background:none!important;-webkit-text-fill-color:#c9a3fa!important;color:#c9a3fa!important;
+    background:none!important;-webkit-text-fill-color:#FCD34D!important;color:#FCD34D!important;
   }
   body.pdf-export h2,
   body.pdf-export h3,
@@ -461,7 +461,7 @@
   body.pdf-export .eb-blood .lab,
   body.pdf-export .eb-step .step-label,
   body.pdf-export .eb-product .ptag,
-  body.pdf-export .eb-cta{color:#c9a3fa!important}
+  body.pdf-export .eb-cta{color:#FCD34D!important}
   body.pdf-export .eb-item,
   body.pdf-export .eb-step,
   body.pdf-export .eb-product,
@@ -469,7 +469,7 @@
   body.pdf-export .eb-blood > div,
   body.pdf-export .eb-toc{background:#15151a!important;border-color:#26262e!important}
   body.pdf-export .eb-quote{background:rgb(28,18,40)!important;border-color:#5b3b8a!important}
-  body.pdf-export .eb-callout{background:#15151a!important;border-left-color:#a855f7!important}
+  body.pdf-export .eb-callout{background:#15151a!important;border-left-color:#F59E0B!important}
   body.pdf-export .eb-disclaimer{background:rgb(40,32,8)!important;border-color:#a37a08!important;border-left-color:#eab308!important}
   body.pdf-export .eb-item,
   body.pdf-export .eb-step,
@@ -533,13 +533,13 @@
   body.pdf-export #cover{min-height:1080px!important;display:flex!important;flex-direction:column!important;padding:24px 0 28px!important}
   body.pdf-export #cover .eb-wrap-wide{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:1040px!important}
   body.pdf-export #cover .eb-toc{margin-top:auto!important}
-  body.pdf-export #cover .eb-meta{margin-top:auto!important;padding-top:18px!important;border-top:1px solid #26262e!important;display:flex!important;gap:14px!important;justify-content:center!important;align-items:center!important;font-size:10px!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:#c9a3fa!important}
+  body.pdf-export #cover .eb-meta{margin-top:auto!important;padding-top:18px!important;border-top:1px solid #26262e!important;display:flex!important;gap:14px!important;justify-content:center!important;align-items:center!important;font-size:10px!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:#FCD34D!important}
   body.pdf-export #cover .eb-meta span{position:relative}
   body.pdf-export #cover .eb-meta span + span::before{content:"·";margin-right:14px;color:#5b3b8a}
 
   /* Cover fit-on-one-A4 in PDF */
   body.pdf-export #cover .eb-hero-title{font-size:42px!important;line-height:1.05!important;margin:0 0 12px!important}
-  body.pdf-export #cover .eb-hero-title .accent{background:none!important;-webkit-text-fill-color:#c9a3fa!important;color:#c9a3fa!important;margin-bottom:0!important}
+  body.pdf-export #cover .eb-hero-title .accent{background:none!important;-webkit-text-fill-color:#FCD34D!important;color:#FCD34D!important;margin-bottom:0!important}
   body.pdf-export #cover .eb-hero-lead{font-size:14.5px!important;margin:0 0 10px!important}
   body.pdf-export #cover .eb-hero-desc{font-size:13px!important;line-height:1.5!important;margin:0 0 14px!important}
   body.pdf-export #cover .eb-tag{margin-bottom:14px!important;padding:5px 12px!important;font-size:10px!important}
@@ -554,7 +554,7 @@
   /* Subtle ambient glow */
   body::before{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
-    background:radial-gradient(60% 50% at 50% 0%, rgba(168,85,247,.18), transparent 70%);
+    background:radial-gradient(60% 50% at 50% 0%, rgba(245,158,11,.18), transparent 70%);
   }
 
   /* Back-to-TOC chip injected per section */
@@ -681,7 +681,7 @@
     width:48px;height:48px;border-radius:50%;
     background:var(--acc);color:#fff;border:0;cursor:pointer;
     font-size:20px;font-weight:800;
-    box-shadow:0 6px 20px rgba(168,85,247,.5);
+    box-shadow:0 6px 20px rgba(245,158,11,.5);
     transition:transform .2s ease;
   }
   .eb-diag-toggle:hover{transform:scale(1.08)}
