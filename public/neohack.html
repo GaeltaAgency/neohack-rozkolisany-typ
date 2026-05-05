@@ -488,11 +488,24 @@
   body.pdf-export{width:794px!important;max-width:794px!important;margin:0!important;padding:0!important;overflow-x:hidden!important}
   body.pdf-export main{width:794px!important;max-width:794px!important;margin:0!important;padding:0 53px!important;background:#0a0a0a!important;box-sizing:border-box!important;overflow:hidden!important}
   body.pdf-export .eb-wrap,body.pdf-export .eb-wrap-wide{max-width:100%!important;width:100%!important;padding:0!important;margin:0!important}
-  body.pdf-export .eb-product{grid-template-columns:200px 1fr!important;gap:14px!important}
-  body.pdf-export .eb-final{padding:24px 0 40px!important;background:#0a0a0a!important;page-break-before:avoid!important;break-before:avoid!important;page-break-inside:avoid!important;break-inside:avoid!important}
-  body.pdf-export .eb-final .eb-final-inner{padding:0!important;width:100%!important}
+  body.pdf-export .eb-product{grid-template-columns:170px 1fr!important;gap:12px!important;padding:10px!important;margin:10px 0!important}
+  body.pdf-export .eb-product .img{max-height:170px!important}
+  body.pdf-export .eb-product p{font-size:12.5px!important;line-height:1.45!important;margin:0 0 6px!important}
+  body.pdf-export .eb-product h3{font-size:14px!important;margin:2px 0 4px!important}
   body.pdf-export section:not(.eb-final){page-break-before:always!important;break-before:page!important;page-break-after:auto!important;break-after:auto!important;padding:14px 0!important;margin:0!important;border:0!important}
-  body.pdf-export .eb-final{padding:14px 0!important;margin:0!important;border:0!important}
+  /* Final section: fill the whole last A4 page so there's no white strip at the bottom */
+  body.pdf-export .eb-final{
+    background:#0a0a0a!important;
+    page-break-before:always!important;break-before:page!important;
+    page-break-after:avoid!important;break-after:avoid!important;
+    page-break-inside:avoid!important;break-inside:avoid!important;
+    margin:0!important;border:0!important;
+    padding:60px 0 60px!important;
+    min-height:1123px!important;
+    display:flex!important;flex-direction:column!important;justify-content:center!important;
+    box-sizing:border-box!important;
+  }
+  body.pdf-export .eb-final .eb-final-inner{padding:0!important;width:100%!important}
   body.pdf-export #cover{page-break-before:auto!important;break-before:auto!important;padding:0 0 18px!important}
   body.pdf-export main > section:last-of-type{page-break-after:avoid!important;break-after:avoid!important}
   body.pdf-export footer,body.pdf-export .eb-pdf-tail{display:none!important;height:0!important}
