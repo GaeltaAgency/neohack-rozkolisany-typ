@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
-<title>NEOHACK — Energetický Kompas: Rozptýlený typ</title>
+<title>NEOHACK — Energetický Kompas: Rozkolísaný typ</title>
 <style>
   :root{
     --bg:#000;
@@ -18,11 +18,11 @@
     --w80:rgba(255,255,255,.80);
     --w75:rgba(255,255,255,.75);
     --w50:rgba(255,255,255,.50);
-    --acc:#A855F7;
-    --acc30:rgba(168,85,247,.30);
-    --acc12:rgba(168,85,247,.12);
-    --acc06:rgba(168,85,247,.06);
-    --ag:linear-gradient(to right,#A855F7 0%,#C9A3FA 50%,#E9D5FF 100%);
+    --acc:#F59E0B;
+    --acc30:rgba(245,158,11,.30);
+    --acc12:rgba(245,158,11,.12);
+    --acc06:rgba(245,158,11,.06);
+    --ag:linear-gradient(to right,#F59E0B 0%,#FCD34D 50%,#FEF3C7 100%);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -136,14 +136,14 @@
   }
   .eb-tag{
     display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;
-    border:1px solid var(--acc30);background:rgba(168,85,247,.08);
-    font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#e9d8ff;
+    border:1px solid var(--acc30);background:rgba(245,158,11,.08);
+    font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#FEF3C7;
     margin-bottom:22px;
   }
   .eb-tag::before{
     content:"";width:8px;height:8px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%,#d8b4fe,var(--acc) 70%);
-    box-shadow:0 0 12px rgba(168,85,247,.7);
+    background:radial-gradient(circle at 30% 30%,#FDE68A,var(--acc) 70%);
+    box-shadow:0 0 12px rgba(245,158,11,.7);
   }
   .eb-hero-title{
     font-size:clamp(36px,6.5vw,64px);font-weight:800;letter-spacing:-.03em;
@@ -153,7 +153,7 @@
   }
   .eb-hero-title .accent{
     display:block;
-    background:linear-gradient(180deg,#c084fc 0%,#a855f7 60%,#7e22ce 100%);
+    background:linear-gradient(180deg,#FCD34D 0%,#F59E0B 60%,#B45309 100%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     padding-bottom:.16em;margin-bottom:-.16em;
   }
@@ -185,7 +185,7 @@
   }
   .eb-chips a::before{
     content:"";width:5px;height:5px;border-radius:50%;background:var(--acc);
-    box-shadow:0 0 8px rgba(168,85,247,.6);
+    box-shadow:0 0 8px rgba(245,158,11,.6);
   }
   .eb-chips a:hover{color:var(--w)}
   @media (max-width:640px){
@@ -210,7 +210,7 @@
   .eb-toc a:hover{color:var(--w)}
   .eb-toc a:hover::before{background:var(--acc);width:24px}
   .eb-toc a::before{
-    content:"";width:18px;height:1px;background:rgba(168,85,247,.45);
+    content:"";width:18px;height:1px;background:rgba(245,158,11,.45);
     flex-shrink:0;transition:all .25s ease;
   }
   .eb-toc a .num{
@@ -327,7 +327,7 @@
    .eb-product > .body{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:4px 6px;}
    .eb-product:hover{
      border-color:var(--acc30);
-     box-shadow:0 0 32px -6px rgba(168,85,247,.25);
+     box-shadow:0 0 32px -6px rgba(245,158,11,.25);
    }
    .eb-product .img{
      display:block;width:100%;height:100%;overflow:hidden;
@@ -388,7 +388,7 @@
   }
   .eb-final::before{
     content:"";position:absolute;inset:0;
-    background:radial-gradient(ellipse at center,rgba(168,85,247,.18) 0%,transparent 60%);
+    background:radial-gradient(ellipse at center,rgba(245,158,11,.18) 0%,transparent 60%);
     pointer-events:none;
   }
   .eb-final-inner{position:relative;z-index:1}
@@ -430,7 +430,7 @@
   body.pdf-export h1,
   body.pdf-export h2 em,
   body.pdf-export .eb-final .quote{
-    background:none!important;-webkit-text-fill-color:#c9a3fa!important;color:#c9a3fa!important;
+    background:none!important;-webkit-text-fill-color:#FCD34D!important;color:#FCD34D!important;
   }
   body.pdf-export h2,
   body.pdf-export h3,
@@ -461,7 +461,7 @@
   body.pdf-export .eb-blood .lab,
   body.pdf-export .eb-step .step-label,
   body.pdf-export .eb-product .ptag,
-  body.pdf-export .eb-cta{color:#c9a3fa!important}
+  body.pdf-export .eb-cta{color:#FCD34D!important}
   body.pdf-export .eb-item,
   body.pdf-export .eb-step,
   body.pdf-export .eb-product,
@@ -469,7 +469,7 @@
   body.pdf-export .eb-blood > div,
   body.pdf-export .eb-toc{background:#15151a!important;border-color:#26262e!important}
   body.pdf-export .eb-quote{background:rgb(28,18,40)!important;border-color:#5b3b8a!important}
-  body.pdf-export .eb-callout{background:#15151a!important;border-left-color:#a855f7!important}
+  body.pdf-export .eb-callout{background:#15151a!important;border-left-color:#F59E0B!important}
   body.pdf-export .eb-disclaimer{background:rgb(40,32,8)!important;border-color:#a37a08!important;border-left-color:#eab308!important}
   body.pdf-export .eb-item,
   body.pdf-export .eb-step,
@@ -533,13 +533,13 @@
   body.pdf-export #cover{min-height:1080px!important;display:flex!important;flex-direction:column!important;padding:24px 0 28px!important}
   body.pdf-export #cover .eb-wrap-wide{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:1040px!important}
   body.pdf-export #cover .eb-toc{margin-top:auto!important}
-  body.pdf-export #cover .eb-meta{margin-top:auto!important;padding-top:18px!important;border-top:1px solid #26262e!important;display:flex!important;gap:14px!important;justify-content:center!important;align-items:center!important;font-size:10px!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:#c9a3fa!important}
+  body.pdf-export #cover .eb-meta{margin-top:auto!important;padding-top:18px!important;border-top:1px solid #26262e!important;display:flex!important;gap:14px!important;justify-content:center!important;align-items:center!important;font-size:10px!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:#FCD34D!important}
   body.pdf-export #cover .eb-meta span{position:relative}
   body.pdf-export #cover .eb-meta span + span::before{content:"·";margin-right:14px;color:#5b3b8a}
 
   /* Cover fit-on-one-A4 in PDF */
   body.pdf-export #cover .eb-hero-title{font-size:42px!important;line-height:1.05!important;margin:0 0 12px!important}
-  body.pdf-export #cover .eb-hero-title .accent{background:none!important;-webkit-text-fill-color:#c9a3fa!important;color:#c9a3fa!important;margin-bottom:0!important}
+  body.pdf-export #cover .eb-hero-title .accent{background:none!important;-webkit-text-fill-color:#FCD34D!important;color:#FCD34D!important;margin-bottom:0!important}
   body.pdf-export #cover .eb-hero-lead{font-size:14.5px!important;margin:0 0 10px!important}
   body.pdf-export #cover .eb-hero-desc{font-size:13px!important;line-height:1.5!important;margin:0 0 14px!important}
   body.pdf-export #cover .eb-tag{margin-bottom:14px!important;padding:5px 12px!important;font-size:10px!important}
@@ -554,7 +554,7 @@
   /* Subtle ambient glow */
   body::before{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
-    background:radial-gradient(60% 50% at 50% 0%, rgba(168,85,247,.18), transparent 70%);
+    background:radial-gradient(60% 50% at 50% 0%, rgba(245,158,11,.18), transparent 70%);
   }
 
   /* Back-to-TOC chip injected per section */
@@ -681,7 +681,7 @@
     width:48px;height:48px;border-radius:50%;
     background:var(--acc);color:#fff;border:0;cursor:pointer;
     font-size:20px;font-weight:800;
-    box-shadow:0 6px 20px rgba(168,85,247,.5);
+    box-shadow:0 6px 20px rgba(245,158,11,.5);
     transition:transform .2s ease;
   }
   .eb-diag-toggle:hover{transform:scale(1.08)}
@@ -764,15 +764,15 @@
 <section id="cover" data-title="Obálka">
   <div class="eb-wrap-wide">
     <div class="eb-eyebrow"><span>Energetický kompas</span></div>
-    <div class="eb-tag">Dopamínová fragmentácia</div>
-    <h1 class="eb-hero-title">Rozptýlený<span class="accent">typ.</span></h1>
-    <p class="eb-hero-lead">Keď mozog skáče všade — no ty stojíš na mieste.</p>
-    <p class="eb-hero-desc">Držíš v rukách manuál k tvojej biológii. Presne ti vysvetlí, čo sa práve teraz deje v tvojom mozgu, ako si sa do tohto stavu dostal, a — čo je najdôležitejšie — ukáže ti konkrétne kroky, ktoré budú mať na tvoju energiu ten najvyšší efekt.</p>
+    <div class="eb-tag">Slabá autonómna stabilita</div>
+    <h1 class="eb-hero-title">Rozkolísaný<span class="accent">typ.</span></h1>
+    <p class="eb-hero-lead">Keď energia kolíše ako aprílové počasie — a ty nikdy nevieš, čo ťa čaká.</p>
+    <p class="eb-hero-desc">Práve si odomkol prístup k svojmu systému. Tento manuál ti vysvetlí, prečo tvoja energia lieta hore-dole, ako k tomuto skratu došlo, a — čo je najdôležitejšie — dá ti presnú mechaniku, ako svoju stabilitu vybudovať späť.</p>
 
     <div class="eb-toc">
       <div class="eb-toc-title">Obsah</div>
-      <a href="#s1"><span class="num">01</span><span class="t">Profil: Rozptýlený typ</span></a>
-      <a href="#s2"><span class="num">02</span><span class="t">Anatómia rozptýlenosti</span></a>
+      <a href="#s1"><span class="num">01</span><span class="t">Profil: Rozkolísaný typ</span></a>
+      <a href="#s2"><span class="num">02</span><span class="t">Anatómia rozkolísanosti</span></a>
       <a href="#s3"><span class="num">03</span><span class="t">Symptómy v praxi</span></a>
       <a href="#s4"><span class="num">04</span><span class="t">Ako klameš vlastný systém</span></a>
       <a href="#s5"><span class="num">05</span><span class="t">Tvoj skutočný deficit</span></a>
@@ -782,7 +782,7 @@
       <a href="#s9"><span class="num">09</span><span class="t">Tvoje palivo: NEOHACK protokol</span></a>
     </div>
 
-    <div class="eb-meta"><span>NEOHACK.SK</span><span>Personalizovaný sprievodca</span><span>Typ: Rozptýlený</span></div>
+    <div class="eb-meta"><span>NEOHACK.SK</span><span>Personalizovaný sprievodca</span><span>Typ: Rozkolísaný</span></div>
   </div>
 </section>
 
@@ -790,22 +790,21 @@
 <section id="s1" data-title="01 Prvý krok">
   <div class="eb-wrap">
     <div class="eb-label">01</div>
-    <h2><em>TVOJ PRVÝ KROK:</em> Odomknutie systému</h2>
-    <p class="lead">Práve si získal prístup k pochopeniu vlastného tela. Tento krok mení všetko.</p>
-    <p>Držíš v rukách manuál k tvojej biológii. Presne ti vysvetlí, čo sa práve teraz deje v tvojom mozgu, ako si sa do tohto stavu dostal, a – čo je najdôležitejšie – ukáže ti konkrétne kroky, ktoré budú mať na tvoju energiu ten najvyšší efekt.</p>
+    <h2><em>TVOJ PRVÝ KROK:</em> Pochopenie skutočného problému</h2>
+    <p class="lead">Práve si odomkol prístup k svojmu systému.</p>
+    <p>Tvoj nervový systém nie je vyhorený. Netrpí ani nízkou aktiváciou. Ukazuje iný vzorec. <strong>Čistú nestabilitu.</strong></p>
 
     <div class="eb-disclaimer"><strong>⚠️ Upozornenie:</strong> Tento manuál nie je náhradou lekárskych odporúčaní. Tvoje zdravie je tvoja zodpovednosť. Akékoľvek pretrvávajúce zdravotné problémy rieš primárne so svojím lekárom.</div>
 
-    <h3>PROFIL: ROZPTÝLENÝ TYP</h3>
-    <p class="lead"><strong>Motor na plný plyn. Zaradený neutrál.</strong></p>
-    <p>To, s čím momentálne bojuješ, nie je vyhorenie ani chronický stres.</p>
-    <div class="eb-quote">Volá sa to <span style="color:var(--acc)">dopamínová fragmentácia.</span></div>
-    <p>Tvoj problém nie je nedostatok paliva. Ty máš energie na rozdávanie.</p>
-    <p>Tvoj mozog beží na 200 % a nápady prúdia. Lenže tvoje sústredenie je na nule, pretože tento výkon spaľuješ na desiatich rôznych miestach naraz.</p>
-    <p>Začneš 10 vecí. Nedokončíš ani jednu. Výsledok dobre poznáš. Večer je tvoje telo absolútne vyčerpané z celodenného prešľapovania na mieste, no tvoja myseľ stále beží na plné obrátky a hľadá ďalší stimul.</p>
-    <div class="eb-callout">Zastavme to tu a teraz a pozrime sa na tvoju biológiu bez emócií a sebaobviňovania.</div>
-    <p>Nie, nie si lenivý. Tvoja pevná vôľa nezlyhala. Nie je to ani chyba tvojho charakteru. Tvoja biológia sa len zasekla v slučke okamžitých odmien.</p>
-    <div class="eb-quote"><span style="color:var(--acc)">Dobrá správa?</span> Je to len systémový vzorec. A ten sa dá krok za krokom opraviť.</div>
+    <h3>PROFIL: ROZKOLÍSANÝ TYP</h3>
+    <p class="lead"><strong>Slabá autonómna stabilita.</strong></p>
+    <p>Tvoj problém nie je nedostatok energie. Tvoj problém je <strong>absolútna strata kontroly nad ňou.</strong></p>
+    <div class="eb-quote">To, s čím bojuješ, je konkrétny fyziologický stav — odborne sa nazýva <span style="color:var(--acc)">slabá autonómna regulácia.</span></div>
+    <p><strong>Tvoja energia nekolíše náhodou.</strong> Telo nereaguje prehnane preto, že si slabý alebo precitlivený. Tvoj systém jednoducho stratil brzdy a kotvy.</p>
+    <p>Nevie sa stlmiť, keď je v strese. Nevie si udržať ťah, keď potrebuje pracovať. Prepadáva sa z jedného extrému do druhého.</p>
+    <p><strong>Tvoj výkon a nálada sú dnes čistá lotéria.</strong> Závisia od toho, ako si spal, čo si zjedol, alebo do akého stavu sa tvoja biológia práve prepla. A presne tento permanentný chaos ťa systematicky ničí.</p>
+    <div class="eb-callout">Toto nie je tvoja povaha. Je to len biológia, ktorá stratila svoj rytmus. A rovnako ako každý iný fyzikálny proces, aj táto <strong>nestabilita sa dá opraviť.</strong></div>
+    <p>Držíš v rukách manuál k vlastnému telu. Zistíš, prečo k tomuto skratu došlo. A dostaneš presnú mechaniku, ako svoju stabilitu vybudovať späť.</p>
   </div>
 </section>
 
@@ -813,19 +812,13 @@
 <section id="s2" class="bg-s1" data-title="02 Anatómia">
   <div class="eb-wrap">
     <div class="eb-label">02</div>
-    <h2>Anatómia rozptýlenosti: <em>Prečo tvoja brzda prestala fungovať?</em></h2>
-    
-    <p>Rozptýlenosť je len naučený vzorec.</p>
-    <p>Tvoja prefrontálna kôra – racionálne centrum, ktoré riadi sústredenie a robí plány – stratila výkon. Riadenie prevzal limbický systém. Tvoje centrum okamžitých impulzov.</p>
-    <div class="eb-quote">Racionálna brzda zoslabla. Emócie vyhrali.</div>
-    <div class="eb-callout"><strong>TVOJE TELO NEZLYHALO. IBA SA DOKONALE PRISPÔSOBILO.</strong></div>
-    <p>Ako k tomu došlo?</p>
-    <p>Prostredie neustálych notifikácií, preskakovania pozornosti a digitálneho šumu potichu prekalibrovalo tvoje nervové dráhy.</p>
-    <p>Tvoj dopamínový systém sa naučil fungovať na rýchlych, nízkonákladových odmenách. Tvoj mozog prestal budovať pevnú štruktúru, pretože si zvykol na skratky.</p>
-    <p>A presne preto máš dnes pocit, že nevieš zaradiť rýchlosť.</p>
-    <p>Akonáhle od seba vyžaduješ prácu, ktorá je pomalá, sústredená a vyžaduje námahu, tvoja myseľ odmietne spolupracovať. Nechce ísť ťažšou cestou. Namiesto toho automaticky hľadá najbližší, okamžitý dopamínový únik.</p>
-    <p>Tvoje telo nepotrebuje umelo bičovať. Nepotrebuješ viac motivácie ani viac energie.</p>
-    <p>Potrebuješ len vrátiť svojej energii smer. Znovu vybudovať stratenú kapacitu pre hlboké sústredenie. A nastaviť tichú dopamínovú disciplínu.</p>
+    <h2>Anatómia rozkolísanosti: <em>Prečo tvoj systém neustále stráca rovnováhu</em></h2>
+
+    <p>Rozkolísaný typ znamená, že tvoj autonómny nervový systém momentálne nedokáže udržiavať stabilitu. Namiesto toho, aby plynule a hladko prechádzal medzi výkonom a oddychom, tvoje telo sa medzi nimi nekontrolovateľne prepína.</p>
+    <div class="eb-quote"><strong>Autonómna nestabilita je ako jazda v aute so zničenými tlmičmi.</strong> Kým iní prejdú cez bežnú nerovnosť na ceste bez povšimnutia, tvoj systém ten istý malý otras precíti päťnásobne silnejšie.</div>
+    <p><strong>Táto nestabilita narúša nervovú vodivosť.</strong> Telo v chaose extrémne rýchlo páli elektrolyty. Bez stabilných minerálov však neuróny nedokážu udržať elektrické napätie.</p>
+    <p>Výsledok? Elektrolyty v tvojich neurónoch lietajú rovnako chaoticky ako tvoja energia. A bez stabilných minerálov tvoj systém „skratuje" presne vtedy, keď ho najviac potrebuješ.</p>
+    <div class="eb-callout"><strong>TVOJE TELO NEZLYHALO. IBA STRATILO SCHOPNOSŤ SA REGULOVAŤ.</strong></div>
   </div>
 </section>
 
@@ -833,14 +826,15 @@
 <section id="s3" data-title="03 Symptómy">
   <div class="eb-wrap">
     <div class="eb-label">03</div>
-    <h2>Symptómy: <em>Ako vyzerá tvoja roztrieštenosť v praxi?</em></h2>
-    <p class="lead">Tu je päť tvárí dopamínovej fragmentácie.</p>
+    <h2>Symptómy: <em>Ako vyzerá tvoja rozkolísanosť v praxi?</em></h2>
+    <p class="lead">Šesť tvárí autonómnej nestability.</p>
 
-    <div class="eb-item"><span class="num">01</span><h3>SYNDRÓM ZAMRZNUTÉHO ŠTARTU</h3><p>Začneš niekoľko vecí naraz s obrovskou úvodnou energiou. Nedokončíš žiadnu. Nový projekt je totiž dopamínový hit. Dokončovanie je len drina.</p></div>
-    <div class="eb-item"><span class="num">02</span><h3>KREATIVITA BEZ REALIZÁCIE A VÝSLEDKOV</h3><p>Tvoja myseľ generuje skvelé nápady. Zasekávaš sa však v realizácii. Máš plný stôl plánov, no nulové výstupy.</p></div>
-    <div class="eb-item"><span class="num">03</span><h3>OCHRANNÁ PARALÝZA (bezcieľne scrollovanie)</h3><p>Vezmeš do ruky telefón, hoci si to vôbec nechcel. Prezeráš sociálne siete v stave miernej letargie. Tvoj systém takto kompenzuje neschopnosť udržať pozornosť na ťažších úlohách.</p></div>
-    <div class="eb-item"><span class="num">04</span><h3>ALERGIA NA NUDU</h3><p>Akonáhle dostaneš zadanie, ktoré nemá okamžitú odmenu (je nudné, dlhé, analytické), tvoj mozog doslova odmieta spolupracovať. Aj keď vieš, že je to pre teba životne dôležité.</p></div>
-    <div class="eb-item"><span class="num">05</span><h3>NOČNÁ HYPERAKTIVITA</h3><p>Cez deň si mal problém sústrediť sa, ale večer, keď má ísť telo spať, tvoj mozog paradoxne nabehne na plné obrátky. Unavený nervový systém stále zúfalo hľadá posledné stimuly pred vypnutím.</p></div>
+    <div class="eb-item"><span class="num">01</span><h3>NEPREDVÍDATEĽNÁ ENERGIA</h3><p>Energia ti počas dňa lieta hore-dole bez akéhokoľvek zjavného a logického dôvodu. Nikdy dopredu nevieš, či budeš mať o druhej poobede silu rozbiť stenu, alebo ťa úplne vypne.</p></div>
+    <div class="eb-item"><span class="num">02</span><h3>MOZGOVÁ HMLA (BRAIN FOG)</h3><p>Prichádzajú momenty, kedy tvoja myseľ zrazu stratí ostrosť. Pripadáš si ťažkopádny a zahmlený. Nedokážeš sa ďalej sústrediť, uvažovanie ťa fyzicky bolí a aj jednoduché úlohy ti trvajú večnosť.</p></div>
+    <div class="eb-item"><span class="num">03</span><h3>CITLIVÉ TRÁVENIE</h3><p>Tvoj žalúdok je priamym zrkadlom tvojho nervového systému. Akonáhle si pod tlakom, si nervózny. Ak si sa nestihol najesť včas, tvoje trávenie sa zvyčajne ozve kŕčmi, bolesťou alebo úplným zablokovaním.</p></div>
+    <div class="eb-item"><span class="num">04</span><h3>EXTRÉMNA REAKCIA NA STRES</h3><p>Malé, bežné problémy, nad ktorými iní len mávnu rukou, u teba okamžite spúšťajú neprimerane silnú telesnú reakciu — búšenie srdca, nervozitu, potenie, či stiahnutý žalúdok.</p></div>
+    <div class="eb-item"><span class="num">05</span><h3>VÝKYVY NÁLAD</h3><p>Tvoje emócie sa striedajú aj niekoľkokrát za deň. Dokážeš rýchlo prejsť od euforického nadšenia k hlbokému pesimizmu alebo podráždenosti bez výraznej racionálnej príčiny zvonka.</p></div>
+    <div class="eb-item"><span class="num">06</span><h3>POCIT NESTABILITY</h3><p>Nikdy nevieš, ako sa budeš cítiť o hodinu. Tvoja vlastná biológia je pre teba nepredvídateľná. Tento stav ťa neustále udržuje v podvedomom, vyčerpávajúcom strehu, pretože nevieš, kedy príde ďalší pád.</p></div>
   </div>
 </section>
 
@@ -849,16 +843,15 @@
   <div class="eb-wrap">
     <div class="eb-label">04</div>
     <h2>Ako sa snažíš <em>oklamať vlastný systém</em>: Tvoje kompenzácie</h2>
-    
-    <p>Cítiš, že strácaš pôdu pod nohami. A tak hľadáš skratky. Tvoj mozog si vytvoril tri rýchle kompenzačné mechanizmy, ktorými sa snaží zakryť stratu sústredenia.</p>
 
-    <div class="eb-item"><span class="num">01</span><h3>KOFEÍNOVÝ ÚVER</h3><p>Leješ do seba kávu s nádejou, že ťa konečne donúti sústrediť sa. Ale kofeín ti nedá ani miligram skutočného sústredenia. On iba hrubo zablokuje senzory únavy. Berie si od tvojho tela biologický úver, ktorého drastický úrok vždy splatíš neskorším pádom.</p></div>
-    <div class="eb-item"><span class="num">02</span><h3>DIGITÁLNA ANESTÉZIA</h3><p>Mobil a sociálne siete. Používaš ich ako okamžitú dopamínovú infúziu presne v momente, keď tvoj mozog odmieta čeliť ťažkej úlohe. Nie je to hľadanie informácií. Je to len rýchly únik pred námahou.</p></div>
-    <div class="eb-item"><span class="num">03</span><h3>ILÚZIA PRODUKTIVITY</h3><p>Neustále otváraš nové a nové projekty. Novosť je totiž pre tvoj systém dokonalý dopamínový hit. Začínať niečo nové je vždy ľahké a bezbolestné. Dokončovať veci v tichosti je drina, ktorej sa tvoj mozog vyhýba.</p></div>
+    <p>Keďže nikdy nevieš, ako sa budeš o hodinu cítiť, vytvoril si si záchranné mechanizmy. Tvoj mozog sa ich pomocou snaží udržať ťa aspoň v akej-takej rovnováhe. V skutočnosti ale tieto kompenzácie tvoj krehký systém ešte viac destabilizujú.</p>
 
-    <p><strong>Kde je chyba?</strong></p>
-    <p>Každé jedno z týchto rýchlych riešení ťa ťahá hlbšie ku dnu. Neriešia príčinu a drasticky znižujú tvoj prah dopamínovej citlivosti. Tvoje telo zrazu potrebuje čoraz viac stimulov len na to, aby vôbec niečo cítilo a dosiahlo rovnaký efekt.</p>
-    <p>Výsledok je neúprosný. Skutočná práca – hlboká, pomalá, hodnotná – sa pre teba stáva zo dňa na deň nedosiahnuteľnejšia.</p>
+    <div class="eb-item"><span class="num">01</span><h3>RÝCHLE DOPĹŇANIE PALIVA (CUKOR)</h3><p>Akonáhle cítiš, že prichádza energetický pád, inštinktívne siahneš po sladkom medzi jedlami. Tvoj systém vie, že rýchly cukor = okamžitá (hoci len požičaná) energia. Glukóza ťa na moment preberie. Telo však na tento neprirodzený skok zareaguje vyplavením obrovského množstva inzulínu. Ten zrazí hladinu cukru tak rýchlo a tak nízko, že ťa pošle do ešte tvrdšieho útlmu.</p></div>
+    <div class="eb-item"><span class="num">02</span><h3>KRÍZOVÝ MANAŽMENT KOFEÍNOM</h3><p>Kávu nepiješ pre radosť, používaš ju ako krízový štartér. Kofeín v skutočnosti tvoju energiu nedoplní. V mozgu dočasne zablokuje receptory únavy a zároveň donúti nadobličky vyplaviť stresový adrenalín. Tvoj nervový systém sa síce na chvíľu nakopne, ale namiesto toho, aby si telu dodal palivo, ti káva v skutočnosti z rezerv kradne posledné zvyšky skutočnej sily.</p></div>
+    <div class="eb-item"><span class="num">03</span><h3>CYKLY EXTRÉMOV</h3><p>Nedokážeš si udržať stredné tempo. V dňoch, kedy máš pocit, že máš energiu, si naložíš prácu aj tréning na maximum, aby si to „dohnal". Systém tento extrém nezvládne a opäť ťa vypne. Striedaš dni maximálneho výkonu s fázami, kedy ťa vlastná biológia pošle do núteného útlmu, pretože stratila kapacitu držať krok s energiou.</p></div>
+
+    <p><strong>Cena za nestabilitu</strong></p>
+    <p>Každý jeden z týchto kompenzačných krokov robí tvoj systém ešte krehkejším. Cukrové skoky prehlbujú glukózové výkyvy. Krízový kofeín ničí nadobličky. Dni maximálneho výkonu ti berú zvyšky energie. Neopravuješ systém, len hasíš požiare, zatiaľ čo tvoja biológia sa prepadáva do čoraz hlbšieho chaosu.</p>
   </div>
 </section>
 
@@ -866,29 +859,28 @@
 <section id="s5" class="bg-s1" data-title="05 Deficit">
   <div class="eb-wrap">
     <div class="eb-label">05</div>
-    <h2>Tvoj skutočný deficit: <em>Čo tvojmu telu chýba?</em></h2>
-    
-    <p>Vymeňme si na chvíľu optiku. Dopamín nie je odmena za to, že si niečo dokázal. Je to biologický kompas. Je to motivačný signál smerom k odmene.</p>
-    <p>Ak je tvoj dopamínový systém fragmentovaný, nemáš šancu udržať motiváciu k dlhodobým cieľom. Aj keď ich racionálne veľmi chceš dosiahnuť. Tvoj mozog zakaždým bezpečne uskočí k najbližšej, najrýchlejšej odmene. To, čo si stratil, nie je energia. Stratil si tri kľúčové parametre:</p>
+    <h2>Tvoj skutočný deficit: <em>Čo tvojmu telu v skutočnosti chýba?</em></h2>
+
+    <p>Nedostatok sily, ktorý cítiš, nie je psychologický blok. Je to ukážkový štrukturálny deficit. Tvoj nervový systém prišiel o stavebný materiál. Nejde o to, že by si stratil motiváciu, len si jednoducho vyžmýkal svoju biológiu na troch kritických úrovniach:</p>
 
     <div class="eb-deficit">
-      <div><span class="lab">Smer</span><p>Bez jasného cieľa je tvoj dopamínový systém slepý. Automaticky preto začne vyhľadávať náhradné, lacné odmeny v okolí.</p></div>
-      <div><span class="lab">Sústredenie</span><p>Tvoja nervová kapacita pre dlhšie, neprerušované sústredenie doslova atrofovala. Zmenšila sa ako sval, ktorý prestaneš používať.</p></div>
-      <div><span class="lab">Dopamínová disciplína</span><p>Stratil si kľúčovú schopnosť – odložiť okamžitú, bezcennú odmenu v prospech tej väčšej, významnejšej, ale vzdialenejšej.</p></div>
+      <div><span class="lab">Stabilita</span><p>Tvoj nervový systém potrebuje pevné kotvy a pravidelnosť. Momentálne dostáva len neustálu, chaotickú intenzitu, na ktorú musí nepretržite reagovať.</p></div>
+      <div><span class="lab">Elektrolytová rovnováha</span><p>Sodík, draslík a horčík fungujú v tvojom tele ako poistky — priamo regulujú napätie v neurónoch. Keď tieto minerály v tele kolíšu, tvoje nervové odpovede sa stávajú nepredvídateľnými.</p></div>
+      <div><span class="lab">Biologický rytmus</span><p>Tvoje vnútorné hodiny (cirkadiánny rytmus) potrebujú pre správne fungovanie jasné a konzistentné vstupy — pravidelné jedlo, spánok a svetlo.</p></div>
     </div>
 
-    <p>Ako z toho von?</p>
-    <p>Tvoja racionálna brzda je momentálne oslabená. Impulzy nad tebou vyhrávajú každý jeden deň.</p>
-    <p>Existuje len jediné riešenie. Tréning čistej, neprerušovanej, sústredenej práce.</p>
-    <p>Pretože práve ten je fyzickým tréningom tvojho brzdného systému.</p>
+    <div class="eb-quote">Autonómny nervový systém sa kalibruje na vzorce, nie na výnimky. Obyčajná pravidelnosť v čase jedla, spánku a pohybu vysiela mozgu silnejší signál fyziologického bezpečia a stability, než akýkoľvek komplexný suplementačný protokol.</div>
 
-    <h3>Ako si sa sem dostal? <em style="font-style:normal;background:var(--ag);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Chyby v kóde tvojho dňa.</em></h3>
-    <p>Tvoj mozog sa nepokazil zo dňa na deň. Bola to postupná, potichu prebiehajúca adaptácia na prostredie. Tu sú štyri presné momenty, kedy tvoja biológia začala prehrávať:</p>
+    <p><strong>Základom tejto stability sú elektrolyty.</strong> Sodík, draslík a magnézium priamo regulujú napäťové kanály neurónov. Ak ich hladina kolíše, dochádza k chybám v prenose signálov. To, čo ty vnímaš ako náhlu únavu, stratu sústredenia, či výkyv nálady, je v skutočnosti len nestabilná elektrická odpoveď tvojho systému na fyzickej úrovni.</p>
 
-    <div class="eb-item"><span class="num">01</span><h3>DIGITÁLNA OVERSTIMULÁCIA</h3><span class="sub">Čo sa stalo: Mozog sa natrénoval na mikro-odmeny</span><p>Sociálne siete, krátke videá, nekonečný prúd notifikácií. Tvoj dopamínový systém bol každý deň vystavovaný extrémnym dávkam lacných podnetov. Výsledok? Naučil sa reagovať len na zlomky sekúnd. Pomalá realita ho prestala zaujímať.</p></div>
-    <div class="eb-item"><span class="num">02</span><h3>ILÚZIA ROBENIA VIACERÝCH VECÍ NARAZ (MULTITASKING)</h3><span class="sub">Čo sa stalo: Zabudol si zostať pri jednej veci</span><p>Neustále si preskakoval medzi otvorenými oknami, úlohami a konverzáciami. Nikdy si nedokončil jednu myšlienku do konca. Tvoj mozog sa doslova odnaučil, ako vyzerá dlhodobá, hlboká práca.</p></div>
-    <div class="eb-item"><span class="num">03</span><h3>ZÁVISLOSŤ NA KRÁTKYCH ODMENÁCH</h3><span class="sub">Čo sa stalo: Prerušenie sa stalo odmenou</span><p>Lajky, views, okamžité odpovede na správy. Náš mozog miluje rýchlu spätnú väzbu. Každé jedno pípnutie telefónu sa stalo mikro-odmenou, ktorú tvoje telo začalo uprednostňovať pred skutočnými, veľkými víťazstvami.</p></div>
-    <div class="eb-item"><span class="num">04</span><h3>CHÝBAJÚCA VÍZIA</h3><span class="sub">Čo sa stalo: Systém začal hľadať náhrady</span><p>Bez silnej vízie je tvoj dopamínový systém stratený. Nemá jasný smer. A tak začne zúfalo hľadať náhradné ciele – neustále začínanie nových projektov, konzumácia nekonečného obsahu a umelá stimulácia.</p></div>
+    <h3>Ako si sa sem dostal? <em style="font-style:normal;background:var(--ag);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Chyby v kóde tvojho bežného dňa.</em></h3>
+    <p>Tvoja biológia prepla do krízového režimu kvôli týmto dôvodom:</p>
+
+    <div class="eb-item"><span class="num">01</span><h3>NEPRAVIDELNÝ REŽIM</h3><span class="sub">Čo sa stalo: Systém stratil mapu</span><p>Telo sa nedokáže kalibrovať bez jasného vzorca. Ak každý deň spíš a ješ v iných časoch, pre tvoj nervový systém to nie je sloboda, ale permanentný stav pohotovosti.</p></div>
+    <div class="eb-item"><span class="num">02</span><h3>STRES A NEDOSPÁVANIE</h3><span class="sub">Čo sa stalo: Elektrolyty sa vyčerpali</span><p>Kombinácia chronického napätia a chýbajúceho hlbokého spánku ničí tvoj cirkadiánny rytmus a drasticky vyčerpáva hladinu kľúčových minerálov v bunkách.</p></div>
+    <div class="eb-item"><span class="num">03</span><h3>VÝKYVY JEDLA</h3><span class="sub">Čo sa stalo: Glukózová nestabilita</span><p>Preskakované raňajky, neskoré ťažké večere, extrémne diéty striedané s „cheat days". Tvoj mozog kvôli tomu neustále spracováva energetické šoky z nedostatku a následného nadbytku glukózy.</p></div>
+    <div class="eb-item"><span class="num">04</span><h3>CHAOS V PROSTREDÍ</h3><span class="sub">Čo sa stalo: Trvalá ostražitosť</span><p>Neustále zmeny plánov, chaos a nepredvídateľnosť v tvojom okolí udržujú tvoj nervový systém v neustálom napätí. Nemá kedy vypnúť.</p></div>
+    <div class="eb-item"><span class="num">05</span><h3>NAPROGRAMOVANIE NESTABILITY V DETSTVE</h3><span class="sub">Čo sa stalo: Naprogramovanie ochranného mechanizmu</span><p>Ak bolo tvoje prostredie v detstve nepredvídateľné, tvoj systém sa mohol kalibrovať na neustálu ostražitosť už na samom začiatku. Tvoj nervový systém si mohol túto nestabilitu uložiť ako základný program na prežitie. To, čo bolo kedysi obranou, ťa dnes udržuje v permanentnom napätí.</p></div>
   </div>
 </section>
 
@@ -896,41 +888,39 @@
 <section id="s6" data-title="06 Reset protokol">
   <div class="eb-wrap">
     <div class="eb-label">06</div>
-    <h2>Resetovací protokol: <em>3 kroky, ktoré ti pomôžu vrátiť sústredenie</em></h2>
-    <p class="lead">Tvoja biológia nepotrebuje zložité inovácie. Potrebuje konzistenciu. Tieto taktiky možno budú znieť pre teba obyčajne, ale pre tvoj systém predstavujú práve tieto tri zmeny najvyššiu návratnosť investovanej energie.</p>
+    <h2>Resetovací protokol: <em>3 kroky, ktoré ti pomôžu vrátiť energiu</em></h2>
+    <p class="lead"><strong>Nepotrebuješ radikálnu zmenu života.</strong> Tvoja biológia potrebuje len presný zásah do miesta, kde stratila rovnováhu. Tieto tri kroky ukotvia tvoj nervový systém v najkratšom možnom čase.</p>
 
     <div class="eb-step">
       <div class="step-label">Krok 01</div>
-      <h3>01. TRÉNING HĹBKY (60 MINÚT DENNE)</h3>
-      <p>Toto je ten najdôležitejší tréning pre tvoj nervový systém. Každá dokončená hodina hlbokej práce priamo posilňuje tvoju oslabenú „top-down“ reguláciu.</p>
+      <h3>01. RANNÁ HYDRATÁCIA + ELEKTROLYTY</h3>
+      <p>Ráno je pre tvoju rozkolísanosť kritický čas. Po noci je tvoj systém dehydrovaný a elektrolyty sú na minime. Nastav si ranný rituál: doplnenie elektrolytov a štartuj deň s okamžitou nervovou stabilitou. Kávu zaraď až po jedle a najskôr 60 minút po prebudení.</p>
       <ul>
-        <li>1 úloha. 60 minút. Nulové prerušenia. Každý deň rovnaký čas.</li>
-        <li>Žiadny telefón. Žiadne notifikácie. „len si niečo rýchlo skontrolujem“.</li>
-        <li>Ak je hodina na začiatok priveľa, začni na 25 minútach (Pomodoro technika) a kapacitu postupne zvyšuj. Tvoj mozog dostane jasný signál, kedy má začať sústredenie.</li>
-        <li>Bude to nepríjemné. Tvoja myseľ bude hľadať únikový východ. To je úplne normálne. A je to presne ten dôvod, prečo to musíš robiť.</li>
+        <li><strong>Tvoja úloha:</strong> Do 30 minút po prebudení vypi pohár vody s elektrolytmi (nielen čistú vodu).</li>
+        <li><strong>Mechanizmus:</strong> Elektrolyty okamžite „nahodia" nervovú vodivosť a stabilizujú krvný tlak.</li>
+        <li><strong>Výsledok:</strong> Priama prevencia ranného zahmlenia tvojho myslenia a dopoludňajších energetických pádov.</li>
       </ul>
     </div>
 
     <div class="eb-step">
       <div class="step-label">Krok 02</div>
-      <h3>02. ELIMINÁCIA KOGNITÍVNEJ DANE (MOBIL MIMO DOHĽAD)</h3>
-      <p>Aj keď je smartfón otočený displejom nadol a úplne ticho, jeho samotná prítomnosť znižuje tvoju kognitívnu kapacitu o 10 až 20 %. Pre tvoj typ to nie je metafora. Je to reálna daň za pozornosť.</p>
+      <h3>02. ROVNAKÝ ČAS JEDLA KAŽDÝ DEŇ</h3>
+      <p>Toto je pre tvoju rozkolísanosť najdôležitejší princíp. Obyčajná pravidelnosť jedla funguje ako najsilnejšia kotva pre tvoj nervový systém. <strong>Žiadna diéta. Žiadne počítanie kalórií. Len čistý rytmus.</strong></p>
       <ul>
-        <li>Počas práce ide telefón do inej miestnosti alebo do šuplíka.</li>
-        <li>Prvú hodinu po prebudení nepozeraj do obrazovky. Je to absolútne kľúčový čas pre rannú kalibráciu dopamínu.</li>
-        <li>Vypni všetky upozornenia a notifikácie okrem hovorov od blízkych. Ty kontroluješ technológie, nie ony teba.</li>
+        <li><strong>Tvoja úloha:</strong> Raňajkuj v rovnakom časovom okne s odchýlkou maximálne ±30 minút každý deň. Obed a večeru udržuj v podobnom, predvídateľnom rytme.</li>
+        <li><strong>Mechanizmus:</strong> Telo sa fyziologicky naučí „čakať" na jedlo — glukózové výkyvy sa zmenšia a trávenie sa stabilizuje.</li>
+        <li><strong>Výsledok:</strong> Extrémne glukózové výkyvy zmiznú a tvoje citlivé trávenie sa upokojí.</li>
       </ul>
     </div>
 
     <div class="eb-step">
       <div class="step-label">Krok 03</div>
-      <h3>03. JASNÁ HIERARCHIA (1 PRIORITA NA DEŇ)</h3>
-      <p>Rozptýlený mozog nedokáže rozlíšiť dôležitosť. Všetko sa mu zdá rovnako naliehavé a dôležité. Preto potrebuješ externý systém.</p>
+      <h3>03. 20 MINÚT CHÔDZE DENNE</h3>
+      <p>Rozkolísaný typ nepotrebuje behať šprinty. Intenzívne cvičenie tvoju krízovú situáciu len zhorší. Mierny aeróbny pohyb je pre teba presne ten spínač, ktorý tvoj systém hľadá. <strong>Buď konzistentný skôr, než začneš byť intenzívny.</strong></p>
       <ul>
-        <li>Každé ráno (alebo večer predtým) urči presne 1 vec, ktorá urobí tvoj deň úspešným.</li>
-        <li>Táto 1 vec je zákon. Všetko ostatné v ten deň je len bonus.</li>
-        <li>Večer skontroluj iba túto jednu vec. Nerieš 10 iných.</li>
-        <li>Týmto postupom potichu rekalibruješ svoj systém na dlhodobejšie odmeny. Každý deň znovu zažiješ ten pocit, aké to je reálne niečo dokončiť a pripísať si skutočnú výhru.</li>
+        <li><strong>Tvoja úloha:</strong> 20 minút chôdze denne (ideálne vonku na dennom svetle, ideálne po obede).</li>
+        <li><strong>Mechanizmus:</strong> Chôdza aktivuje parasympatikus (režim bezpečia), reguluje srdcovú variabilitu (HRV) a vonkajšie svetlo natvrdo rekalibruje cirkadiánny rytmus.</li>
+        <li><strong>Výsledok:</strong> Ak zaradíš chôdzu po obede, je to ten najúčinnejší nástroj na zastavenie poobednej únavy a mozgovej hmly.</li>
       </ul>
     </div>
   </div>
@@ -940,39 +930,39 @@
 <section id="s7" class="bg-s2" data-title="07 Architektúra dňa">
   <div class="eb-wrap">
     <div class="eb-label">07</div>
-    <h2>Tvoja nová <em>architektúra dňa</em></h2>
-    <p class="lead">Nestačí len trénovať sústredenie. Musíš okamžite zastaviť krvácanie svojej pozornosti. Pomôžu ti tieto 3 úpravy tvojej každodennej operatívy.</p>
+    <h2>Tvoja nová <em>architektúra dňa</em>: Čo upraviť v životospráve</h2>
+    <p class="lead"><strong>Pravidelnosť nad intenzitou.</strong> Toto je odteraz tvoje jediné pravidlo. Zabudni na všetky motivačné reči o tom, ako musíš makať tvrdšie. Rozkolísaný nervový systém neopravíš zničením sa vo fitku, extrémnou diétou ani hrsťou drahých suplementov. Opravíš ho len pravidelným rytmom.</p>
 
     <div class="eb-step">
       <div class="step-label">Krok 01</div>
-      <h3>01. INFORMAČNÁ DIÉTA (Menej notifikácií)</h3>
-      <p>Každé jedno pípnutie je priame prerušenie tvojho sústredenia. A každý návrat k plnej koncentrácii ťa stojí v priemere 23 minút. Pre Rozptýlený typ je táto notifikačná záťaž doslova zatiahnutou ručnou brzdou.</p>
+      <h3>01. PRAVIDELNOSŤ NAD INTENZITOU</h3>
+      <p>Tvoja biológia nerozlišuje, či je streda alebo sobota. Telo nepotrebuje tvoje maximum, potrebuje tvoju konzistenciu.</p>
       <ul>
-        <li>Vypni všetky push notifikácie okrem hovorov od blízkych.</li>
-        <li>E-mail a pracovné aplikácie (ako Slack, Asana) kontroluj aktívne len 2 až 3-krát za deň. Nepracuj reaktívne podľa toho, kto a kedy ti napíše.</li>
-        <li>Na sociálne siete si v nastaveniach telefónu nastav tvrdý časový limit.</li>
+        <li>Vstávaj a choď spať v rovnakom čase. Tvoja biológia nerozlišuje, či je streda alebo sobota.</li>
+        <li>Jedz v podobných časoch a podobné objemy. Prestaň telo šokovať extrémami.</li>
+        <li>Pohyb udržuj mierny a pravidelný. Nekonečné striedanie maratónskeho nadšenia a úplného vyhorenia tvoj systém reštartuje do nuly.</li>
       </ul>
     </div>
 
     <div class="eb-step">
       <div class="step-label">Krok 02</div>
-      <h3>02. KOGNITÍVNA PROTÉZA (Jasná priorita dňa)</h3>
-      <p>Bez jasnej priority tvoj mozog vždy vyberie tú najpríjemnejšiu dostupnú aktivitu. Nikdy tú najdôležitejšiu. Systém jednej priority slúži pre tvoj typ ako vonkajšia barla.</p>
+      <h3>02. KOMPLEXNÉ PALIVO. ŽIADNE EXTRÉMNE DIÉTY</h3>
+      <p>Kalorické deficity, prerušované hladovanie, keto alebo akékoľvek detoxikačné kúry pre teba momentálne nie sú nástroje na optimalizáciu. Pre tvoju rozkolísanosť sú to len ďalšie tvrdé fyziologické stresory, ktoré tvoje telo nezvládne spracovať.</p>
       <ul>
-        <li>1. Deň si pripravuj už večer predtým. Tvoje emócie sú po celom dni stabilnejšie.</li>
-        <li>2. Neplánuj si dôležité veci hneď ráno. Ranné rozhodnutia v stave čerstvo naštartovaného systému (s nízkym kortizolom) sú objektívne horšie.</li>
-        <li>3. Pravidlo znie: 1 hlavná priorita. Maximálne 3 podporné úlohy. Nič viac.</li>
+        <li>Každé jedlo musí obsahovať plnohodnotnú trojkombináciu: bielkoviny, tuky a sacharidy. Zabudni na low-carb extrémy.</li>
+        <li>Stabilizuj prísun jedla. Hladovanie je pre tvoju biológiu poplach. Akákoľvek medzera dlhšia ako 5 až 6 hodín dostáva tvoje telo pod fyziologický tlak.</li>
+        <li>Ak chceš chudnúť, nastav si len minimálny, stabilný deficit. Akékoľvek dramatické škrty tvoja biológia okamžite vyhodnotí ako krízu.</li>
       </ul>
     </div>
 
     <div class="eb-step">
       <div class="step-label">Krok 03</div>
-      <h3>03. OCHRANA PRED INSTANTNÝMI STIMULMI</h3>
-      <p>Aplikácie, nekonečné feedy, sociálne siete a online nakupovanie neurobili chybu. Sú navrhnuté tak, aby obišli tvoju racionálnu brzdu a udreli priamo na dopamín. Odstrihni ich.</p>
+      <h3>03. RUTINA AKO PEVNÝ ZÁKLAD</h3>
+      <p>Tvoj nervový systém potrebuje znovu vybudovať stabilný rytmus a oprieť sa o pevné fyziologické kotvy. Potrebuje dennú rutinu, ktorá ako jediná dokáže vrátiť systému pocit bezpečia a ukončiť tento krízový stav.</p>
       <ul>
-        <li>Bezcieľne prezeranie sociálnych sietí vymeň za fyzickú aktivitu alebo čítanie.</li>
-        <li>Prestaň pasívne konzumovať videá. Pozeraj ich výhradne so zámerom a cieľom.</li>
-        <li>Zaveď pravidelný reset: Jeden deň v týždni úplne bez sociálnych sietí a streamovania. Tvoja dopamínová rovnováha potrebuje čas na obnovu.</li>
+        <li>Nepotrebuješ viac motivácie, pevnej vôle ani ďalšiu výzvu. Akýkoľvek pokus o hrubú silu tvoj systém teraz len dorazí.</li>
+        <li>Tvoja rozkolísanosť je ukážková adaptácia tvojej biológie na neustále sa meniace podmienky, extrémy a dlhodobý chaos.</li>
+        <li>Výsledkom je permanentná pohotovosť. Nevieš sa uvoľniť, lebo tvoje telo čaká na ďalší náraz. Rytmus je liek.</li>
       </ul>
     </div>
   </div>
@@ -982,18 +972,17 @@
 <section id="s8" class="bg-s1" data-title="08 Fyzický deficit">
   <div class="eb-wrap">
     <div class="eb-label">08</div>
-    <h2>Vylúčenie fyzického deficitu: <em>Čo si nechať skontrolovať</em></h2>
-    <p class="lead">Tvoj primárny problém so sústredením je naučený behaviorálny vzorec.</p>
-    <p>Žiadny laboratórny test u lekára ti zázračne nevráti stratené sústredenie. Ten si budeš musieť pretrénovať vlastným úsilím.</p>
-    <p>Napriek tomu sa v tvojom tele môže skrývať aj fyzický deficit.</p>
-    <p>Tieto krvné hodnoty slúžia výlučne na to, aby sme vylúčili organické príčiny tvojej únavy. Pre úplný pokoj v duši a istotu, že pri tvrdom tréningu disciplíny nebudeš bežať so zatiahnutou ručnou brzdou.</p>
-    <p>Ak sa budeš cítiť vyčerpaný aj po poctivom zavedení protokolu, daj si u lekára preventívne skontrolovať tieto 4 hodnoty:</p>
+    <h2>Vylúčenie fyzického deficitu: <em>Čo si nechať skontrolovať u lekára</em></h2>
+    <p class="lead"><strong>Žiadny laboratórny test ti zázračne nevráti stratený rytmus — ten si musíš vybudovať sám.</strong></p>
+    <p>Potrebuješ sa však uistiť, že pri nastavovaní novej rutiny zbytočne nebojuješ so zatiahnutou ručnou brzdou. Tvoja rozkolísanosť totiž môže byť umocnená skrytým, no medicínsky ľahko riešiteľným problémom.</p>
+    <p>Ak po zavedení základnej rutiny do svojich dní stále cítiš extrémne výkyvy a výpadky energie, vyžiadaj si u lekára kontrolu týchto 5 hodnôt:</p>
 
     <div class="eb-blood">
-      <div><span class="lab">B12</span><p>B12: Jeho nízke hladiny priamo spôsobujú neurologické spomalenie. Bez neho sa len veľmi ťažko zbavíš takzvanej „mentálnej hmly“.</p></div>
-      <div><span class="lab">Vitamín D</span><p>VITAMÍN D: Nízke hodnoty tohto hormónu matematicky korelujú s citeľne horším kognitívnym výkonom a celkovou kapacitou mozgu.</p></div>
-      <div><span class="lab">Železo &amp; Feritín</span><p>ŽELEZO A FERITÍN: Ak je tento parameter v deficite, tvoj mozog nemá fyzicky dostatok kyslíka na to, aby udržal hlbokú a dlhodobú koncentráciu.</p></div>
-      <div><span class="lab">Glukóza</span><p>GLUKÓZA: Základ tvojej energie. Akákoľvek glukózová nestabilita (prudké výkyvy cukru v krvi) okamžite a radikálne zhoršuje tvoju schopnosť sústrediť sa. Mozog vyžaduje plynulý prísun paliva.</p></div>
+      <div><span class="lab">Glukóza a inzulín nalačno</span><p>Základná diagnostika tvojej glukózovej stability. Potrebuješ vedieť, či tvoje telo vôbec dokáže správne hospodáriť s cukrom bez obrovských energetických pádov.</p></div>
+      <div><span class="lab">HbA1c</span><p>Glykovaný hemoglobín ukáže priemernú hladinu tvojej glukózy za posledné tri mesiace. Presne odhalí dlhodobé výkyvy, ktoré bežný ranný odber krvi nemusí zachytiť.</p></div>
+      <div><span class="lab">Minerálny profil</span><p>Sodík, draslík, horčík — kontrola tvojej elektrolytovej bilancie. Ich chronický nedostatok je najčastejšou príčinou nestabilnej nervovej vodivosti, svalových kŕčov a kolísavého tlaku.</p></div>
+      <div><span class="lab">Ferritín</span><p>Presný ukazovateľ tvojich zásob železa. Skrytý deficit na bunkovej úrovni (aj keď máš krvný obraz zdanlivo v poriadku) dokáže púšťať ťažkú fyzickú únavu a neschopnosť tela držať stabilný výkon.</p></div>
+      <div><span class="lab">CRP</span><p>C-reaktívny proteín — základný marker systémového zápalu v tele. Akýkoľvek chronický, skrytý zápal je pre tvoj nervový systém obrovský stresor, ktorý ho destabilizuje a drží v neustálom napätí.</p></div>
     </div>
   </div>
 </section>
@@ -1002,51 +991,44 @@
 <section id="s9" data-title="09 NEOHACK Protokol">
   <div class="eb-wrap">
     <div class="eb-label">09</div>
-    <h2>NEOHACK Protokol — <em>Prvých 6–8 týždňov</em></h2>
-    
-    <p>Doteraz si svoj systém bičoval kofeínom a novými projektmi. Výsledok poznáš. Je čas prejsť od stimulácie k systematickému budovaniu.</p>
-    <p>Urobme si jasno. Doplnky za teba tvoju rozbitú pozornosť neopravia. To, čo máš pred sebou, nie je instantná energia na dlh. Je to cielená, biologická podpora presne pre tvoj typ rozptýlenosti.</p>
-    <p>Čisté stavebné látky, ktoré tvoj mozog môže potrebovať na to, aby si dokázal znovu vytvoriť stabilné sústredenie a udržal si sa na ceste. My ti dodáme funkčné nástroje. Motor však musíš naštartovať ty.</p>
+    <h2>Tvoje palivo: <em>NEOHACK Protokol</em></h2>
+
+    <p>Doteraz si svoje energetické pády riešil kávou a rýchlym cukrom. Výsledok už poznáš — len si tým prehlboval svoj vlastný chaos.</p>
+    <p>Na základe tvojho typu sme vybrali doplnky, ktoré majú pre tvoju rozkolísanosť najvyšší biologický prínos. Žiadne náhodné skúšanie, kedy zješ všetko v nádeji, že niečo zaberie. Dostaneš len to, čo dáva zmysel tvojej fyziológii.</p>
+    <p>Urobme si ale jasno: samotné doplnky ti neprinesú stabilný život, <strong>ak ty sám nezavedieš do dňa pravidelnosť.</strong> To, čo máš pred sebou, sú funkčné nástroje na fyziologické ukotvenie tvojho nervového systému. <strong>Rytmus si však musíš nastaviť ty.</strong></p>
+
+    <h3>✅ ZÁKLADNÁ KOTVA (Prvých 6 až 8 týždňov)</h3>
+    <p>Tieto dva produkty sú tvoje základné stavebné kamene. Cielia na to najdôležitejšie, čo si stratil: schopnosť ráno sa stabilne naštartovať a večer bezpečne vypnúť.</p>
 
     <div class="eb-product">
-      <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/MetaFocusPP_07050d96-e098-4756-8de1-2f30984fc5bf.png" alt="MetaFocus" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
-      <div class="body">
-        <span class="ptag">MetaFocus</span>
-        <h3>Kalibrácia tvojho sústredenia</h3>
-        <p>Nootropický komplex navrhnutý pre okamžitú dopamínovú reguláciu. Pre tvoj typ je to priama podpora oslabenej racionálnej brzdy (top-down regulácie). Výrazne znižuje mentálny hluk a fyzicky ti pomáha udržať pozornosť na jednej jedinej veci. Ranná dávka nastaví tvoj mozog na neprerušovanú prácu skôr, ako príde prvá notifikácia.</p>
-        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
-      </div>
-    </div>
-
-    <div class="eb-product">
-      <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/AminoFuelgradient.jpg" alt="AminoFuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
-      <div class="body">
-        <span class="ptag">AminoFuel</span>
-        <h3>Stabilizácia motivácie</h3>
-        <p>Tvoje telo nevyrába dopamín zo vzduchu. Vyrába ho z aminokyselín (konkrétne z tyrozínu, ktorý pochádza z proteínu). Ak ich tvoja strava nemá dostatok, tvoj systém beží nasucho a dopamínová syntéza viazne. AminoFuel ti dodá esenciálne stavebné bloky pre stabilnú produkciu dopamínu počas celého dňa.</p>
-        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
-      </div>
-    </div>
-
-    <div class="eb-product">
-      <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/ChatGPTImage26.2.2026_12_47_33.png" alt="MethylFuel B-Complex" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
-      <div class="body">
-        <span class="ptag">MethylFuel B-Complex</span>
-        <h3>Aktivácia nervových dráh</h3>
-        <p>Bez aktívnych, metylovaných B-vitamínov (B6, B12 a folát) nedokáže tvoje telo správne premeniť prijaté aminokyseliny na dopamín. Sú to nevyhnutné kofaktory. Bez nich ti ani ten najlepší proteín nezaručí funkčnú chémiu v mozgu. Pre tvoj typ je to absolútny základ neurotransmiterovej podpory.</p>
-        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
-      </div>
-    </div>
-
-    <h3>SYSTÉMOVÁ NADSTAVBA: Počúvaj svoje telo</h3>
-    <p>Každá biológia je iná. Tvoj Rozptýlený typ sa môže prelínať s inými deficitmi. Počúvaj svoje telo a ak popri tréningu tvojho sústredenia narážaš na tieto špecifické prekážky, zaraď doplnkové poistky:</p>
-
-    <div class="eb-product muted">
       <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/HydroFuel_with_background.jpg" alt="HydroFuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
       <div class="body">
-        <span class="ptag">Bonus — HydroFuel</span>
-        <h3>Hlboká hydratácia</h3>
-        <p>Zaraď ho v prípade, ak počas dňa pozoruješ prudké, nepredvídateľné výpadky energie (je možné, že sa tvoj profil prelína s Rozkolísaným typom). Únava totiž často nie je nedostatok spánku, ale chronická strata bunkovej vody a minerálov.</p>
+        <span class="ptag">HydroFuel</span>
+        <h3>Tvoj ranný štartér</h3>
+        <p>Tvoj deň musí začať stabilitou. Po noci je tvoje telo dehydrované. Ak do tohto stavu naleješ kávu, okamžite spúšťaš krízový režim. HydroFuel je elektrolytová zmes, ktorá hydratuje bunky na tej najhlbšej úrovni. Pre tvoju rozkolísanosť je tento prvý ranný pohár záchranným kolesom dňa — od prvej minúty nastolíš správnu nervovú vodivosť, stabilizuješ kolísavý krvný tlak a chrániš mozog pred poobedným prepadom energie.</p>
+        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
+      </div>
+    </div>
+
+    <div class="eb-product">
+      <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/mineralfuel_gradient_BG.png" alt="MagneZinc" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
+      <div class="body">
+        <span class="ptag">MagneZinc</span>
+        <h3>Tvoja večerná brzda</h3>
+        <p>Tvoj nervový systém si zvykol byť permanentne v strehu. Nedokáže sám od seba bezpečne spomaliť. Vysoko vstrebateľná kombinácia magnézia a zinku tu funguje ako priama, fyzická brzda. Večerná dávka MagneZinc je jasným signálom pre systém, že deň sa skončil. Znižuje vnútornú nervozitu, stlmí prehnané stresové reakcie a výrazne zlepšuje hĺbku tvojej regenerácie počas spánku.</p>
+        <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
+      </div>
+    </div>
+
+    <h3>⬆️ NADSTAVBA (Podľa tvojej špecifickej situácie)</h3>
+    <p>Keď tvoj systém po prvých týždňoch získa základnú stabilitu a ty dokážeš udržať plynulý chod dní, tieto produkty tvoju novú odolnosť ešte viac prehĺbia:</p>
+
+    <div class="eb-product muted">
+      <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/mineralfuel_gradient_BG.png" alt="MineralFuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
+      <div class="body">
+        <span class="ptag">Bonus — MineralFuel</span>
+        <h3>Doplnenie minerálov</h3>
+        <p>Zaraď ho v momente, ak si dlhodobo, chronicky fyzicky vyčerpaný, alebo ak máš z krvi potvrdené, že tvoje telo trpí masívnym deficitom minerálov a bežná strava ti jednoducho nestačí.</p>
         <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
       </div>
     </div>
@@ -1055,18 +1037,18 @@
       <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/Omega3Fueltable.jpg" alt="Omega3Fuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
       <div class="body">
         <span class="ptag">Bonus — Omega3Fuel</span>
-        <h3>Ochrana neurónov</h3>
-        <p>Tvoja voľba, ak ťa trápi permanentná mentálna hmla a nedokážeš udržať čistú myseľ ani po ôsmich hodinách hlbokého spánku. Tvoj mozog nedokáže budovať rýchle nervové spojenia, ak mu chýbajú kvalitné tuky na stavbu bunkových membrán.</p>
+        <h3>Vyhladenie zápalu a nálady</h3>
+        <p>Absolútna nutnosť, ak u seba popri únave pozoruješ tiché zápalové príznaky (bolesti kĺbov, problémy s trávením) alebo masívne výkyvy nálady, ktoré potrebuješ na hormonálnej úrovni vyhladiť.</p>
         <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
       </div>
     </div>
 
     <div class="eb-product muted">
-      <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/mineralfuel_gradient_BG.png" alt="MineralFuel" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
+      <a class="img" href="https://neohack.sk" target="_blank" rel="noopener"><img src="https://neohack.sk/cdn/shop/files/AminoFuelgradient.jpg" alt="ImmunoCore" crossorigin="anonymous" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('fallback');this.parentElement.setAttribute('data-label',this.alt);" /></a>
       <div class="body">
-        <span class="ptag">Bonus — MineralFuel</span>
-        <h3>Nervová stabilita</h3>
-        <p>Kľúčový doplnok, ak tvoju rozptýlenosť sprevádza aj celková fyzická a psychická rozkolísanosť. Horčík je primárny inhibítor stresu. Ak ho máš málo, tvoj systém nedokáže fyzicky vypnúť napätie, čo priamo znemožňuje hlboké sústredenie.</p>
+        <span class="ptag">Bonus — ImmunoCore</span>
+        <h3>Posilnenie imunity</h3>
+        <p>Tvoja silná poistka pre prípad, že si práve prekonal infekciu, alebo cítiš, že tvoj imunitný systém po mesiacoch rozkolísanosti úplne stratil obranyschopnosť a chytíš každý vírus naokolo.</p>
         <a class="eb-cta" href="https://neohack.sk" target="_blank" rel="noopener">Zobraziť produkt →</a>
       </div>
     </div>
@@ -1076,9 +1058,9 @@
 <!-- FINAL -->
 <section class="eb-final" data-title="Záver">
   <div class="eb-wrap eb-final-inner">
-    <div class="quote">„Fokus nie je talent.<br/>Je to sval, ktorý sa dá trénovať."</div>
-    <p>Hlboké sústredenie nie je vrodený talent. Je to sval tvojho nervového systému. Ako každý iný sval, aj tento sa dá vytrénovať a adaptovať na akúkoľvek záťaž.</p>
-    <p>Tvoja rozptýlenosť nie je defekt tvojho charakteru. Je to len brzda, ktorú tvoje telo zatiahlo pred ďalším vyhorením. Biológia nepozná sviatky ani pondelky. Prevezmi nad sebou kontrolu už zajtra ráno. Spomaľ. Odlož ten telefón. A nastav svoj systém späť do rovnováhy.</p>
+    <div class="quote">„Stabilita nie je nuda.<br/>Je to ten najsilnejší nástroj tvojej slobody."</div>
+    <p>Možno sa celý život bojíš rutiny, pretože ti pripadá zväzujúca. Ale pravda, ktorú ti tvoja biológia práve ukázala, je presne opačná. Rutina tvoj život neochudobní. <strong>Rutina mu konečne vráti pevné základy.</strong></p>
+    <p>Sloboda nie je to, že žiješ bez akýchkoľvek pravidiel. Skutočná sloboda je moment, kedy tvoja biológia prestane byť tvojím najväčším rizikom, a konečne sa stane tvojou najpevnejšou oporou.</p>
     <button class="eb-final-cta" id="dlPdfFinal" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Stiahnuť PDF
@@ -1086,7 +1068,7 @@
   </div>
 </section>
 
-<footer>© 2025 NEOHACK.SK — Energetický Kompas: Rozptýlený typ. Všetky práva vyhradené.</footer>
+<footer>© 2025 NEOHACK.SK — Energetický Kompas: Rozkolísaný typ. Všetky práva vyhradené.</footer>
 <div class="eb-pdf-tail" aria-hidden="true"></div>
 
 </main>
@@ -1124,7 +1106,7 @@
                     'Á','É','Í','Ó','Ú','Ý','Ä','Ô','Ľ','Ĺ','Ŕ','Š','Č','Ž','Ť','Ď','Ň'];
 
   // ========= PDF GENERATION (dark theme) =========
-  var FILENAME = 'NEOHACK-Rozptyleny-typ.pdf';
+  var FILENAME = 'Neohack-rozkolisany-typ.pdf';
   var lastPdfBlob = null;
 
   function generatePdf(){
