@@ -1,45 +1,43 @@
-## QA výsledok exportu (NEOHACK-Rozptyleny-typ-5.pdf, 14 strán)
+## Cieľ
+Spojiť záverečnú sekciu („Fokus nie je talent…") na predchádzajúcu stranu s bonusovými produktmi (HydroFuel / Omega3Fuel / MineralFuel). PDF tak bude mať 12 strán namiesto 13 a zmizne aj prázdny biely pruh dole na poslednej strane.
 
-Prešiel som všetkých 14 strán. Layout, šírka, farby a typografia sú **OK** — žiadny orezaný text, žiadne čierne pásy vpravo, posledná strana má plné tmavé pozadie a vycentrovaný citát. Zostávajú už len **3 kozmetické chyby**:
+## Zmeny v `public/neohack.html`
 
-### Chyba 1 — Prázdna strana 7 (kritické)
-Strana 7 je **úplne prázdna**, len malé „07" číslo úplne dole. Vznikla artefaktom zalamovania medzi sekciou „Resetovací protokol" (str. 6) a „Nová architektúra dňa" (str. 8). Pravdepodobne `page-break-before:always` alebo nadrozmerný spacer pred sekciou „Nová architektúra dňa" tlačí jej obsah o stranu nižšie a vytvorí prázdnu vsuvku.
+### 1. PDF override pre `.eb-final` (riadky 492–493)
+Odstrániť `page-break-before:always` a `min-height:1080px`, aby sekcia plynule nadviazala za bonusovú sekciu na tej istej strane. Ponechať tmavé pozadie a centrovanie obsahu.
 
-### Chyba 2 — Prázdne spodky strán 4, 6, 9 (drobné)
-Strany 4 (Symptómy), 6 (závisí od chyby 1) a 9 (Vylúčenie deficitu) majú spodnú tretinu/polovicu prázdnu, lebo karty sa kvôli `page-break-inside:avoid` posunuli celé na ďalšiu stranu. Toto je normálny side-effekt PDF zalamovania, ale dá sa zmierniť kompaktnejším vertikálnym rytmom v PDF móde (menšie `margin` medzi kartami a sekciami) tak, aby sa viac obsahu zmestilo na predošlú stranu.
+Nový blok:
+```css
+body.pdf-export .eb-final{
+  padding:24px 0 40px!important;
+  background:#0a0a0a!important;
+  page-break-before:avoid!important;
+  break-before:avoid!important;
+  page-break-inside:avoid!important;
+  break-inside:avoid!important;
+}
+body.pdf-export .eb-final .eb-final-inner{padding:0!important;width:100%!important}
+```
 
-### Chyba 3 — Cover (str. 1) má veľa prázdneho miesta
-Obálka má všetok obsah v hornej polovici (titulok + TOC), spodná polovica je prázdna. Nie je to chyba, ale strata príležitosti — chýba vizuálny kotvič dole (napr. CTA-like riadok „Personalizovaný sprievodca · NEOHACK.SK" alebo decentný gradient/akcent dole).
+### 2. Generický `section` page-break (riadok 494)
+Selektor `body.pdf-export section{page-break-before:always…}` aktuálne zabezpečí, že každá `<section>` (vrátane `.eb-final`) začne novú stranu. Pridať výnimku pre `.eb-final`:
+```css
+body.pdf-export section:not(.eb-final){
+  page-break-before:always!important;break-before:page!important;
+  …ostatné pravidlá ostávajú…
+}
+```
 
-## Plán opráv (`public/neohack.html`, len `body.pdf-export …` selektory)
+### 3. Nič iné sa nemení
+- Žiadne zmeny v obsahu (text, nadpisy, produkty).
+- Žiadne zmeny vo webovej verzii (mimo `body.pdf-export`).
+- Cover, ostatné sekcie a stránkovanie zostanú nedotknuté.
 
-### 1. Vyriešiť prázdnu stranu 7
-- Nájsť sekciu „Nová architektúra dňa" (zhruba ID `architektura` alebo trieda v rámci sekcií 06–07) a v PDF móde **odstrániť `page-break-before:always`** (resp. nahradiť za `page-break-before:auto`). To isté skontrolovať pre všetky `<section>` v rámci `body.pdf-export` — povoliť prirodzené zalomenie všade okrem cover/final.
-- Dať si pozor, aby cover (`#cover`) a final (`.eb-final`) zostali samostatné strany (`page-break-after:always` resp. `page-break-before:always` len pre tieto dva uzly).
-- QA cieľ: 13 strán namiesto 14, žiadna prázdna.
-
-### 2. Zhustiť vertikálny rytmus v PDF móde
-- V `body.pdf-export` znížiť:
-  - `section { padding-top/bottom }` z aktuálnej hodnoty (~64–80 px) na **40 px**
-  - `.eb-item, .eb-step, .eb-product, .eb-deficit, .eb-blood { margin-bottom }` na **14 px**
-  - `h2 { margin-top/bottom }` skrátiť o ~30 %
-- To dovolí ďalšej karte „dosadnúť" pred zalomenie a zredukuje prázdne spodky.
-
-### 3. Cover — vyplniť spodok strany
-- V `body.pdf-export #cover` pridať pod TOC tichý spacer + decentný riadok:
-  - Tenká fialová linka + text malými capitals: **„NEOHACK.SK · DOPAMÍNOVÝ PROTOKOL · ROZPTÝLENÝ TYP"**
-  - Vertikálne ho ukotviť cca 60 mm od spodu (pomocou `position:absolute; bottom:60px` v rámci `#cover` ktorý dostane `position:relative; min-height:1123px`).
-- Alternatíva (jednoduchšia): cover sekciu nastaviť `min-height:1123px; display:flex; flex-direction:column; justify-content:space-between` aby sa TOC/úvod prirodzene roztiahli s footer-pásom dole.
-
-### 4. Povinný QA cyklus
-1. Vyrenderovať PDF, `pdftoppm -jpeg -r 120 export.pdf qa`, pozrieť **každú** stranu.
-2. Skontrolovať: žiadna prázdna strana, žiadny veľký prázdny spodok (max ~15 % výšky), cover má vyplnený spodok, final má citát stále vycentrovaný.
-3. Iterovať max 2× ak treba doladiť spacing.
-
-## Čo sa NEMENÍ
-- Šírka layoutu (794 px), padding (53 px), farby, typografia, obsah.
-- Webová verzia.
-- Posledná strana (final) — funguje OK.
-
-## Dotknuté riadky
-`public/neohack.html` riadky ~417–492 (PDF override blok) + jeden nový blok pre `#cover` v PDF móde. Žiadne zmeny v React kóde.
+## QA cyklus
+1. Vyrenderovať PDF, `pdftoppm -jpeg -r 120 export.pdf qa`.
+2. Overiť, že:
+   - PDF má 12 strán.
+   - Bonusy + záverečný citát sú spolu na poslednej strane.
+   - Žiadny biely pruh na spodku poslednej strany (celé tmavé pozadie až po koniec A4).
+   - Predchádzajúce strany sú nezmenené.
+3. V prípade potreby doladiť `padding` v bode 1 (napr. zväčšiť `padding-top` ak je medzi MineralFuel kartou a citátom príliš málo miesta).
