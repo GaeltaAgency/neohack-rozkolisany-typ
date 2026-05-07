@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
-    window.location.replace("/neohack.html");
+    window.location.replace(new URL("neohack.html", window.location.href).href);
   }, []);
   return (
     <div
@@ -25,7 +25,7 @@ const Index = () => {
         </div>
         <div style={{ marginTop: 12, fontSize: 14, opacity: 0.7 }}>
           Ak sa nenačíta automaticky,{" "}
-          <a href="/neohack.html" style={{ color: "#F59E0B" }}>
+          <a href="./neohack.html" style={{ color: "#F59E0B" }}>
             kliknite sem
           </a>
           .
